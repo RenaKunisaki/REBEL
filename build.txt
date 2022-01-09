@@ -1,0 +1,3 @@
+displayName = R.E.B.E.L
+author = Rena Kunisaki
+version = 0.1
