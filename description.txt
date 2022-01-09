@@ -1,1 +1,1 @@
-R.E.B.E.L is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks.
