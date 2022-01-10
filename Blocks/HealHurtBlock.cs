@@ -29,8 +29,9 @@ namespace REBEL.Blocks {
             /** Called when hit by a hammer.
              */
 			Tile tile = Main.tile[i, j];
+            int mode = ((int)((tile.frameY / 18)+1)) & 3;
             tile.frameX = 0;
-			tile.frameY ^= 18;
+			tile.frameY = (short)(mode * 18);
 			if (Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1,
                     Player.tileTargetX, Player.tileTargetY,
@@ -39,12 +40,47 @@ namespace REBEL.Blocks {
             return false;
 		}
 
-        public override bool RightClick(int x, int y) {
-            /** Called when right-clicked.
-             *  Used because apparently we can't hammer non-solid tiles.
-             */
-            Slope(x, y);
-            return true; //we did something, don't do default right click
+        static String[] deathMessages = {
+            "{0} touched a Hurt Block too much.",
+            "{0} didn't pay attention to their pain.",
+            "{0} touched something they shouldn't.",
+            "{0} never learned about hot stoves.",
+        };
+
+        protected void _onTouchedHurt(Entity whom, Point location,
+        TouchDirection direction, bool fast) {
+            int msgNo = Main.rand.Next(0, deathMessages.Length-1);
+            String msg = deathMessages[msgNo];
+            
+            //NPCs don't have hitstun, so only hurt them
+            //every 2 seconds.
+            uint frame = Main.GameUpdateCount % 120;
+            if(whom is Player p) {
+                //XXX fast
+                p.Hurt(PlayerDeathReason.ByCustomReason(
+                    String.Format(msg, p.name)), 1, 0);
+            }
+            else if(whom is NPC n && (frame == 0 || fast)) {
+                n.StrikeNPC(1, 0, 0);
+                if(n.life <= 0 && n.isLikeATownNPC ) {
+                    Main.NewText(String.Format(msg, n.FullName),
+                        0xFF, 0x00, 0x00);
+                }
+            }
+        }
+
+        protected void _onTouchedHeal(Entity whom, Point location,
+        TouchDirection direction, bool fast) {
+            uint frame = Main.GameUpdateCount % 120;
+            if(frame != 0 && !fast) return;
+            if(whom is Player p) {
+                p.HealEffect(1); //visual only
+                p.statLife = Math.Min(p.statLife+1, p.statLifeMax);
+            }
+            else if(whom is NPC n) {
+                n.HealEffect(1);
+                n.life = Math.Min(n.life+1, n.lifeMax);
+            }
         }
 
         public void OnTouched(Entity whom, Point location,
@@ -52,30 +88,10 @@ namespace REBEL.Blocks {
             var tile = Main.tile[location.X, location.Y];
             int mode = (int)(tile.frameY / 18) & 3;
             switch(mode) {
-                case 0: { //heal
-                    if(whom is Player p) {
-                        p.HealEffect(1); //visual only
-                        p.statLife = Math.Min(p.statLife+1, p.statLifeMax);
-                    }
-                    else if(whom is NPC n) {
-                        n.HealEffect(1);
-                        n.life = Math.Min(n.life+1, n.lifeMax);
-                    }
-                    break;
-                }
-                case 1: { //hurt
-                    if(whom is Player p) {
-                        p.Hurt(PlayerDeathReason.ByCustomReason(
-                            String.Format(
-                                "{0} touched a Hurt Block too much.",
-                                p.name)),
-                            1, 0);
-                    }
-                    else if(whom is NPC n) {
-                        n.StrikeNPC(1, 0, 0);
-                    }
-                    break;
-                }
+                case 0: _onTouchedHeal(whom, location, direction, false); break;
+                case 1: _onTouchedHurt(whom, location, direction, false); break;
+                case 2: _onTouchedHeal(whom, location, direction, true); break;
+                case 3: _onTouchedHurt(whom, location, direction, true); break;
                 default: break;
             }
         }

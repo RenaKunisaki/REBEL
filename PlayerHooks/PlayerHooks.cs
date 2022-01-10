@@ -47,6 +47,11 @@ namespace REBEL.Hooks {
 
         protected void _checkTouchedBlocks(Entity whom) {
             //Check for touched tiles.
+
+            //ignore the dead.
+            if(whom is Player p && p.statLife <= 0) return;
+            if(whom is NPC n && n.life <= 0) return;
+
             //touch direction is opposite of coordinate direction
             var coords = new Dictionary<Blocks.TouchDirection, Vector2>() {
                 {Blocks.TouchDirection.Inside,      whom.Center},
