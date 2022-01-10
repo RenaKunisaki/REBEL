@@ -23,6 +23,7 @@ namespace REBEL.Blocks {
 			Main.tileLighted[Type] = false;
 
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
+            TileObjectData.newTile.RandomStyleRange = 0;
             TileObjectData.addTile(Type);
         }
 
