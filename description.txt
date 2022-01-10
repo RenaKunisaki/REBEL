@@ -3,3 +3,6 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks.
 Physics Blocks
 - Bounce Blocks: repels players away on touch.
 - Boost Blocks: accelerates players in a specific direction on touch.
+
+Cheaty/Fun Blocks
+- Heal/Hurt Blocks: Heals or hurts anyone who touches them.

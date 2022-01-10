@@ -8,16 +8,14 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Blocks {
-    public class BoostBlock:
-    Base.ItemDropBlock<Items.Placeable.BoostBlock>,
+    public class HealHurtBlock:
+    Base.ItemDropBlock<Items.Placeable.HealHurtBlock>,
     IReactsToTouch {
-        /** A block that, when you touch it, gives you a boost in
-         *  some direction.
+        /** A block that hurts to touch, or heals you,
+         *  depending on its mode.
          */
-        
-        //XXX use slope to determine which directions it works in?
         public override void SetStaticDefaults() {
-            Main.tileSolid[Type] = false;
+            Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
@@ -27,16 +25,12 @@ namespace REBEL.Blocks {
             TileObjectData.addTile(Type);
         }
 
-        static int[] frameXCycle = { 1, 2, 3, 0 };
         public override bool Slope(int i, int j) {
             /** Called when hit by a hammer.
              */
 			Tile tile = Main.tile[i, j];
-			int style = tile.frameY / 18;
-            int mode  = (tile.frameX / 18) % frameXCycle.Length;
-			int nextFrameX = frameXCycle[mode];
-			tile.frameX = (short)(nextFrameX * 18);
-            tile.frameY = 0;
+            tile.frameX = 0;
+			tile.frameY ^= 18;
 			if (Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1,
                     Player.tileTargetX, Player.tileTargetY,
@@ -56,25 +50,33 @@ namespace REBEL.Blocks {
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
             var tile = Main.tile[location.X, location.Y];
-            int mode = (int)(tile.frameX / 18) & 3;
+            int mode = (int)(tile.frameY / 18) & 3;
             switch(mode) {
-                case 0: whom.velocity.Y = -10; break;
-                case 1: whom.velocity.X =  10; break;
-                case 2: whom.velocity.Y =  10; break;
-                case 3: whom.velocity.X = -10; break;
+                case 0: { //heal
+                    if(whom is Player p) {
+                        p.HealEffect(1); //visual only
+                        p.statLife = Math.Min(p.statLife+1, p.statLifeMax);
+                    }
+                    else if(whom is NPC n) {
+                        n.HealEffect(1);
+                        n.life = Math.Min(n.life+1, n.lifeMax);
+                    }
+                    break;
+                }
+                case 1: { //hurt
+                    if(whom is Player p) {
+                        p.Hurt(PlayerDeathReason.ByCustomReason(
+                            String.Format(
+                                "{0} touched a Hurt Block too much.",
+                                p.name)),
+                            1, 0);
+                    }
+                    else if(whom is NPC n) {
+                        n.StrikeNPC(1, 0, 0);
+                    }
+                    break;
+                }
                 default: break;
-            }
-        }
-
-        public override void AnimateIndividualTile(int type, int i, int j,
-        ref int frameXOffset, ref int frameYOffset) {
-            frameYOffset = (Main.tileFrame[Type] % 5) * 18;
-        }
-
-        public override void AnimateTile(ref int frame, ref int frameCounter) {
-            if(++frameCounter >= 10) {
-                frameCounter = 0;
-                frame = ++frame % 5;
             }
         }
     }

@@ -28,12 +28,6 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
-            //var whom = Main.LocalPlayer;
-
-            //Main.NewText(
-            //    String.Format("Touched {0}", direction),
-            //    0x00, 0x9D, 0xF3);
-
             //apply vertical motion
             //10 units seems good. 100 will cause you to smack your head
             //against the top of the world.

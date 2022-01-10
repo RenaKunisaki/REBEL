@@ -31,18 +31,21 @@ namespace REBEL.Hooks {
             //Methods to handle whom touching each type.
             var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
             var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
+            var heal   = ModContent.GetInstance<Blocks.HealHurtBlock>();
             TouchHandlers = new Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>>() {
                 {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
                 {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
+                {heal  .Type, (p,l,d) => heal  .OnTouched(p,l,d)},
             };
         }
 
         public override void PostUpdate() {
-            _checkPlayerTouchedBlocks(Main.LocalPlayer);
-            foreach(var npc in Main.npc) _checkPlayerTouchedBlocks(npc);
+            _checkTouchedBlocks(Main.LocalPlayer);
+            //XXX do this elsewhere. it doesn't apply when we're dead.
+            foreach(var npc in Main.npc) _checkTouchedBlocks(npc);
         }
 
-        protected void _checkPlayerTouchedBlocks(Entity whom) {
+        protected void _checkTouchedBlocks(Entity whom) {
             //Check for touched tiles.
             //touch direction is opposite of coordinate direction
             var coords = new Dictionary<Blocks.TouchDirection, Vector2>() {
