@@ -10,17 +10,20 @@ namespace REBEL.Blocks {
     public class TestBlock : ModTile {
         public override void PostSetDefaults() {
             Main.tileSolid[Type] = true;
-            Main.tileMergeDirt[Type] = true;
-			Main.tileBlockLight[Type] = false;
+            Main.tileMergeDirt[Type] = false;
+			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
 
-            //XXX what are these? just copying from MagicStorage here.
-            TileObjectData.newTile.Width = 12;
-            TileObjectData.newTile.Height = 12;
-            TileObjectData.newTile.Origin = new Point16(0, 0);
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16 };
-            TileObjectData.newTile.CoordinateWidth = 16;
-            TileObjectData.newTile.CoordinatePadding = 2;
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+            //TileObjectData.newTile.Width = 1; //tile coords
+            //TileObjectData.newTile.Height = 1;
+            ////which tile is under the cursor when placing
+            //TileObjectData.newTile.Origin = new Point16(0, 0);
+
+            //TileObjectData.newTile.CoordinateHeights = new int[] { 16 };
+            //TileObjectData.newTile.CoordinateWidth = 16;
+            //TileObjectData.newTile.CoordinatePadding = 2;
+
             //TileObjectData.newTile.HookCheck = new PlacementHook(CanPlace, -1, 0, true);
             //TileObjectData.newTile.UsesCustomCanPlace = true;
             //TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(Hook_AfterPlacement, -1, 0, false);
@@ -28,9 +31,10 @@ namespace REBEL.Blocks {
 
             //add entry to minimap
             //why can't we chain here? :(
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Test Block");
-            AddMapEntry(new Color(0x00, 0x9D, 0xF3), name);
+            //anyway we don't usually need this.
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Test Block");
+            //AddMapEntry(new Color(0x00, 0x9D, 0xF3), name);
         }
 
         public override void KillTile(int i, int j, ref bool fail,
@@ -45,7 +49,7 @@ namespace REBEL.Blocks {
             Main.NewText("YOU'VE KILLED ME!", 0x00, 0x9D, 0xF3);
             if(!noItem) {
                 Item.NewItem(i * 16, j * 16, 16, 32,
-                    ModContent.ItemType<Items.Placeable.TestBlock>());
+                    ModContent.ItemType<Items.Placeable.BoostBlock>());
             }
 		}
 
@@ -56,7 +60,7 @@ namespace REBEL.Blocks {
         //            i, j, frameX, frameY),
         //        0x00, 0x9D, 0xF3);
 		//	Item.NewItem(i * 16, j * 16, 16, 32,
-        //        ModContent.ItemType<Items.Placeable.TestBlock>());
+        //        ModContent.ItemType<Items.Placeable.BoostBlock>());
 		//}
 
         public override bool RightClick(int x, int y) {
