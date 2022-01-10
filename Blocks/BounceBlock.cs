@@ -10,9 +10,10 @@ namespace REBEL.Blocks {
     public class BounceBlock:
     Base.ItemDropBlock<Items.Placeable.BounceBlock>,
     IReactsToTouch {
-        /** A block that, when you touch it, gives you a boost in
-         *  some direction.
+        /** A block that, when you touch it, makes you bounce
+         *  in the opposite direction.
          */
+
         //XXX use slope to determine which directions it works in?
         public override void PostSetDefaults() {
             Main.tileSolid[Type] = true;
