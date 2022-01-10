@@ -12,8 +12,9 @@ namespace REBEL.Items.Placeable {
     {
         public override void SetStaticDefaults() {
             Tooltip.SetDefault(
-				"A block that hurts or heals on contact.");
+				"A block that hurts or heals on contact. Hammer it to cycle between heal, hurt, heal lots, hurt lots.");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
+			DisplayName = "Hurt/Heal Block";
         }
 
         public override void SetDefaults() {

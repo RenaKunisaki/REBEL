@@ -51,14 +51,12 @@ namespace REBEL.Blocks {
         TouchDirection direction, bool fast) {
             int msgNo = Main.rand.Next(0, deathMessages.Length-1);
             String msg = deathMessages[msgNo];
-            
-            //NPCs don't have hitstun, so only hurt them
-            //every 2 seconds.
-            uint frame = Main.GameUpdateCount % 120;
+
+            //NPCs don't have hitstun, so only hurt them every second.
+            uint frame = Main.GameUpdateCount % 60;
             if(whom is Player p) {
-                //XXX fast
                 p.Hurt(PlayerDeathReason.ByCustomReason(
-                    String.Format(msg, p.name)), 1, 0);
+                    String.Format(msg, p.name)), fast ? 20 : 1, 0);
             }
             else if(whom is NPC n && (frame == 0 || fast)) {
                 n.StrikeNPC(1, 0, 0);
@@ -71,7 +69,7 @@ namespace REBEL.Blocks {
 
         protected void _onTouchedHeal(Entity whom, Point location,
         TouchDirection direction, bool fast) {
-            uint frame = Main.GameUpdateCount % 120;
+            uint frame = Main.GameUpdateCount % 60;
             if(frame != 0 && !fast) return;
             if(whom is Player p) {
                 p.HealEffect(1); //visual only

@@ -7,10 +7,11 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Hooks {
-    public class PlayerHooks: ModPlayer {
-        public override void PostUpdate() {
+    public class WorldHooks: ModSystem {
+        public override void PostUpdateNPCs() {
+            //do this here so it applies even when player is dead.
             REBEL mod = Mod as REBEL;
-            mod.checkTouchedBlocks(Main.LocalPlayer);
+            foreach(var npc in Main.npc) mod.checkTouchedBlocks(npc);
         }
     }
 }
