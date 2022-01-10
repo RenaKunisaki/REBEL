@@ -53,7 +53,7 @@ namespace REBEL.Blocks {
             return true; //we did something, don't do default right click
         }
 
-        public void OnTouched(Player player, Point location,
+        public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
             var tile = Main.tile[location.X, location.Y];
             int mode = (int)(tile.frameX / 18) & 3;
@@ -62,10 +62,10 @@ namespace REBEL.Blocks {
             //    0x00, 0x9D, 0xF3);
             
             switch(mode) {
-                case 0: player.velocity.Y = -10; break;
-                case 1: player.velocity.X =  10; break;
-                case 2: player.velocity.Y =  10; break;
-                case 3: player.velocity.X = -10; break;
+                case 0: whom.velocity.Y = -10; break;
+                case 1: whom.velocity.X =  10; break;
+                case 2: whom.velocity.Y =  10; break;
+                case 3: whom.velocity.X = -10; break;
                 default: break;
             }
         }

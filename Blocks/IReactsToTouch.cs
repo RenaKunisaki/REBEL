@@ -22,6 +22,6 @@ namespace REBEL.Blocks {
     public interface IReactsToTouch {
         /** A block that does something when touched.
          */
-        public void OnTouched(Player player, Point location, TouchDirection direction);
+        public void OnTouched(Entity whom, Point location, TouchDirection direction);
     }
 }

@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework;
 namespace REBEL.Hooks {
     public class PlayerHooks: ModPlayer {
         Dictionary<Blocks.TouchDirection, Point> TouchOffsets;
-        Dictionary<ushort, Action<Player, Point, Blocks.TouchDirection>> TouchHandlers;
+        Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>> TouchHandlers;
 
         PlayerHooks() {
             //Offsets to add to position to detect touched tiles
             //in each direction. TouchDirection here refers to the part
             //of the tile being touched, so it's the opposite of the
-            //player's direction.
+            //whom's direction.
             TouchOffsets = new Dictionary<Blocks.TouchDirection, Point>() {
                 {Blocks.TouchDirection.Inside,      new Point( 0,  0)},
                 {Blocks.TouchDirection.Top,         new Point( 0,  1)},
@@ -28,10 +28,10 @@ namespace REBEL.Hooks {
                 {Blocks.TouchDirection.BottomRight, new Point(-1, -1)},
             };
 
-            //Methods to handle player touching each type.
+            //Methods to handle whom touching each type.
             var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
             var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
-            TouchHandlers = new Dictionary<ushort, Action<Player, Point, Blocks.TouchDirection>>() {
+            TouchHandlers = new Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>>() {
                 {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
                 {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
             };
@@ -39,21 +39,22 @@ namespace REBEL.Hooks {
 
         public override void PostUpdate() {
             _checkPlayerTouchedBlocks(Main.LocalPlayer);
+            foreach(var npc in Main.npc) _checkPlayerTouchedBlocks(npc);
         }
 
-        protected void _checkPlayerTouchedBlocks(Player player) {
+        protected void _checkPlayerTouchedBlocks(Entity whom) {
             //Check for touched tiles.
             //touch direction is opposite of coordinate direction
             var coords = new Dictionary<Blocks.TouchDirection, Vector2>() {
-                {Blocks.TouchDirection.Inside,      player.Center},
-                {Blocks.TouchDirection.Top,         player.Bottom},
-                {Blocks.TouchDirection.Bottom,      player.Top},
-                {Blocks.TouchDirection.Left,        player.Right},
-                {Blocks.TouchDirection.Right,       player.Left},
-                {Blocks.TouchDirection.TopLeft,     player.BottomRight},
-                {Blocks.TouchDirection.TopRight,    player.BottomLeft},
-                {Blocks.TouchDirection.BottomLeft,  player.TopRight},
-                {Blocks.TouchDirection.BottomRight, player.TopLeft},
+                {Blocks.TouchDirection.Inside,      whom.Center},
+                {Blocks.TouchDirection.Top,         whom.Bottom},
+                {Blocks.TouchDirection.Bottom,      whom.Top},
+                {Blocks.TouchDirection.Left,        whom.Right},
+                {Blocks.TouchDirection.Right,       whom.Left},
+                {Blocks.TouchDirection.TopLeft,     whom.BottomRight},
+                {Blocks.TouchDirection.TopRight,    whom.BottomLeft},
+                {Blocks.TouchDirection.BottomLeft,  whom.TopRight},
+                {Blocks.TouchDirection.BottomRight, whom.TopLeft},
             };
 
             foreach(var entry in coords) {
@@ -68,7 +69,7 @@ namespace REBEL.Hooks {
                 var loc   = new Point(tx, ty);
                 var tile  = Main.tile[tx, ty];
                 if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
-                    TouchHandlers[tile.type](player, loc, dir);
+                    TouchHandlers[tile.type](whom, loc, dir);
                 }
             }
         }

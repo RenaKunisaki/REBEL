@@ -26,9 +26,9 @@ namespace REBEL.Blocks {
             TileObjectData.addTile(Type);
         }
 
-        public void OnTouched(Player player, Point location,
+        public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
-            //var player = Main.LocalPlayer;
+            //var whom = Main.LocalPlayer;
 
             //Main.NewText(
             //    String.Format("Touched {0}", direction),
@@ -41,12 +41,12 @@ namespace REBEL.Blocks {
                 case TouchDirection.TopLeft:
                 case TouchDirection.Top:
                 case TouchDirection.TopRight:
-                    player.velocity.Y = -10; break;
+                    whom.velocity.Y = -10; break;
 
                 case TouchDirection.BottomLeft:
                 case TouchDirection.Bottom:
                 case TouchDirection.BottomRight:
-                    player.velocity.Y = 10; break;
+                    whom.velocity.Y = 10; break;
 
                 default: break;
             }
@@ -58,12 +58,12 @@ namespace REBEL.Blocks {
                 //case TouchDirection.TopLeft:
                 case TouchDirection.Left:
                 //case TouchDirection.BottomLeft:
-                    player.velocity.X = -10; break;
+                    whom.velocity.X = -10; break;
 
                 //case TouchDirection.TopRight:
                 case TouchDirection.Right:
                 //case TouchDirection.BottomRight:
-                    player.velocity.X = 10; break;
+                    whom.velocity.X = 10; break;
 
                 default: break;
             }
