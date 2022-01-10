@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 namespace REBEL.Hooks {
     public class PlayerHooks: ModPlayer {
         Dictionary<Blocks.TouchDirection, Point> TouchOffsets;
+        Dictionary<ushort, Action<Player, Point, Blocks.TouchDirection>> TouchHandlers;
 
         PlayerHooks() {
             //Offsets to add to position to detect touched tiles
@@ -26,12 +27,21 @@ namespace REBEL.Hooks {
                 {Blocks.TouchDirection.BottomLeft,  new Point( 1, -1)},
                 {Blocks.TouchDirection.BottomRight, new Point(-1, -1)},
             };
+
+            //Methods to handle player touching each type.
+            var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
+            var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
+            TouchHandlers = new Dictionary<ushort, Action<Player, Point, Blocks.TouchDirection>>() {
+                {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
+                {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
+            };
         }
 
         public override void PostUpdate() {
-            var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
-            var player = Main.LocalPlayer;
+            _checkPlayerTouchedBlocks(Main.LocalPlayer);
+        }
 
+        protected void _checkPlayerTouchedBlocks(Player player) {
             //Check for touched tiles.
             //touch direction is opposite of coordinate direction
             var coords = new Dictionary<Blocks.TouchDirection, Vector2>() {
@@ -45,6 +55,7 @@ namespace REBEL.Hooks {
                 {Blocks.TouchDirection.BottomLeft,  player.TopRight},
                 {Blocks.TouchDirection.BottomRight, player.TopLeft},
             };
+
             foreach(var entry in coords) {
                 var dir   = entry.Key;
                 var coord = entry.Value;
@@ -56,12 +67,8 @@ namespace REBEL.Hooks {
                 int ty    = (int)((coord.Y + ((float)offset.Y * 8.0)) / 16.0);
                 var loc   = new Point(tx, ty);
                 var tile  = Main.tile[tx, ty];
-                if(tile.IsActive) {
-                    //XXX there must be some better way to do this.
-                    //we can't use switch here because the values
-                    //aren't constant. can we not somehow get the type
-                    //of a tile given its ID?
-                    if(tile.type == bounce.Type) bounce.OnTouched(player, loc, dir);
+                if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
+                    TouchHandlers[tile.type](player, loc, dir);
                 }
             }
         }
