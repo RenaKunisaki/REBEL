@@ -20,8 +20,9 @@ namespace REBEL.Blocks {
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
+            Main.tileFrameImportant[Type] = true;
 
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+            TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
             TileObjectData.addTile(Type);
         }
 
@@ -65,6 +66,18 @@ namespace REBEL.Blocks {
                     player.velocity.X = 10; break;
 
                 default: break;
+            }
+        }
+
+        public override void AnimateIndividualTile(int type, int i, int j,
+        ref int frameXOffset, ref int frameYOffset) {
+            frameYOffset = (Main.tileFrame[Type] % 3) * 18;
+        }
+
+        public override void AnimateTile(ref int frame, ref int frameCounter) {
+            if(++frameCounter >= 10) {
+                frameCounter = 0;
+                frame = ++frame % 3;
             }
         }
     }
