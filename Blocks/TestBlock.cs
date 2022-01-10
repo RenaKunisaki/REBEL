@@ -49,7 +49,7 @@ namespace REBEL.Blocks {
             Main.NewText("YOU'VE KILLED ME!", 0x00, 0x9D, 0xF3);
             if(!noItem) {
                 Item.NewItem(i * 16, j * 16, 16, 32,
-                    ModContent.ItemType<Items.Placeable.BoostBlock>());
+                    ModContent.ItemType<Items.Placeable.BounceBlock>());
             }
 		}
 
@@ -60,7 +60,7 @@ namespace REBEL.Blocks {
         //            i, j, frameX, frameY),
         //        0x00, 0x9D, 0xF3);
 		//	Item.NewItem(i * 16, j * 16, 16, 32,
-        //        ModContent.ItemType<Items.Placeable.BoostBlock>());
+        //        ModContent.ItemType<Items.Placeable.BounceBlock>());
 		//}
 
         public override bool RightClick(int x, int y) {

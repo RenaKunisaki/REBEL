@@ -8,7 +8,7 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class BoostBlock : ModItem
+    public class BounceBlock : ModItem
     {
         public override void SetStaticDefaults() {
             Tooltip.SetDefault(
@@ -26,12 +26,12 @@ namespace REBEL.Items.Placeable {
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
 			Item.value = 500;
-			Item.createTile = ModContent.TileType<Blocks.BoostBlock>();
+			Item.createTile = ModContent.TileType<Blocks.BounceBlock>();
 		}
 
         public override void AddRecipes() {
 			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.BoostBlock>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.BounceBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();

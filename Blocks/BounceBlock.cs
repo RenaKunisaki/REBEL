@@ -7,7 +7,7 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Blocks {
-    public class BoostBlock : ModTile, IReactsToTouch {
+    public class BounceBlock : ModTile, IReactsToTouch {
         /** A block that, when you touch it, gives you a boost in
          *  some direction.
          */
@@ -40,13 +40,13 @@ namespace REBEL.Blocks {
             if(fail) return;
             if(!noItem) {
                 Item.NewItem(i * 16, j * 16, 16, 16,
-                    ModContent.ItemType<Items.Placeable.BoostBlock>());
+                    ModContent.ItemType<Items.Placeable.BounceBlock>());
             }
 		}
 
         public void OnTouched(Player player, Point location,
         TouchDirection direction) {
-            var player = Main.LocalPlayer;
+            //var player = Main.LocalPlayer;
 
             //Main.NewText(
             //    String.Format("Touched {0}", direction),

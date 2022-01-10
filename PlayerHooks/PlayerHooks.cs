@@ -29,7 +29,7 @@ namespace REBEL.Hooks {
         }
 
         public override void PostUpdate() {
-            var boost = ModContent.GetInstance<Blocks.BoostBlock>();
+            var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
             var player = Main.LocalPlayer;
 
             //Check for touched tiles.
@@ -61,7 +61,7 @@ namespace REBEL.Hooks {
                     //we can't use switch here because the values
                     //aren't constant. can we not somehow get the type
                     //of a tile given its ID?
-                    if(tile.type == boost.Type) boost.OnTouched(player, loc, dir);
+                    if(tile.type == bounce.Type) bounce.OnTouched(player, loc, dir);
                 }
             }
         }
