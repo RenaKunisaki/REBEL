@@ -15,12 +15,11 @@ namespace REBEL.Blocks {
          */
 
         //XXX use slope to determine which directions it works in?
-        public override void PostSetDefaults() {
+        public override void SetStaticDefaults() {
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
-            Main.tileNoAttach[Type] = false;
 
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.addTile(Type);
