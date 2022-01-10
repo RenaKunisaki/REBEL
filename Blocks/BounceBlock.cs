@@ -7,12 +7,13 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Blocks {
-    public class BounceBlock : ModTile, IReactsToTouch {
+    public class BounceBlock:
+    Base.ItemDropBlock<Items.Placeable.BounceBlock>,
+    IReactsToTouch {
         /** A block that, when you touch it, gives you a boost in
          *  some direction.
          */
         //XXX use slope to determine which directions it works in?
-
         public override void PostSetDefaults() {
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
@@ -22,27 +23,6 @@ namespace REBEL.Blocks {
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.addTile(Type);
         }
-
-        /* public override bool RightClick(int x, int y) {
-            Main.NewText(
-                String.Format("I'm at {0} {1}", x, y),
-                0x00, 0x9D, 0xF3);
-            return true; //we did something, don't do default right click
-        } */
-
-        public override void KillTile(int i, int j, ref bool fail,
-        ref bool effectOnly, ref bool noItem) {
-            //Called when this tile is hit by a pickaxe.
-            //i, j: this tile's world tile-coordinates.
-            //fail: whether we didn't hit hard enough to destroy it.
-            //effectOnly: only create dust
-            //noItem: don't drop anything.
-            if(fail) return;
-            if(!noItem) {
-                Item.NewItem(i * 16, j * 16, 16, 16,
-                    ModContent.ItemType<Items.Placeable.BounceBlock>());
-            }
-		}
 
         public void OnTouched(Player player, Point location,
         TouchDirection direction) {
