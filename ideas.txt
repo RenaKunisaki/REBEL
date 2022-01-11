@@ -1,0 +1,9 @@
+- coin block
+    - touch it, it vanishes and you gain one coin
+- better mine cart stuff
+    - brakes (slows you if above a certain speed)
+    - boosters that work in whichever direction you're facing
+        - can be turned off with wires
+    - junctions that can be switched by wires
+- block that toggles the gravity flip effect on touch or on right click
+- one-way gates a la Mario Maker

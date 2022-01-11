@@ -7,14 +7,17 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Blocks {
-    public class TestBlock : ModTile {
+    public class TestBlock:
+    Base.ItemDropBlock<Items.Placeable.TestBlock>,
+    IReactsToTouch {
         public override void PostSetDefaults() {
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;
 			Main.tileLighted[Type] = false;
+            Main.tileFrameImportant[Type] = true;
 
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+            TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
             //TileObjectData.newTile.Width = 1; //tile coords
             //TileObjectData.newTile.Height = 1;
             ////which tile is under the cursor when placing
@@ -36,22 +39,6 @@ namespace REBEL.Blocks {
             //name.SetDefault("Test Block");
             //AddMapEntry(new Color(0x00, 0x9D, 0xF3), name);
         }
-
-        public override void KillTile(int i, int j, ref bool fail,
-        ref bool effectOnly, ref bool noItem) {
-            //Called when this tile is hit by a pickaxe.
-            //i, j: this tile's world tile-coordinates.
-            //fail: whether we didn't hit hard enough to destroy it.
-            //effectOnly: only create dust
-            //noItem: don't drop anything.
-            if(fail) return;
-
-            Main.NewText("YOU'VE KILLED ME!", 0x00, 0x9D, 0xF3);
-            if(!noItem) {
-                Item.NewItem(i * 16, j * 16, 16, 32,
-                    ModContent.ItemType<Items.Placeable.BounceBlock>());
-            }
-		}
 
         //public override void KillMultiTile(int i, int j, int frameX, int frameY) {
         //    //used for multi-tile objects.
@@ -83,10 +70,12 @@ namespace REBEL.Blocks {
             //    0x00, 0x9D, 0xF3);
         //}
 
-        public override void FloorVisuals(Player player) {
-            //called when player stands on this tile
-            player.velocity.Y = -10;
-            //Main.NewText("BOING!", 0x00, 0x9D, 0xF3);
+        public void OnTouched(Entity whom, Point location,
+        TouchDirection direction) {
+            String name = $"{whom}";
+            if(whom is Player p) name = p.name;
+            else if(whom is NPC n) name = n.FullName;
+            Main.NewText($"I was touched from the {direction} at {location} by {name}");
         }
     }
 }
