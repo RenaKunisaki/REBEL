@@ -18,6 +18,7 @@ namespace REBEL.Blocks {
 
         //XXX use slope to determine which directions it works in?
         public override void SetStaticDefaults() {
+            (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = false;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;

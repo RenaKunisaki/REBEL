@@ -16,6 +16,7 @@ namespace REBEL.Blocks {
          *  depending on its mode.
          */
         public override void SetStaticDefaults() {
+            (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;

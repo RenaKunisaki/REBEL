@@ -18,24 +18,36 @@ namespace REBEL {
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");
+			TouchHandlers = new Dictionary<ushort,
+				Action<Entity, Point, TouchDirection>>();
 
             //Methods to handle whom touching each type.
 			//XXX can this be automated? somehow test if the tile is of
 			//a type that has an OnTouched method?
-            var test   = ModContent.GetInstance<Blocks.TestBlock>();
+            /* var test   = ModContent.GetInstance<Blocks.TestBlock>();
             var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
             var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
             var heal   = ModContent.GetInstance<Blocks.HealHurtBlock>();
+            var oneWay = ModContent.GetInstance<Blocks.OneWayBlock>();
             TouchHandlers = new Dictionary<ushort, Action<Entity, Point, TouchDirection>>() {
                 {test  .Type, (p,l,d) => test  .OnTouched(p,l,d)},
                 {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
                 {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
                 {heal  .Type, (p,l,d) => heal  .OnTouched(p,l,d)},
-            };
+                {oneWay.Type, (p,l,d) => oneWay.OnTouched(p,l,d)},
+            }; */
 		}
 
 		public override void Unload() {
 			//Logger.InfoFormat("Goodbye cruel world!");
+		}
+
+		public void registerTouchHandler(ushort type,
+		Action<Entity, Point, TouchDirection> handler) {
+			/** Register a function to call when this type of block
+			 *  is touched by the player, an NPC, or other entity.
+			 */
+			TouchHandlers[type] = handler;
 		}
 
 		public void checkTouchedBlocks(Entity whom) {

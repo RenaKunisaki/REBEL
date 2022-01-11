@@ -12,6 +12,7 @@ namespace REBEL.Blocks {
     ItemDropBlock<Items.Placeable.TestBlock>,
     IReactsToTouch {
         public override void PostSetDefaults() {
+            (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = false;
 			Main.tileBlockLight[Type] = true;

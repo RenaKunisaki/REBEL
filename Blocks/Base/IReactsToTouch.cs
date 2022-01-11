@@ -19,9 +19,17 @@ namespace REBEL.Blocks.Base {
         Inside //player is overlapping this block
     }
 
-    public interface IReactsToTouch {
-        /** A block that does something when touched.
+    public interface IReactsToTouch: IModType {
+        /** Interface for a block that does something when touched.
          */
-        public void OnTouched(Entity whom, Point location, TouchDirection direction);
+        
+        /** Called when an entity touches the block.
+         *  @param whom What touched it. Can be Player, NPC, or other Entity.
+         *  @param location The tile coordinates of the block.
+         *  @param direction Which part of the block was touched.
+         *  @note Not called if the entity is dead.
+         */
+        abstract public void OnTouched(Entity whom, Point location,
+        TouchDirection direction);
     }
 }
