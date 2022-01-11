@@ -54,13 +54,15 @@ namespace REBEL {
 			TouchDirection D_B  = TouchDirection.Bottom;
 			TouchDirection D_BR = TouchDirection.BottomRight;
 
-			//XXX do a line intersect test using oldVelocity to prevent
+			//XXX do a line intersect test using oldPosition to prevent
 			//clipping at high speeds.
 
-			Point TopLeft = whom.TopLeft.ToTileCoordinates();
+			Point TopLeft = new Vector2(
+				whom.Hitbox.Left, whom.Hitbox.Top).ToTileCoordinates();
 			//get the blocks above us, so we know when we bonk our head.
 			if(whom.velocity.Y < 0) TopLeft.Y -= 1;
-			Point BottomRight = whom.BottomRight.ToTileCoordinates();
+			Point BottomRight = new Vector2(
+				whom.Hitbox.Right, whom.Hitbox.Bottom).ToTileCoordinates();
 
 			//check each tile the entity occupies.
 			for(int y=TopLeft.Y; y<=BottomRight.Y; y++) {
