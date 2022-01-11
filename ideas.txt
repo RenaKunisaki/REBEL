@@ -6,5 +6,6 @@
         - can be turned off with wires
     - junctions that can be switched by wires
 - block that toggles the gravity flip effect on touch or on right click
+    - implemented but kinda useless because that effect doesn't let you jump
 - black hole block, draws you toward it
     - magnet block, draws metal toward it

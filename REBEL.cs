@@ -14,11 +14,14 @@ using REBEL.Blocks.Base;
 namespace REBEL {
 	public class REBEL: Mod {
 		Dictionary<ushort, Action<Entity, Point, TouchDirection>> TouchHandlers;
+		public bool forceUpsideDown; //force reverse gravity + screen flip
+		public bool wasForceUpsideDown;
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");
 			TouchHandlers = new Dictionary<ushort,
 				Action<Entity, Point, TouchDirection>>();
+			forceUpsideDown = false;
 		}
 
 		public override void Unload() {

@@ -46,14 +46,21 @@ namespace REBEL.Blocks {
             /** Called when hit by a hammer.
              */
 			Main.NewText("Ow!", 0xFF, 0x00, 0x00);
+            //Main.drawBetterDebug = !Main.drawBetterDebug;
+            //Main.LocalPlayer.bunny = true;
             return false;
 		}
 
         public override bool RightClick(int x, int y) {
             int biome = Main.LocalPlayer.GetPrimaryBiome();
-            Main.NewText($"You are in biome {biome}, clicked {x} {y}",
+            Main.NewText($"You are in biome {biome}, clicked {x} {y}, grav {Main.LocalPlayer.gravity}",
                 0x00, 0x9D, 0xF3);
             //Mod.Logger.InfoFormat("You are in biome {0}.", biome);
+
+            //problem: we can't jump in this state... normally we'd just flip
+            //gravity again but this doesn't let us do that.
+            var rebel = Mod as REBEL;
+            rebel.forceUpsideDown = !rebel.forceUpsideDown;
             return true; //we did something, don't do default right click
         }
 
