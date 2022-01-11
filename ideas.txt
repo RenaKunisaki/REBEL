@@ -1,5 +1,3 @@
-- coin block
-    - touch it, it vanishes and you gain one coin
 - better mine cart stuff
     - brakes (slows you if above a certain speed)
     - boosters that work in whichever direction you're facing
