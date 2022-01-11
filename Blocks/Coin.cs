@@ -33,5 +33,19 @@ namespace REBEL.Blocks {
                     ItemID.CopperCoin);
             }
         }
+
+        //repeat the middle frame to avoid duplicating it in memory.
+        static int[] animFrames = {0, 1, 2, 1};
+        public override void AnimateIndividualTile(int type, int i, int j,
+        ref int frameXOffset, ref int frameYOffset) {
+            frameYOffset = (animFrames[Main.tileFrame[Type] & 3]) * 18;
+        }
+
+        public override void AnimateTile(ref int frame, ref int frameCounter) {
+            if(++frameCounter >= 16) {
+                frameCounter = 0;
+                frame = (frame+1) & 3;
+            }
+        }
     }
 }
