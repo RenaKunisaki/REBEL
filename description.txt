@@ -2,7 +2,11 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 
 Physics Blocks
 - Bounce Blocks: repels things away on touch.
-- Boost Blocks: accelerates things in a specific direction on touch. Right-click to change direction since hammer doesn't work on non-solid tiles.
+- Boost Blocks: accelerates things in a specific direction on touch.
+    - Right-click to change direction.
+- Gravity Blocks (NOT WORKING): flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
+    - These "work" but the effect is incomplete.
 
 Cheaty/Fun Blocks
-- Heal/Hurt Blocks: Heals or hurts anyone who touches them. Hammer to change their mode and power.
+- Heal/Hurt Blocks: Heals or hurts anyone who touches them.
+    - Hammer to change their mode; alternates between hurt, heal, hurt lots, heal lots.
