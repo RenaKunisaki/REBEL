@@ -14,7 +14,7 @@ namespace REBEL.Blocks {
         /** A block that, when you touch it, gives you a boost in
          *  some direction.
          */
-        
+
         //XXX use slope to determine which directions it works in?
         public override void SetStaticDefaults() {
             Main.tileSolid[Type] = false;

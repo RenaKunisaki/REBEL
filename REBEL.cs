@@ -16,7 +16,7 @@ namespace REBEL {
         Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>> TouchHandlers;
 
         public override void Load() {
-			Logger.InfoFormat("Hello world!");
+			//Logger.InfoFormat("Hello world!");
 
             //Methods to handle whom touching each type.
 			//XXX can this be automated? somehow test if the tile is of
@@ -34,7 +34,7 @@ namespace REBEL {
 		}
 
 		public override void Unload() {
-			Logger.InfoFormat("Goodbye cruel world!");
+			//Logger.InfoFormat("Goodbye cruel world!");
 		}
 
 		public void checkTouchedBlocks(Entity whom) {
@@ -60,10 +60,15 @@ namespace REBEL {
 			if(whom.velocity.Y < 0) TopLeft.Y -= 1;
 			Point BottomRight = whom.BottomRight.ToTileCoordinates();
 
+			//check each tile the entity occupies.
 			for(int y=TopLeft.Y; y<=BottomRight.Y; y++) {
 				for(int x=TopLeft.X; x<=BottomRight.X; x++) {
 					var tile = Main.tile[x, y];
 					if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
+						//work out the direction we touched from.
+						//this is the opposite of the direction we are
+						//from the tile, so if the contact is our bottom
+						//left point, it's the tile's top right.
 						Blocks.TouchDirection dir = D_I;
 						if(x == TopLeft.X) {
 							dir = D_R;

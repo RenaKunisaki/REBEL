@@ -30,7 +30,7 @@ namespace REBEL.Blocks {
         TouchDirection direction) {
             //apply vertical motion
             //10 units seems good. 100 will cause you to smack your head
-            //against the top of the world.
+            //against the top of the world. 20 can clip you through blocks.
             switch(direction) {
                 case TouchDirection.TopLeft:
                 case TouchDirection.Top:

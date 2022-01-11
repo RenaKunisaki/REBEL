@@ -40,21 +40,16 @@ namespace REBEL.Blocks {
             //AddMapEntry(new Color(0x00, 0x9D, 0xF3), name);
         }
 
-        //public override void KillMultiTile(int i, int j, int frameX, int frameY) {
-        //    //used for multi-tile objects.
-        //    Main.NewText(
-        //        String.Format("YOU'VE KILLED ME! {0} {1}, frame {2} {3}",
-        //            i, j, frameX, frameY),
-        //        0x00, 0x9D, 0xF3);
-		//	Item.NewItem(i * 16, j * 16, 16, 32,
-        //        ModContent.ItemType<Items.Placeable.BounceBlock>());
-		//}
+        public override bool Slope(int i, int j) {
+            /** Called when hit by a hammer.
+             */
+			Main.NewText("Ow!", 0xFF, 0x00, 0x00);
+            return false;
+		}
 
         public override bool RightClick(int x, int y) {
             int biome = Main.LocalPlayer.GetPrimaryBiome();
-            Main.NewText(
-                String.Format("You are in biome {0}, clicked {1} {2}",
-                    biome, x, y),
+            Main.NewText($"You are in biome {biome}, clicked {x} {y}",
                 0x00, 0x9D, 0xF3);
             //Mod.Logger.InfoFormat("You are in biome {0}.", biome);
             return true; //we did something, don't do default right click
