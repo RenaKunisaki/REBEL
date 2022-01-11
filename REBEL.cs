@@ -54,6 +54,9 @@ namespace REBEL {
 			TouchDirection D_B  = TouchDirection.Bottom;
 			TouchDirection D_BR = TouchDirection.BottomRight;
 
+			//XXX do a line intersect test using oldVelocity to prevent
+			//clipping at high speeds.
+
 			Point TopLeft = whom.TopLeft.ToTileCoordinates();
 			//get the blocks above us, so we know when we bonk our head.
 			if(whom.velocity.Y < 0) TopLeft.Y -= 1;

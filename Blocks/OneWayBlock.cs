@@ -60,11 +60,49 @@ namespace REBEL.Blocks {
             var tile = Main.tile[location.X, location.Y];
             int mode = (int)(tile.frameX / 18) & 3;
             //0:up 1:right 2:down 3:left
+            //these numbers are the order of the graphics in the image
             switch(mode) {
-                case 0: whom.velocity.Y = Math.Min(whom.velocity.Y, 0); break;
-                case 1: whom.velocity.X = Math.Max(whom.velocity.X, 0); break;
-                case 2: whom.velocity.Y = Math.Max(whom.velocity.Y, 0); break;
-                case 3: whom.velocity.X = Math.Min(whom.velocity.X, 0); break;
+                case 0: { //up
+                    if(direction == TouchDirection.Top
+                    || direction == TouchDirection.TopLeft
+                    || direction == TouchDirection.TopRight) {
+                        //XXX there must be a better way to do this.
+                        //we could try to change solidity but that would
+                        //affect all instances of the tile.
+                        //as it is, this causes a weird jittering instead
+                        //of simply standing on top.
+                        whom.velocity.Y = Math.Min(whom.velocity.Y, 0);
+                        whom.position.Y -= 0.5f;
+                    }
+                    break;
+                }
+                case 1: { //right
+                    if(direction == TouchDirection.Right
+                    || direction == TouchDirection.BottomRight
+                    || direction == TouchDirection.TopRight) {
+                        whom.velocity.X = Math.Max(whom.velocity.X,  0); 
+                        whom.position.X += 0.5f;
+                    }
+                    break;
+                }
+                case 2: { //down
+                    if(direction == TouchDirection.Bottom
+                    || direction == TouchDirection.BottomLeft
+                    || direction == TouchDirection.BottomRight) {
+                        whom.velocity.Y = Math.Max(whom.velocity.Y,  0);
+                        whom.position.Y += 0.5f;
+                    }
+                    break;
+                }
+                case 3: { //left
+                    if(direction == TouchDirection.Left
+                    || direction == TouchDirection.TopLeft
+                    || direction == TouchDirection.BottomLeft) {
+                        whom.velocity.X = Math.Min(whom.velocity.X, 0);
+                        whom.position.X -= 0.5f;
+                    }
+                    break;
+                }
                 default: break;
             }
         }
