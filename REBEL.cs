@@ -13,29 +13,12 @@ using REBEL.Blocks.Base;
 
 namespace REBEL {
 	public class REBEL: Mod {
-		Dictionary<TouchDirection, Point> TouchOffsets;
-        Dictionary<ushort, Action<Entity, Point, TouchDirection>> TouchHandlers;
+		Dictionary<ushort, Action<Entity, Point, TouchDirection>> TouchHandlers;
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");
 			TouchHandlers = new Dictionary<ushort,
 				Action<Entity, Point, TouchDirection>>();
-
-            //Methods to handle whom touching each type.
-			//XXX can this be automated? somehow test if the tile is of
-			//a type that has an OnTouched method?
-            /* var test   = ModContent.GetInstance<Blocks.TestBlock>();
-            var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
-            var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
-            var heal   = ModContent.GetInstance<Blocks.HealHurtBlock>();
-            var oneWay = ModContent.GetInstance<Blocks.OneWayBlock>();
-            TouchHandlers = new Dictionary<ushort, Action<Entity, Point, TouchDirection>>() {
-                {test  .Type, (p,l,d) => test  .OnTouched(p,l,d)},
-                {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
-                {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
-                {heal  .Type, (p,l,d) => heal  .OnTouched(p,l,d)},
-                {oneWay.Type, (p,l,d) => oneWay.OnTouched(p,l,d)},
-            }; */
 		}
 
 		public override void Unload() {
@@ -54,6 +37,9 @@ namespace REBEL {
 			/** Check if the given Entity is touching any of our blocks.
 			 */
 			//ignore the dead.
+			//note that a dead NPC is still there, invisible, at the
+			//position it died at. I assume it goes away eventually,
+			//like when its entry in the array is overwritten?
             if(whom is Player p && p.statLife <= 0) return;
             if(whom is NPC n && n.life <= 0) return;
 
