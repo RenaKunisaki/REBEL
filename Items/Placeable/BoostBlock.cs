@@ -12,7 +12,7 @@ namespace REBEL.Items.Placeable {
     {
         public override void SetStaticDefaults() {
             Tooltip.SetDefault(
-				"A block that accelerates you in a direction. Right-click to change direction");
+				"A block that accelerates you in a direction. Right-click to change direction.");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 

@@ -9,11 +9,10 @@ using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
     public class HealHurtBlock : ModItem {
-		String DisplayName = "Heal/Hurt Block";
-
-        public override void SetStaticDefaults() {
+		public override void SetStaticDefaults() {
             Tooltip.SetDefault(
 				"A block that hurts or heals on contact. Hammer it to cycle between heal, hurt, heal lots, hurt lots.");
+			DisplayName.SetDefault("Heal/Hurt Block");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
