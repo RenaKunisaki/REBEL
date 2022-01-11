@@ -57,8 +57,6 @@ namespace REBEL.Blocks {
                 0x00, 0x9D, 0xF3);
             //Mod.Logger.InfoFormat("You are in biome {0}.", biome);
 
-            //problem: we can't jump in this state... normally we'd just flip
-            //gravity again but this doesn't let us do that.
             var rebel = Mod as REBEL;
             rebel.forceUpsideDown = !rebel.forceUpsideDown;
             return true; //we did something, don't do default right click
