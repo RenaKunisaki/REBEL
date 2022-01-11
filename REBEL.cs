@@ -9,11 +9,12 @@ using Terraria.UI;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using REBEL.Blocks.Base;
 
 namespace REBEL {
 	public class REBEL: Mod {
-		Dictionary<Blocks.TouchDirection, Point> TouchOffsets;
-        Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>> TouchHandlers;
+		Dictionary<TouchDirection, Point> TouchOffsets;
+        Dictionary<ushort, Action<Entity, Point, TouchDirection>> TouchHandlers;
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");
@@ -25,7 +26,7 @@ namespace REBEL {
             var bounce = ModContent.GetInstance<Blocks.BounceBlock>();
             var boost  = ModContent.GetInstance<Blocks.BoostBlock>();
             var heal   = ModContent.GetInstance<Blocks.HealHurtBlock>();
-            TouchHandlers = new Dictionary<ushort, Action<Entity, Point, Blocks.TouchDirection>>() {
+            TouchHandlers = new Dictionary<ushort, Action<Entity, Point, TouchDirection>>() {
                 {test  .Type, (p,l,d) => test  .OnTouched(p,l,d)},
                 {bounce.Type, (p,l,d) => bounce.OnTouched(p,l,d)},
                 {boost .Type, (p,l,d) => boost .OnTouched(p,l,d)},
@@ -45,15 +46,15 @@ namespace REBEL {
             if(whom is NPC n && n.life <= 0) return;
 
 			//shorthand to make code less ugly maybe
-			Blocks.TouchDirection D_TL = Blocks.TouchDirection.TopLeft;
-			Blocks.TouchDirection D_T  = Blocks.TouchDirection.Top;
-			Blocks.TouchDirection D_TR = Blocks.TouchDirection.TopRight;
-			Blocks.TouchDirection D_L  = Blocks.TouchDirection.Left;
-			Blocks.TouchDirection D_I  = Blocks.TouchDirection.Inside;
-			Blocks.TouchDirection D_R  = Blocks.TouchDirection.Right;
-			Blocks.TouchDirection D_BL = Blocks.TouchDirection.BottomLeft;
-			Blocks.TouchDirection D_B  = Blocks.TouchDirection.Bottom;
-			Blocks.TouchDirection D_BR = Blocks.TouchDirection.BottomRight;
+			TouchDirection D_TL = TouchDirection.TopLeft;
+			TouchDirection D_T  = TouchDirection.Top;
+			TouchDirection D_TR = TouchDirection.TopRight;
+			TouchDirection D_L  = TouchDirection.Left;
+			TouchDirection D_I  = TouchDirection.Inside;
+			TouchDirection D_R  = TouchDirection.Right;
+			TouchDirection D_BL = TouchDirection.BottomLeft;
+			TouchDirection D_B  = TouchDirection.Bottom;
+			TouchDirection D_BR = TouchDirection.BottomRight;
 
 			Point TopLeft = whom.TopLeft.ToTileCoordinates();
 			//get the blocks above us, so we know when we bonk our head.
@@ -69,7 +70,7 @@ namespace REBEL {
 						//this is the opposite of the direction we are
 						//from the tile, so if the contact is our bottom
 						//left point, it's the tile's top right.
-						Blocks.TouchDirection dir = D_I;
+						TouchDirection dir = D_I;
 						if(x == TopLeft.X) {
 							dir = D_R;
 							if     (y == TopLeft.Y)     dir = D_BR;

@@ -5,10 +5,11 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
     public class BounceBlock:
-    Base.ItemDropBlock<Items.Placeable.BounceBlock>,
+    ItemDropBlock<Items.Placeable.BounceBlock>,
     IReactsToTouch {
         /** A block that, when you touch it, makes you bounce
          *  in the opposite direction.

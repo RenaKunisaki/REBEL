@@ -5,10 +5,11 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
     public class TestBlock:
-    Base.ItemDropBlock<Items.Placeable.TestBlock>,
+    ItemDropBlock<Items.Placeable.TestBlock>,
     IReactsToTouch {
         public override void PostSetDefaults() {
             Main.tileSolid[Type] = true;

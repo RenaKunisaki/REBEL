@@ -6,10 +6,11 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
     public class HealHurtBlock:
-    Base.ItemDropBlock<Items.Placeable.HealHurtBlock>,
+    ItemDropBlock<Items.Placeable.HealHurtBlock>,
     IReactsToTouch {
         /** A block that hurts to touch, or heals you,
          *  depending on its mode.

@@ -6,10 +6,11 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
     public class BoostBlock:
-    Base.ItemDropBlock<Items.Placeable.BoostBlock>,
+    ItemDropBlock<Items.Placeable.BoostBlock>,
     IReactsToTouch {
         /** A block that, when you touch it, gives you a boost in
          *  some direction.

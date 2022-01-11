@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
-namespace REBEL.Blocks {
+namespace REBEL.Blocks.Base {
     public enum TouchDirection {
         Top,     //player standing on top of this block
         Bottom,  //player hit block from below
