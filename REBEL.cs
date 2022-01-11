@@ -57,8 +57,9 @@ namespace REBEL {
 
 			Point TopLeft = whom.TopLeft.ToTileCoordinates();
 			//get the blocks above us, so we know when we bonk our head.
-			TopLeft.Y -= 1;
+			if(whom.velocity.Y < 0) TopLeft.Y -= 1;
 			Point BottomRight = whom.BottomRight.ToTileCoordinates();
+
 			for(int y=TopLeft.Y; y<=BottomRight.Y; y++) {
 				for(int x=TopLeft.X; x<=BottomRight.X; x++) {
 					var tile = Main.tile[x, y];

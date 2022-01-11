@@ -7,3 +7,4 @@
     - junctions that can be switched by wires
 - block that toggles the gravity flip effect on touch or on right click
 - one-way gates a la Mario Maker
+- black hole block, draws you toward it
