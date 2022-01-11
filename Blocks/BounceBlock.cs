@@ -10,7 +10,7 @@ using REBEL.Blocks.Base;
 namespace REBEL.Blocks {
     public class BounceBlock:
     ItemDropBlock<Items.Placeable.BounceBlock>,
-    IReactsToTouch {
+    IReactsToTouch, ILoadable {
         /** A block that, when you touch it, makes you bounce
          *  in the opposite direction.
          */

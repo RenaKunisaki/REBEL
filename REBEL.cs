@@ -26,6 +26,8 @@ namespace REBEL {
 
 		public override void Unload() {
 			//Logger.InfoFormat("Goodbye cruel world!");
+			TouchHandlers.Clear();
+			TouchHandlers = null;
 		}
 
 		public void registerTouchHandler(ushort type,
