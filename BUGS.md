@@ -8,6 +8,7 @@
 - the recipes are dumb because I haven't yet remembered to make them not dumb
 - some things can be changed by hammering, others by right-click
     - this is a tModLoader limitation since hammering non-solid tiles doesn't work
+- time sensors will activate when you manually change the time backward, even if it's not on the hour
 
 # Visual bugs
 - one-way gates cause jitter

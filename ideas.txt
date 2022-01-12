@@ -26,7 +26,6 @@
 - more sensors; signal/change solidity when...
     - touched by NPCs
         - detect only friend/foe
-    - every hour
     - on player join/leave server
     - on random/every N frames
     - weather
@@ -55,11 +54,13 @@
             - eg if received signals on red, then green, then blue
         - signal received X frames ago (delay)
 - other consumable blocks like the coin - health/mana refills, item pickups...
+    - ones that don't disappear but just become inactive for a while
 - fire
     - every frame, random chance to spread to adjacent blocks of certain types
         - damage them like pickaxe would; if destroyed, replace with fire
     - when hit by water, turn back into what used to be there/dirt/air/ash block
 - heal/hurt blocks but non-solid (gas blocks)
+- turret; fires projectiles at nearby enemies
 - speed limit block (slows you down like honey but less so)
     - or subtracts coins if you move too fast :V
 - when touched, prompt for a password (use the sign text entry?)
