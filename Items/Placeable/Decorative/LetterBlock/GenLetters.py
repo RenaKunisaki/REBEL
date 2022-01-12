@@ -4,6 +4,9 @@ template = """
 	public class LetterBlock{name}: LetterBlock<Blocks.LetterBlock{name}, Items.Placeable.LetterBlock{name}> {{
 	    public override String _getLetter1() {{ return "{0}"; }}
 		public override String _getLetter2() {{ return "{1}"; }}
+		public override String Texture {{
+            get => "REBEL/Items/Placeable/Decorative/LetterBlock/LetterBlock{name}";
+        }}
 	}}"""
 
 # all names have a Z in front so they sort at the end of the list.

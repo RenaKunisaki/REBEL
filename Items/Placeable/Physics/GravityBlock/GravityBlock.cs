@@ -8,11 +8,14 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class TimeSensor : ModItem
-    {
+    public class GravityBlock : ModItem {
+		public override String Texture {
+            get => "REBEL/Items/Placeable/Physics/GravityBlock/GravityBlock";
+        }
         public override void SetStaticDefaults() {
-            Tooltip.SetDefault("Emits a signal every in-game hour.");
-			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Tooltip.SetDefault(
+				"A block that flips gravity when touched.");
+			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
         public override void SetDefaults() {
@@ -25,13 +28,13 @@ namespace REBEL.Items.Placeable {
 			Item.useTime = 10;
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
-			Item.value = 1;
-			Item.createTile = ModContent.TileType<Blocks.TimeSensor>();
+			Item.value = 500;
+			Item.createTile = ModContent.TileType<Blocks.GravityBlock>();
 		}
 
         public override void AddRecipes() {
 			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.TimeSensor>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.GravityBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();

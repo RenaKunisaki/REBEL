@@ -8,16 +8,19 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class BounceBlock : ModItem
-    {
-        public override void SetStaticDefaults() {
+    public class OneWayBlock : ModItem {
+		public override String Texture {
+            get => "REBEL/Items/Placeable/Physics/OneWayBlock/OneWayBlock";
+        }
+		public override void SetStaticDefaults() {
             Tooltip.SetDefault(
-				"A block that bounces away anything that touches it.");
+				"A block that can only be passed through from one direction. Right-click to change direction.");
+			DisplayName.SetDefault("One-Way Block");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
         public override void SetDefaults() {
-			Item.width = 16;
+			Item.width = 16; //hitbox size in pixels
 			Item.height = 16;
 			Item.maxStack = 9999;
 			Item.useTurn = true;
@@ -27,12 +30,12 @@ namespace REBEL.Items.Placeable {
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
 			Item.value = 500;
-			Item.createTile = ModContent.TileType<Blocks.BounceBlock>();
+			Item.createTile = ModContent.TileType<Blocks.OneWayBlock>();
 		}
 
         public override void AddRecipes() {
 			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.BounceBlock>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.OneWayBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();

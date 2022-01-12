@@ -8,10 +8,14 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class Coin : ModItem {
+    public class HealHurtBlock : ModItem {
+		public override String Texture {
+            get => "REBEL/Items/Placeable/Misc/HealHurtBlock/HealHurtBlock";
+        }
 		public override void SetStaticDefaults() {
-            Tooltip.SetDefault("A coin floating in the air.");
-			DisplayName.SetDefault("Coin");
+            Tooltip.SetDefault(
+				"A block that hurts or heals on contact. Hammer it to cycle between heal, hurt, heal lots, hurt lots.");
+			DisplayName.SetDefault("Heal/Hurt Block");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -25,14 +29,15 @@ namespace REBEL.Items.Placeable {
 			Item.useTime = 10;
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
-			Item.value = 1;
-			Item.createTile = ModContent.TileType<Blocks.Coin>();
+			Item.value = 500;
+			Item.createTile = ModContent.TileType<Blocks.HealHurtBlock>();
 		}
 
         public override void AddRecipes() {
-			var resultItem = ModContent.GetInstance<Items.Placeable.Coin>();
-			resultItem.CreateRecipe(1)
-				.AddIngredient(ItemID.CopperCoin, 1)
+			//recipe: create a stack of 69 from one dirt block.
+			var resultItem = ModContent.GetInstance<Items.Placeable.HealHurtBlock>();
+			resultItem.CreateRecipe(69)
+				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();
 		}
     }

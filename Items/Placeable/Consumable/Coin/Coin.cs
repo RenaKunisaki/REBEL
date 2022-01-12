@@ -8,11 +8,14 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class OneWayBlock : ModItem {
+    public class Coin : ModItem {
+		public override String Texture {
+            get => "REBEL/Items/Placeable/Consumable/Coin/Coin";
+        }
+
 		public override void SetStaticDefaults() {
-            Tooltip.SetDefault(
-				"A block that can only be passed through from one direction. Right-click to change direction.");
-			DisplayName.SetDefault("One-Way Block");
+            Tooltip.SetDefault("A coin floating in the air.");
+			DisplayName.SetDefault("Coin");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -26,15 +29,14 @@ namespace REBEL.Items.Placeable {
 			Item.useTime = 10;
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
-			Item.value = 500;
-			Item.createTile = ModContent.TileType<Blocks.OneWayBlock>();
+			Item.value = 1;
+			Item.createTile = ModContent.TileType<Blocks.Coin>();
 		}
 
         public override void AddRecipes() {
-			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.OneWayBlock>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			var resultItem = ModContent.GetInstance<Items.Placeable.Coin>();
+			resultItem.CreateRecipe(1)
+				.AddIngredient(ItemID.CopperCoin, 1)
 				.Register();
 		}
     }

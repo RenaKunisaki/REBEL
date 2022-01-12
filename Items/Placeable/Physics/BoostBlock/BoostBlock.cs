@@ -8,11 +8,13 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Items.Placeable {
-    public class HealHurtBlock : ModItem {
-		public override void SetStaticDefaults() {
+    public class BoostBlock : ModItem {
+		public override String Texture {
+            get => "REBEL/Items/Placeable/Physics/BoostBlock/BoostBlock";
+        }
+        public override void SetStaticDefaults() {
             Tooltip.SetDefault(
-				"A block that hurts or heals on contact. Hammer it to cycle between heal, hurt, heal lots, hurt lots.");
-			DisplayName.SetDefault("Heal/Hurt Block");
+				"A block that accelerates you in a direction. Right-click to change direction.");
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -27,12 +29,12 @@ namespace REBEL.Items.Placeable {
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
 			Item.value = 500;
-			Item.createTile = ModContent.TileType<Blocks.HealHurtBlock>();
+			Item.createTile = ModContent.TileType<Blocks.BoostBlock>();
 		}
 
         public override void AddRecipes() {
 			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.HealHurtBlock>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.BoostBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();
