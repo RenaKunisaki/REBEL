@@ -10,6 +10,8 @@ Physics Blocks
 Sensors (use with wires)
 - Time Sensor: Emits a signal every in-game hour.
 - Random Sensor: Emits a signal at random.
+- Rapid Timer: Emits a signal every two frames.
+    - Not everything plays nicely with this. For example, torches' states won't change.
 
 Cheaty/Fun Blocks
 - Heal/Hurt Blocks: Heals or hurts anyone who touches them.

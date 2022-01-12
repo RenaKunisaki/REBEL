@@ -27,7 +27,6 @@
     - touched by NPCs
         - detect only friend/foe
     - on player join/leave server
-    - on random/every N frames
     - weather
     - you catch a fish
     - you touch/near/right-click them with a certain item/# of coins in your inventory
