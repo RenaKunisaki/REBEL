@@ -38,7 +38,7 @@ namespace REBEL.Blocks {
             int mode  = (tile.frameX / 18) % frameXCycle.Length;
 			int nextFrameX = frameXCycle[mode];
 			tile.frameX = (short)(nextFrameX * 18);
-            tile.frameY = 0;
+            //tile.frameY = 0;
 			if (Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1,
                     Player.tileTargetX, Player.tileTargetY,
@@ -58,13 +58,27 @@ namespace REBEL.Blocks {
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
             var tile = Main.tile[location.X, location.Y];
-            int mode = (int)(tile.frameX / 18) & 3;
+            if(tile.IsActuated) return; //don't react when turned off.
+
+            int mode = (int)(tile.frameX / 18) & 7;
             switch(mode) {
                 case 0: whom.velocity.Y = -10; break;
                 case 1: whom.velocity.X =  10; break;
                 case 2: whom.velocity.Y =  10; break;
                 case 3: whom.velocity.X = -10; break;
+                //other states are deactivated (actuator hack)
                 default: break;
+            }
+        }
+
+        public override void HitWire(int i, int j) {
+            //called when a signal passes through this tile via wire.
+            Tile tile = Main.tile[i, j];
+            if(tile.HasActuator) {
+                //actuation doesn't work properly for non-solid blocks.
+                int mode = (int)(tile.frameX / 18) & 7;
+                mode ^= 4;
+                tile.frameX = (short)(mode * 18);
             }
         }
 

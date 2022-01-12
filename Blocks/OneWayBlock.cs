@@ -58,6 +58,8 @@ namespace REBEL.Blocks {
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
             var tile = Main.tile[location.X, location.Y];
+            if(tile.IsActuated) return; //don't react when turned off.
+
             int mode = (int)(tile.frameX / 18) & 3;
             //0:up 1:right 2:down 3:left
             //these numbers are the order of the graphics in the image
@@ -80,7 +82,7 @@ namespace REBEL.Blocks {
                     if(direction == TouchDirection.Right
                     || direction == TouchDirection.BottomRight
                     || direction == TouchDirection.TopRight) {
-                        whom.velocity.X = Math.Max(whom.velocity.X,  0); 
+                        whom.velocity.X = Math.Max(whom.velocity.X,  0);
                         whom.position.X += 0.5f;
                     }
                     break;

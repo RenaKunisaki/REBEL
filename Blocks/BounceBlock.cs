@@ -30,6 +30,9 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
+            var tile = Main.tile[location.X, location.Y];
+            if(tile.IsActuated) return; //don't react when turned off.
+
             //apply vertical motion
             //10 units seems good. 100 will cause you to smack your head
             //against the top of the world. 20 can clip you through blocks.

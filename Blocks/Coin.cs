@@ -26,11 +26,23 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
+            var tile = Main.tile[location.X, location.Y];
+            if(tile.IsActuated) return; //don't react when turned off.
+            if(tile.frameX != 0) return; //actuator hack
+
             if(whom is Player p) {
                 p.DoCoins(1);
                 WorldGen.KillTile(location.X, location.Y);
                 Item.NewItem(location.X * 16, location.Y * 16, 16, 16,
                     ItemID.CopperCoin);
+            }
+        }
+
+        public override void HitWire(int i, int j) {
+            Tile tile = Main.tile[i, j];
+            if(tile.HasActuator) {
+                //actuation doesn't work properly for non-solid blocks.
+                tile.frameX ^= 18;
             }
         }
 

@@ -31,6 +31,9 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
+            var tile = Main.tile[location.X, location.Y];
+            if(tile.IsActuated) return; //don't react when turned off.
+
             //sadly, NPCs don't have gravity vars, so we can't flip them.
             if(!(whom is Player p)) return;
             //Main.NewText($"Grav touch {direction} at {location} by {p.name}");

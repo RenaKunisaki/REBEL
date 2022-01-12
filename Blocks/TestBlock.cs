@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
@@ -57,8 +59,9 @@ namespace REBEL.Blocks {
                 0x00, 0x9D, 0xF3);
             //Mod.Logger.InfoFormat("You are in biome {0}.", biome);
 
-            var rebel = Mod as REBEL;
-            rebel.forceUpsideDown = !rebel.forceUpsideDown;
+            //var rebel = Mod as REBEL;
+            //rebel.forceUpsideDown = !rebel.forceUpsideDown;
+            Wiring.TripWire(x, y, 1, 1); //send a signal
             return true; //we did something, don't do default right click
         }
 
@@ -78,6 +81,16 @@ namespace REBEL.Blocks {
             if(whom is Player p) name = p.name;
             else if(whom is NPC n) name = n.FullName;
             Main.NewText($"I was touched from the {direction} at {location} by {name}");
+        }
+
+        public override void HitWire(int i, int j) {
+            //called when a signal passes through this tile via wire.
+            SoundEngine.PlaySound(2, -1, -1, 16); //fart
+            Tile tile = Main.tile[i, j];
+            //instead of doing this we could just put an actuator on it.
+            tile.IsActuated = !tile.IsActuated;
+            //Main.NewText($"HitWire({Wiring._currentWireColor})");
+            //1:red 2:blue 3:green 4:yellow
         }
     }
 }

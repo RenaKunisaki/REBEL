@@ -5,3 +5,4 @@
     - junctions that can be switched by wires
 - black hole block, draws you toward it
     - magnet block, draws metal toward it
+- brick that shatters when hit from below

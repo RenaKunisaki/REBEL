@@ -86,6 +86,8 @@ namespace REBEL.Blocks {
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
             var tile = Main.tile[location.X, location.Y];
+            if(tile.IsActuated) return; //don't react when turned off.
+
             int mode = (int)(tile.frameY / 18) & 3;
             switch(mode) {
                 case 0: _onTouchedHeal(whom, location, direction, false); break;
