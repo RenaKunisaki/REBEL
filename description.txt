@@ -10,3 +10,6 @@ Physics Blocks
 Cheaty/Fun Blocks
 - Heal/Hurt Blocks: Heals or hurts anyone who touches them.
     - Hammer to change their mode; alternates between hurt, heal, hurt lots, heal lots.
+
+Decorative Blocks
+- Single-tile non-solid blocks for every ASCII character so you can make big signs.

@@ -6,3 +6,75 @@
 - black hole block, draws you toward it
     - magnet block, draws metal toward it
 - brick that shatters when hit from below
+- block that explodes on touch
+- donut block
+    - block that shatters when stood on for a while
+- block that "moves" by swapping itself with an adjacent tile
+    - dunno how that would work with tiles that are > 1x1
+- functioning clock (check game time in animation routines)
+    - would need some custom draw method to draw hands/digits
+    - large version using 4 number tiles
+- numeric display
+    - by default is a "0" block
+    - when hit by wire, increment the block
+    - if it passes 9, reset to 0 and increment the block to our left if it's a digit
+        - skip one non-digit block to allow for separators
+    - can work like logic gates where you have other blocks attached that the actual signals go into, for operations like inc/dec/reset
+        - the digits themselves can emit a signal when they wrap around
+    - alphabetical version?
+        - silly things like change to show a player's name when clicked
+- more sensors; signal/change solidity when...
+    - touched by NPCs
+        - detect only friend/foe
+    - every hour
+    - on player join/leave server
+    - on random/every N frames
+    - weather
+    - you catch a fish
+    - you touch/near/right-click them with a certain item/# of coins in your inventory
+        - optionally, remove the item and/or block
+    - hit by explosion/bullet/minion/pet/...
+    - you have a certain minion/pet with you
+    - touched by player/NPC of certain gender
+    - player spawns/world is loaded
+    - certain amount of light hits it? (ModifyLight?)
+    - touched for a certain amount of time/a certain number of times
+    - you press various keys
+    - player has some buff/debuff, like Stinky
+    - player nearby gets healed/hurt/has low HP/mana/dies/is a ghost
+    - player is in water/upside down/touching ground/in a minecart/on a mount
+    - an invasion/party is happening
+    - touched by something with certain velocity
+    - the game is lagging/FPS is below X
+    - pass signals to an adjacent block when...
+        - certain time of day/IRL wall time
+        - certain NPC nearby/is in town
+        - always (a diode)
+        - certain number of signals received
+        - certain pattern of signals received (time-based or wire order)
+            - eg if received signals on red, then green, then blue
+        - signal received X frames ago (delay)
+- other consumable blocks like the coin - health/mana refills, item pickups...
+- fire
+    - every frame, random chance to spread to adjacent blocks of certain types
+        - damage them like pickaxe would; if destroyed, replace with fire
+    - when hit by water, turn back into what used to be there/dirt/air/ash block
+- heal/hurt blocks but non-solid (gas blocks)
+- speed limit block (slows you down like honey but less so)
+    - or subtracts coins if you move too fast :V
+- when touched, prompt for a password (use the sign text entry?)
+    - if correct, vanish/teleport player past/emit signal
+- blocks that control the keyboard RGB stuff
+- letter blocks that can be actuated, turning them invisible, allowing for animated text reveals
+- cheat stuff
+    - biome override - while you're near it you're in X biome no matter what
+        - especially fun if actuated...
+    - time/weather override
+    - heal/nuke any NPC that gets near (Heal/Hurt Block but with large radius)
+    - while player is near, all enemies take damage
+
+
+Unrelated mod ideas:
+- show message in chat suggesting you take a break every hour
+- remove the screen-flip effect from gravity potions
+- apply trippy visuals like motion blur and color cycling to everything

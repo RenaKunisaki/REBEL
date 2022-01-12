@@ -15,3 +15,4 @@
     - for vertical it's awful
 - the graphics are bad, someone please make better ones
     - especially some things are missing slope graphics
+- the letter tiles all appear as A while being placed, but show up correctly once placed.
