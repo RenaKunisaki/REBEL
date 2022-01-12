@@ -1,15 +1,20 @@
 Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which desperately need better graphics.
 
 Physics Blocks
-- Bounce Blocks: repels things away on touch.
-- Boost Blocks: accelerates things in a specific direction on touch.
+- Bounce Blocks: Repels things away on touch.
+- Boost Blocks: Accelerates things in a specific direction on touch.
     - Right-click to change direction.
-- Gravity Blocks (NOT WORKING): flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
+- Gravity Blocks (NOT WORKING): Flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
     - These "work" but the effect is incomplete.
+
+Sensors (use with wires)
+- Time Sensor: Emits a signal every in-game hour.
+- Random Sensor: Emits a signal at random.
 
 Cheaty/Fun Blocks
 - Heal/Hurt Blocks: Heals or hurts anyone who touches them.
     - Hammer to change their mode; alternates between hurt, heal, hurt lots, heal lots.
 
 Decorative Blocks
-- Single-tile non-solid blocks for every ASCII character so you can make big signs.
+- Letter Blocks: Single-tile non-solid blocks for every ASCII character so you can make big signs.
+    - Right-click works like the Shift key, to change case/punctuation.
