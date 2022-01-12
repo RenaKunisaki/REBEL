@@ -12,6 +12,9 @@ namespace REBEL.Blocks {
     public class Coin: ModTile, IReactsToTouch {
         /** A coin floating in the air.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Consumable/Coin/Coin";
+        }
         public override void SetStaticDefaults() {
             (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = false;

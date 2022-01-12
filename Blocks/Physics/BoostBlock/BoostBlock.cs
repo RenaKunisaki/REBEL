@@ -15,6 +15,9 @@ namespace REBEL.Blocks {
         /** A block that, when you touch it, gives you a boost in
          *  some direction.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Physics/BoostBlock/BoostBlock";
+        }
 
         //XXX use slope to determine which directions it works in?
         public override void SetStaticDefaults() {

@@ -13,6 +13,10 @@ namespace REBEL.Blocks {
     IReactsToTouch {
         /** A block that flips gravity.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Physics/GravityBlock/GravityBlock";
+        }
+
         Dictionary<int, uint> Cooldown;
 
         public override void SetStaticDefaults() {

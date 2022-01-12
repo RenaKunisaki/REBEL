@@ -15,6 +15,10 @@ namespace REBEL.Blocks {
         /** A block that hurts to touch, or heals you,
          *  depending on its mode.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Misc/HealHurtBlock/HealHurtBlock";
+        }
+
         public override void SetStaticDefaults() {
             (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = true;

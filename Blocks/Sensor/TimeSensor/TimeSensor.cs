@@ -12,6 +12,9 @@ namespace REBEL.Blocks {
     ItemDropBlock<Items.Placeable.TimeSensor> {
         /** Emits a signal every in-game hour.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Sensor/TimeSensor/TimeSensor";
+        }
 
         Dictionary<Point, int> prevTime;
         public override void SetStaticDefaults() {

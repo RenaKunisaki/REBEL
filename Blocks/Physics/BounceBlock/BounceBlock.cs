@@ -14,6 +14,9 @@ namespace REBEL.Blocks {
         /** A block that, when you touch it, makes you bounce
          *  in the opposite direction.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Physics/BounceBlock/BounceBlock";
+        }
 
         //XXX use slope to determine which directions it works in?
         public override void SetStaticDefaults() {

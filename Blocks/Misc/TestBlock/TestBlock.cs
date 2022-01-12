@@ -13,6 +13,10 @@ namespace REBEL.Blocks {
     public class TestBlock:
     ItemDropBlock<Items.Placeable.TestBlock>,
     IReactsToTouch {
+        public override String Texture {
+            get => "REBEL/Blocks/Misc/TestBlock/TestBlock";
+        }
+
         public override void PostSetDefaults() {
             (Mod as REBEL).registerTouchHandler(Type, OnTouched);
             Main.tileSolid[Type] = true;

@@ -14,6 +14,9 @@ namespace REBEL.Blocks {
     IReactsToTouch {
         /** A block that only lets you pass through in one direction.
          */
+        public override String Texture {
+            get => "REBEL/Blocks/Physics/OneWayBlock/OneWayBlock";
+        }
 
         public override void SetStaticDefaults() {
             (Mod as REBEL).registerTouchHandler(Type, OnTouched);

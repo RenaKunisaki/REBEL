@@ -15,9 +15,7 @@ namespace REBEL.Blocks {
         /** A block that's a letter.
          */
         public override String Texture {
-            get {
-                return "REBEL/Blocks/LetterBlock";
-            }
+            get => "REBEL/Blocks/Decorative/LetterBlock/LetterBlock";
         }
 
         abstract public int _getFrame();
