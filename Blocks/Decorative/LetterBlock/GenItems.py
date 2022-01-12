@@ -5,7 +5,7 @@ template = """
 	    public override String _getLetter1() {{ return "{0}"; }}
 		public override String _getLetter2() {{ return "{1}"; }}
 		public override String Texture {{
-            get => "REBEL/Items/Placeable/Decorative/LetterBlock/LetterBlock{name}";
+            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/{name}";
         }}
 	}}"""
 
