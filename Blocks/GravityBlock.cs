@@ -10,7 +10,7 @@ using REBEL.Blocks.Base;
 namespace REBEL.Blocks {
     public class GravityBlock:
     ItemDropBlock<Items.Placeable.GravityBlock>,
-    IReactsToTouch, ILoadable {
+    IReactsToTouch {
         /** A block that flips gravity.
          */
         Dictionary<int, uint> Cooldown;
