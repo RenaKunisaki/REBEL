@@ -36,9 +36,9 @@ namespace REBEL.Hooks {
                 }
             }
 
-            if(player.jump != 0) {
-                Main.NewText($"Jump = {player.justJumped} {player.jump} boost {player.jumpBoost} speed {player.jumpSpeedBoost} vel {player.velocity}");
-            }
+            //if(player.jump != 0) {
+            //    Main.NewText($"Jump = {player.justJumped} {player.jump} boost {player.jumpBoost} speed {player.jumpSpeedBoost} vel {player.velocity}");
+            //}
         }
 
         protected void fuckingGravityShit2() {
