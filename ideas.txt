@@ -1,3 +1,5 @@
+- an item you use to configure some of these
+    - use it, click a block, and it pops up some UI
 - better mine cart stuff
     - brakes (slows you if above a certain speed)
     - boosters that work in whichever direction you're facing
@@ -36,6 +38,7 @@
     - touched by player/NPC of certain gender
     - player spawns/world is loaded
     - certain amount of light hits it? (ModifyLight?)
+        - sounds like that method is just used to determine what light color a lighted tile emits, so wouldn't be useful.
     - touched for a certain amount of time/a certain number of times
     - you press various keys
     - player has some buff/debuff, like Stinky
@@ -67,6 +70,7 @@
 - blocks that control the keyboard RGB stuff
 - letter blocks that can be actuated, turning them invisible, allowing for animated text reveals
 - cheat stuff
+    - just drop a specific item every time it's activated
     - biome override - while you're near it you're in X biome no matter what
         - especially fun if actuated...
     - time/weather override

@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework;
 using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
-    public abstract class LetterBlock<DropItemType>:
-    ItemDropBlock<DropItemType>
-    where DropItemType: ModItem {
+    public abstract class LetterBlock<TDropItem>:
+    ItemDropBlock<TDropItem>
+    where TDropItem: ModItem {
         /** A block that's a letter.
          */
         public override String Texture {
@@ -217,7 +217,7 @@ namespace REBEL.Items.Placeable {
         public override String Texture {
             get {
                 String letter1 = _getLetter1();
-                return $"REBEL/Items/Placeable/Decorative/LetterBlock/LetterBlock{letter1}";
+                return $"REBEL/Blocks/Decorative/LetterBlock/LetterBlock{letter1}";
             }
         }
 
