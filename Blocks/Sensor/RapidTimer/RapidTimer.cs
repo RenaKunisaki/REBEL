@@ -33,18 +33,23 @@ namespace REBEL.Blocks {
             Tile tile = Main.tile[i, j];
             if(tile.frameX == 0) return; //inactive
             if((Main.GameUpdateCount & 1) == 0) {
-                Wiring.TripWire(i, j, 1, 1); //send a signal
+                (Mod as REBEL).tripWire(i, j); //send a signal
             }
         }
 
         protected void toggle(int i, int j) {
+            if((Mod as REBEL).wireAlreadyHit(i, j)) return;
+
             Tile tile = Main.tile[i, j];
             tile.frameX ^= 18;
+            //Mod.Logger.Info($"[{Main.GameUpdateCount}] Timer toggled {tile.frameX}");
             if (Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1,
                     Player.tileTargetX, Player.tileTargetY,
                     1, TileChangeType.None);
 			}
+            //avoid turning ourselves off
+            (Mod as REBEL).wireAlreadyHit(i, j);
         }
 
         public override bool RightClick(int x, int y) {
@@ -53,6 +58,7 @@ namespace REBEL.Blocks {
         }
 
         public override void HitWire(int i, int j) {
+            //Mod.Logger.Info($"[{Main.GameUpdateCount}] Timer hit {i}, {j}");
             toggle(i, j); //toggle like normal timers
         }
     }

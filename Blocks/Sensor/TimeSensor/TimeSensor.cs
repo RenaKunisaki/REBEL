@@ -55,7 +55,7 @@ namespace REBEL.Blocks {
             //near the top of the hour. don't just check for == 0 because
             //then we can miss an hour if there's lag.
             if(minute < prev && minute < 5) {
-                Wiring.TripWire(i, j, 1, 1); //send a signal
+                (Mod as REBEL).tripWire(i, j); //send a signal
             }
             prevTime[pt] = minute;
         }

@@ -14,7 +14,6 @@ namespace REBEL.Blocks {
         /** A pair of blocks that pass signals in one direction
          *  across short gaps.
          */
-        protected Dictionary<Point, uint> lastHit;
         public override String Texture {
             get => "REBEL/Blocks/Wire/Isolator/Block";
         }
@@ -28,8 +27,6 @@ namespace REBEL.Blocks {
 
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
             TileObjectData.addTile(Type);
-
-            lastHit = new Dictionary<Point, uint>();
         }
 
         public override bool RightClick(int x, int y) {
@@ -44,14 +41,8 @@ namespace REBEL.Blocks {
             int mode = tile.frameX / 18;
             if(mode != 0) return; //nothing to do
 
-            //for whatever reason, tripping another wire elsewhere can
-            //trip this tile again too. make sure it doesn't trip more
-            //than once per tick.
-            uint tick = Main.GameUpdateCount;
-            Point p = new Point(i, j);
-            if(!lastHit.ContainsKey(p)) lastHit[p] = 0;
-            if(lastHit[p] == tick) return;
-            lastHit[p] = tick;
+            REBEL mod = Mod as REBEL;
+            if(mod.wireAlreadyHit(i, j)) return;
 
             //Mod.Logger.Info($"[{Main.GameUpdateCount}] Isolator({i},{j}) hit (mode {mode} wire {Wiring._currentWireColor})");
 
@@ -65,18 +56,7 @@ namespace REBEL.Blocks {
                     Tile t2 = Main.tile[x, y];
                     if(t2.type == this.Type && t2.frameX != 0) {
                         //Mod.Logger.Info($"Isolator trip at {x},{y}");
-                        Point p2 = new Point(x, y);
-                        if(!lastHit.ContainsKey(p2)) lastHit[p2] = 0;
-                        if(lastHit[p2] != tick) {
-                            lastHit[p] = tick;
-                            try {
-                                Wiring.TripWire(x, y, 1, 1);
-                            }
-                            catch(System.ArgumentException) {
-                                //ignore. this happens if the wire is already tripped.
-                                Mod.Logger.Info("Got ArgumentException in TripWire");
-                            }
-                        }
+                        mod.tripWire(x, y);
                     }
                 }
             }
@@ -85,9 +65,7 @@ namespace REBEL.Blocks {
         public override void KillTile(int i, int j, ref bool fail,
         ref bool effectOnly, ref bool noItem) {
             base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
-            if(!(lastHit is null)) {
-                lastHit.Remove(new Point(i, j)); //don't leak memory
-            }
+            (Mod as REBEL).deleteWire(i, j);
         }
 
         public void setFrame(int i, int j, int frameX, int frameY) {

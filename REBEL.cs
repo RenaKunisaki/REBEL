@@ -14,6 +14,7 @@ using REBEL.Blocks.Base;
 namespace REBEL {
 	public class REBEL: Mod {
 		Dictionary<ushort, Action<Entity, Point, TouchDirection>> TouchHandlers;
+		Dictionary<Point, uint> lastWireHit;
 		public bool forceUpsideDown; //force reverse gravity + screen flip
 		public bool wasForceUpsideDown;
 
@@ -21,6 +22,7 @@ namespace REBEL {
 			//Logger.InfoFormat("Hello world!");
 			TouchHandlers = new Dictionary<ushort,
 				Action<Entity, Point, TouchDirection>>();
+			lastWireHit = new Dictionary<Point, uint>();
 			forceUpsideDown = false;
 		}
 
@@ -28,6 +30,44 @@ namespace REBEL {
 			//Logger.InfoFormat("Goodbye cruel world!");
 			if(!(TouchHandlers is null)) TouchHandlers.Clear();
 			TouchHandlers = null;
+			if(!(lastWireHit is null)) lastWireHit.Clear();
+			lastWireHit = null;
+		}
+
+		public void tripWire(int i, int j, int w=1, int h=1) {
+			for(int y=0; y<h; y++) {
+				for(int x=0; x<w; x++) {
+					//avoid tile triggering itself
+					wireAlreadyHit(i+x, j+y);
+				}
+			}
+			try {
+				Wiring.TripWire(i, j, w, h);
+			}
+			catch(System.ArgumentException) {
+				//ignore. this happens if the wire is already tripped.
+				Logger.Info("Got ArgumentException in TripWire");
+			}
+		}
+		public bool wireAlreadyHit(int i, int j) {
+			/** For whatever reason, a tile that trips a wire somewhere
+			 *  other than itself also gets tripped, even if there's not
+			 *  a direct connection back to the tile.
+			 *  This method ensures a tile doesn't trip multiple times
+			 *  in one tick and get stuck in a loop.
+			 */
+			uint tick = Main.GameUpdateCount;
+            Point p = new Point(i, j);
+            if(!lastWireHit.ContainsKey(p)) lastWireHit[p] = 0;
+            if(lastWireHit[p] == tick) return true;
+            lastWireHit[p] = tick;
+			return false;
+		}
+		public void deleteWire(int i, int j) {
+			/** Remove point from lastWireHit to avoid leaking memory.
+			 */
+			Point p = new Point(i, j);
+			if(lastWireHit.ContainsKey(p)) lastWireHit.Remove(p);
 		}
 
 		public void registerTouchHandler(ushort type,

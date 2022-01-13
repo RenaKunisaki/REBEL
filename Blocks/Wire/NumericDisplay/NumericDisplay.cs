@@ -151,7 +151,7 @@ namespace REBEL.Blocks {
             if(d == 9) {
                 //Mod.Logger.Info($"Overflow {i},{j}");
                 setDigit(i, j, 0);
-                if(j > Main.topWorld) Wiring.TripWire(i, j-1, 1, 1);
+                if(j > Main.topWorld) (Mod as REBEL).tripWire(i, j-1);
                 return true; //overflow
             }
             //Mod.Logger.Info($"Increment {i},{j} to {d+1}");
@@ -165,7 +165,7 @@ namespace REBEL.Blocks {
             if(d == 0) {
                 //Mod.Logger.Info($"Underflow {i},{j}");
                 setDigit(i, j, 9);
-                if(j < Main.bottomWorld) Wiring.TripWire(i, j+1, 1, 1);
+                if(j < Main.bottomWorld) (Mod as REBEL).tripWire(i, j+1);
                 return true; //underflow
             }
             //Mod.Logger.Info($"Decrement {i},{j} to {d-1}");
@@ -178,6 +178,7 @@ namespace REBEL.Blocks {
         }
 
         public override void HitWire(int i, int j) {
+            if((Mod as REBEL).wireAlreadyHit(i, j)) return;
             increment(i, j);
         }
     }
@@ -190,6 +191,8 @@ namespace REBEL.Blocks {
         public override int _getFrameY() { return 48; }
 
         public override void HitWire(int i, int j) {
+            if((Mod as REBEL).wireAlreadyHit(i, j)) return;
+
             //reset all blocks to our left
             int nSpc = 0, nDigit = 0;
             while(i > Main.leftWorld) {
@@ -228,6 +231,8 @@ namespace REBEL.Blocks {
         public override int _getFrameY() { return 47; }
 
         public override void HitWire(int i, int j) {
+            if((Mod as REBEL).wireAlreadyHit(i, j)) return;
+
             int x=0, y=0;
             if(!findDigit(i, j, ref x, ref y)) {
                 noDigit();
@@ -255,6 +260,8 @@ namespace REBEL.Blocks {
         public override int _getFrameY() { return 47; }
 
         public override void HitWire(int i, int j) {
+            if((Mod as REBEL).wireAlreadyHit(i, j)) return;
+
             int x=0, y=0;
             if(!findDigit(i, j, ref x, ref y)) {
                 noDigit();

@@ -31,7 +31,7 @@ namespace REBEL.Blocks {
         public override void NearbyEffects(int i, int j, bool closer) {
             if(Main.gamePaused) return;
             if(Main.rand.Next(60) == 0) {
-                Wiring.TripWire(i, j, 1, 1); //send a signal
+                (Mod as REBEL).tripWire(i, j); //send a signal
             }
         }
     }
