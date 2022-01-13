@@ -149,11 +149,12 @@ namespace REBEL.Blocks {
             //add 1 to the displayed digit. return true if overflow.
             int d = getDigit(i, j);
             if(d == 9) {
-                Mod.Logger.Info($"Overflow {i},{j}");
+                //Mod.Logger.Info($"Overflow {i},{j}");
                 setDigit(i, j, 0);
                 if(j > Main.topWorld) Wiring.TripWire(i, j-1, 1, 1);
                 return true; //overflow
             }
+            //Mod.Logger.Info($"Increment {i},{j} to {d+1}");
             setDigit(i, j, d+1);
             return false;
         }
@@ -162,11 +163,12 @@ namespace REBEL.Blocks {
             //subtract 1 from the displayed digit. return true if underflow.
             int d = getDigit(i, j);
             if(d == 0) {
-                Mod.Logger.Info($"Underflow {i},{j}");
+                //Mod.Logger.Info($"Underflow {i},{j}");
                 setDigit(i, j, 9);
                 if(j < Main.bottomWorld) Wiring.TripWire(i, j+1, 1, 1);
                 return true; //underflow
             }
+            //Mod.Logger.Info($"Decrement {i},{j} to {d-1}");
             setDigit(i, j, d-1);
             return false;
         }
@@ -192,25 +194,25 @@ namespace REBEL.Blocks {
             int nSpc = 0, nDigit = 0;
             while(i > Main.leftWorld) {
                 if(isADigitTile(i-1, j)) {
-                    Mod.Logger.Info($"Reset {i-1},{j}");
+                    //Mod.Logger.Info($"Reset {i-1},{j}");
                     Main.tile[i-1, j].frameY = 26 * 18; //reset to 0
                     i--;
                     nSpc = 0;
                     nDigit++;
                 }
                 else if(isANumericTile(i-1, j)) {
-                    Mod.Logger.Info($"Skip button {i-1},{j}");
+                    //Mod.Logger.Info($"Skip button {i-1},{j}");
                     i--; //skip other buttons
                 }
                 else if(nSpc == 0) {
-                    Mod.Logger.Info($"Skip other {i-1},{j}");
+                    //Mod.Logger.Info($"Skip other {i-1},{j}");
                     //skip one non-digit tile to allow for separators
                     nSpc++;
                     i--;
                 }
                 else break;
             }
-            Mod.Logger.Info($"Reset {nDigit} digits");
+            //Mod.Logger.Info($"Reset {nDigit} digits");
             if(nDigit == 0) {
                 Main.NewText("No digit to the left of this button!",
                     0xFF, 0x80, 0x00);
@@ -227,14 +229,21 @@ namespace REBEL.Blocks {
 
         public override void HitWire(int i, int j) {
             int x=0, y=0;
-            if(!findDigit(i, j, ref x, ref y)) noDigit();
-            else {
-                var dTile = ModContent.GetInstance<NumericDisplayDigit>();
-                if(dTile.increment(x, y) && i > Main.leftWorld) HitWire(x, y);
-                //we don't use x-1 here because when we recurse we call
-                //findDigit() again, which does not look at this tile but does
-                //first look to the left, so we automatically move left.
+            if(!findDigit(i, j, ref x, ref y)) {
+                noDigit();
+                return;
             }
+
+            int nDigit = 0;
+            //Mod.Logger.Info("Increment start");
+            while(x > Main.leftWorld) {
+                nDigit++;
+                //Mod.Logger.Info($"At {i},{j} inc {x},{y} ({nDigit})");
+                var dTile = ModContent.GetInstance<NumericDisplayDigit>();
+                if(!dTile.increment(x, y)) break;
+                x--; //if overflow, loop to next digit
+            }
+            //Mod.Logger.Info($"Incremented {nDigit} digits");
         }
     }
 
@@ -247,11 +256,21 @@ namespace REBEL.Blocks {
 
         public override void HitWire(int i, int j) {
             int x=0, y=0;
-            if(!findDigit(i, j, ref x, ref y)) noDigit();
-            else {
-                var dTile = ModContent.GetInstance<NumericDisplayDigit>();
-                if(dTile.decrement(x, y) && i > Main.leftWorld) HitWire(x, y);
+            if(!findDigit(i, j, ref x, ref y)) {
+                noDigit();
+                return;
             }
+
+            int nDigit = 0;
+            //Mod.Logger.Info("Decrement start");
+            while(x > Main.leftWorld) {
+                nDigit++;
+                //Mod.Logger.Info($"At {i},{j} dec {x},{y} ({nDigit})");
+                var dTile = ModContent.GetInstance<NumericDisplayDigit>();
+                if(!dTile.decrement(x, y)) break;
+                x--; //if underflow, loop to next digit
+            }
+            //Mod.Logger.Info($"Decremented {nDigit} digits");
         }
     }
 }
