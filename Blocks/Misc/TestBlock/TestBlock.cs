@@ -96,6 +96,12 @@ namespace REBEL.Blocks {
             //Main.NewText($"HitWire({Wiring._currentWireColor})");
             //1:red 2:blue 3:green 4:yellow
         }
+
+        public override void ModifyLight(int i, int j, ref float r,
+        ref float g, ref float b) {
+            //Main.NewText($"Light {r} {g} {b}");
+            r = 1f;
+        }
     }
 }
 

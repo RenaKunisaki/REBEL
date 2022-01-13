@@ -12,6 +12,7 @@ Sensors (use with wires)
 - Random Sensor: Emits a signal at random.
 - Rapid Timer: Emits a signal every two frames.
     - Not everything plays nicely with this. For example, torches' states won't change. Especially if the game lags, signals can be dropped.
+    - The activation state saves between sessions, unlike vanilla timers.
 
 Wire Helper Blocks
 - Isolator: Passes signals in one direction across short gaps.

@@ -58,6 +58,7 @@
     - player spawns/world is loaded
     - certain amount of light hits it? (ModifyLight?)
         - sounds like that method is just used to determine what light color a lighted tile emits, so wouldn't be useful.
+            - it's called with ref r,g,b but they're 0 by default.
     - touched for a certain amount of time/a certain number of times
     - you press various keys
     - player has some buff/debuff, like Stinky
