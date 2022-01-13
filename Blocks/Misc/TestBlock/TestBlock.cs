@@ -100,28 +100,12 @@ namespace REBEL.Blocks {
 }
 
 namespace REBEL.Items.Placeable {
-    public class TestBlock : ModItem {
+    public class TestBlock: TilePlaceItem<Blocks.TestBlock, TestBlock> {
 		public override String Texture {
             get => "REBEL/Blocks/Misc/TestBlock/Item";
         }
-        public override void SetStaticDefaults() {
-            Tooltip.SetDefault("A block for debugging.");
-			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
-
-        public override void SetDefaults() {
-			Item.width = 16; //hitbox size in pixels
-			Item.height = 16;
-			Item.maxStack = 7511;
-			Item.useTurn = true;
-			Item.autoReuse = true;
-			Item.useAnimation = 15;
-			Item.useTime = 10;
-			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
-			Item.consumable = true;
-			Item.value = 10000000;
-			Item.createTile = ModContent.TileType<Blocks.TestBlock>();
-		}
+        public override String _getName() => "Test Block";
+        public override String _getDescription() => "A block for debugging.";
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.TestBlock>();

@@ -115,33 +115,17 @@ namespace REBEL.Blocks {
 }
 
 namespace REBEL.Items.Placeable {
-    public class OneWayBlock : ModItem {
+    public class OneWayBlock: TilePlaceItem<Blocks.OneWayBlock, OneWayBlock> {
 		public override String Texture {
             get => "REBEL/Blocks/Physics/OneWayBlock/Item";
         }
-		public override void SetStaticDefaults() {
-            Tooltip.SetDefault(
-				"A block that can only be passed through from one direction. Right-click to change direction.");
-			DisplayName.SetDefault("One-Way Block");
-			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
-        }
-
-        public override void SetDefaults() {
-			Item.width = 16; //hitbox size in pixels
-			Item.height = 16;
-			Item.maxStack = 9999;
-			Item.useTurn = true;
-			Item.autoReuse = true;
-			Item.useAnimation = 15;
-			Item.useTime = 10;
-			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
-			Item.consumable = true;
-			Item.value = 500;
-			Item.createTile = ModContent.TileType<Blocks.OneWayBlock>();
-		}
+        public override String _getName() => "One-Way Block";
+        public override String _getDescription() =>
+            "A block that can only be passed through from one direction. Right-click to change direction.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
 
         public override void AddRecipes() {
-			//recipe: create a stack of 69 from one dirt block.
 			var resultItem = ModContent.GetInstance<Items.Placeable.OneWayBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)

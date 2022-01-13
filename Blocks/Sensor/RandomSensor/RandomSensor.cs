@@ -38,34 +38,19 @@ namespace REBEL.Blocks {
 }
 
 namespace REBEL.Items.Placeable {
-    public class RandomSensor : ModItem {
+    public class RandomSensor: TilePlaceItem<Blocks.RandomSensor, RandomSensor> {
 		public override String Texture {
-            //use same texture for both
+            //reuse this
             get => "REBEL/Blocks/Sensor/RandomSensor/Block";
         }
-        public override void SetStaticDefaults() {
-            Tooltip.SetDefault("Emits a signal at random.");
-			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-        }
-
-        public override void SetDefaults() {
-			Item.width = 16;
-			Item.height = 16;
-			Item.maxStack = 9999;
-			Item.useTurn = true;
-			Item.autoReuse = true;
-			Item.useAnimation = 15;
-			Item.useTime = 10;
-			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
-			Item.consumable = true;
-			Item.value = 1;
-			Item.createTile = ModContent.TileType<Blocks.RandomSensor>();
-            item.mech = true; // lets you see wires while holding.
-		}
+        public override String _getName() => "Random Sensor";
+        public override String _getDescription() => "Emits a signal at random.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
+        public override bool _showsWires() => true;
 
         public override void AddRecipes() {
-			//recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<Items.Placeable.RandomSensor>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.OneWayBlock>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)
 				.Register();

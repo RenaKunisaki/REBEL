@@ -1,5 +1,6 @@
 - an item you use to configure some of these
     - use it, click a block, and it pops up some UI
+- an item that prompts for text and plops letter blocks
 - better mine cart stuff
     - brakes (slows you if above a certain speed)
     - boosters that work in whichever direction you're facing

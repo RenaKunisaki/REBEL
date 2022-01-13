@@ -17,9 +17,9 @@ namespace REBEL.Items.Placeable {
 		//public override String Texture;
         abstract public String _getName();
         abstract public String _getDescription();
-        public int _getResearchNeeded() => 1;
-        public int _getValue() => 1;
-        public bool _showsWires() => false;
+        virtual public int _getResearchNeeded() => 1;
+        virtual public int _getValue() => 1;
+        virtual public bool _showsWires() => false;
 
         public override void SetStaticDefaults() {
             Tooltip.SetDefault(_getDescription());
@@ -40,7 +40,7 @@ namespace REBEL.Items.Placeable {
 			Item.consumable = true;
 			Item.value = _getValue();
 			Item.createTile = ModContent.TileType<TPlaceTile>();
-            item.mech = _showsWires();
+            Item.mech = _showsWires();
 		}
 
         public override void AddRecipes() {
