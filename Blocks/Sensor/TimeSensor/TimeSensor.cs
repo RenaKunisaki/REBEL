@@ -84,6 +84,7 @@ namespace REBEL.Items.Placeable {
 			Item.consumable = true;
 			Item.value = 1;
 			Item.createTile = ModContent.TileType<Blocks.TimeSensor>();
+            item.mech = true; // lets you see wires while holding.
 		}
 
         public override void AddRecipes() {

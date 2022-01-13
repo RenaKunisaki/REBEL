@@ -283,6 +283,7 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Digit";
         public override String _getDescription() => "A digit that can be adjusted.";
+        public override bool _showsWires() => true;
     }
 
     public class NumericDisplayInc : TilePlaceItem<
@@ -292,6 +293,7 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Increment";
         public override String _getDescription() => "Increments nearby digits when activated.";
+        public override bool _showsWires() => true;
     }
 
     public class NumericDisplayDec : TilePlaceItem<
@@ -301,6 +303,7 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Decrement";
         public override String _getDescription() => "Decrements nearby digits when activated.";
+        public override bool _showsWires() => true;
     }
 
     public class NumericDisplayClear : TilePlaceItem<
@@ -310,5 +313,6 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Clear";
         public override String _getDescription() => "Resets nearby digits when activated.";
+        public override bool _showsWires() => true;
     }
 }
