@@ -23,19 +23,19 @@ Decorative Blocks
 
 Numeric Display
 Four blocks that work together to create a digital display that can be increased, decreased, or cleared by activating them (using wire or right-click).
-- Numeric Display Block: When placed, displays a 0. When activated, increases the digit by 1.
-- Numeric Increment Block: When activated, looks for a nearby Numeric Display Block and increases it by 1.
-- Numeric Decrement Block: When activated, looks for a nearby Numeric Display Block and decreases it by 1.
-- Numeric Clear Block: When activated, looks for Numeric Display Blocks to its left and resets them to 0.
+- Numeric Display Digit: When placed, displays a 0. When activated, increases the digit by 1.
+- Numeric Increment Block: When activated, looks for a nearby Numeric Display Digit and increases it by 1.
+- Numeric Decrement Block: When activated, looks for a nearby Numeric Display Digit and decreases it by 1.
+- Numeric Clear Block: When activated, looks for Numeric Display Digits to its left and resets them to 0.
 
-Numeric Display Blocks can be chained. When a block is increased past 9, it resets to 0; if the block to its left is another Numeric Display Block, that block is increased too. Similarly, when decreased past 0, it resets to 9 and decreases the block to its left.
+Numeric Display Digits can be chained. When a Digit is increased past 9, it resets to 0; if the block to its left is another Digit, that block is increased too. Similarly, when decreased past 0, it resets to 9 and decreases the block to its left.
 
-If the block to the left is not a Numeric Display Block, it will check to the left of that block; if that also isn't a Numeric Display Block, the process stops. This means you can place single blocks (of any kind, including empty space) between the digits to separate them.
+If the block to the left is not a Digit, it will check to the left of that block; if that also isn't a Digit, the process stops. This means you can place single blocks (of any kind, including empty space) between the digits to separate them.
 
-Additionally, when a Numeric Display Block wraps from 9 to 0, it sends a signal over any wire immediately above it. When it wraps from 0 to 9, it sends a signal over any wire immediately below it.
+Additionally, when a Digit wraps from 9 to 0, it sends a signal over any wire immediately above it. When it wraps from 0 to 9, it sends a signal over any wire immediately below it. Note that whatever is on the other end of that wire must not be touching the Digit block to be activated.
 
-The Increment and Decrement blocks will search for a Numeric block to their left, to their right, above them, and below them (in that order); if one is found within 16 blocks, they'll operate on it.
+The Increment and Decrement blocks will search for a Digit block to their left, to their right, above them, and below them (in that order); if one is found within 16 blocks, they'll operate on it.
 
 The Clear block only clears digits to its immediate left, ignoring any Increment/Decrement blocks. The same one-block gap rule applies.
 
-The values of Numeric blocks save between sessions.
+The values of Digit blocks save between sessions.
