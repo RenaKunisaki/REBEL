@@ -41,16 +41,6 @@ namespace REBEL.Blocks {
             return true;
         }
 
-        public void setFrame(int i, int j, int frameX, int frameY) {
-            Tile tile = Main.tile[i, j];
-            tile.frameX = (short)(frameX * 18);
-            tile.frameY = (short)(frameY * 18);
-            if(Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1, Player.tileTargetX,
-                    Player.tileTargetY, 1, TileChangeType.None);
-			}
-        }
-
         public bool isANumericTile(int i, int j) {
             //Check if the tile at this location is any NumericDisplayBase tile.
             Tile tile = Main.tile[i, j];
@@ -142,7 +132,7 @@ namespace REBEL.Blocks {
         public int getDigit(int i, int j) {
             //check which digit is displayed.
             Tile tile = Main.tile[i, j];
-            return (int)(tile.frameY / 18) - 26;
+            return (int)(tile.frameY / getFrameHeight()) - 26;
         }
 
         public bool increment(int i, int j) {
@@ -198,7 +188,7 @@ namespace REBEL.Blocks {
             while(i > Main.leftWorld) {
                 if(isADigitTile(i-1, j)) {
                     //Mod.Logger.Info($"Reset {i-1},{j}");
-                    Main.tile[i-1, j].frameY = 26 * 18; //reset to 0
+                    setFrame(i-1, j, 0, 26); //reset to 0
                     i--;
                     nSpc = 0;
                     nDigit++;

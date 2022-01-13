@@ -74,7 +74,7 @@ namespace REBEL.Blocks {
         static int[] animFrames = {0, 1, 2, 1};
         public override void AnimateIndividualTile(int type, int i, int j,
         ref int frameXOffset, ref int frameYOffset) {
-            frameYOffset = (animFrames[Main.tileFrame[Type] & 3]) * 18;
+            frameYOffset = (animFrames[Main.tileFrame[Type] & 3]) * getFrameHeight();
         }
 
         public override void AnimateTile(ref int frame, ref int frameCounter) {

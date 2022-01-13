@@ -36,17 +36,9 @@ namespace REBEL.Blocks {
         public override bool Slope(int i, int j) {
             /** Called when hit by a hammer.
              */
-			Tile tile = Main.tile[i, j];
-			int style = tile.frameY / 18;
-            int mode  = (tile.frameX / 18) % frameXCycle.Length;
-			int nextFrameX = frameXCycle[mode];
-			tile.frameX = (short)(nextFrameX * 18);
-            //tile.frameY = 0;
-			if (Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1,
-                    Player.tileTargetX, Player.tileTargetY,
-                    1, TileChangeType.None);
-			}
+            Point p = getFrameBlock(i, j);
+            if(p.X >= frameXCycle.Length) p.X = 0;
+            setFrame(i, j, frameXCycle[p.X], 0);
             return false;
 		}
 
@@ -63,7 +55,7 @@ namespace REBEL.Blocks {
             var tile = Main.tile[location.X, location.Y];
             if(tile.IsActuated) return; //don't react when turned off.
 
-            int mode = (int)(tile.frameX / 18) & 7;
+            int mode = (int)(tile.frameX / getFrameWidth()) & 7;
             switch(mode) {
                 case 0: whom.velocity.Y = -10; break;
                 case 1: whom.velocity.X =  10; break;
@@ -79,15 +71,15 @@ namespace REBEL.Blocks {
             Tile tile = Main.tile[i, j];
             if(tile.HasActuator) {
                 //actuation doesn't work properly for non-solid blocks.
-                int mode = (int)(tile.frameX / 18) & 7;
-                mode ^= 4;
-                tile.frameX = (short)(mode * 18);
+                Point p = getFrameBlock(i, j);
+                p.X = (p.X & 7) ^ 4;
+                setFrame(i, j, p.X, p.Y);
             }
         }
 
         public override void AnimateIndividualTile(int type, int i, int j,
         ref int frameXOffset, ref int frameYOffset) {
-            frameYOffset = (Main.tileFrame[Type] % 5) * 18;
+            frameYOffset = (Main.tileFrame[Type] % 5) * getFrameHeight();
         }
 
         public override void AnimateTile(ref int frame, ref int frameCounter) {

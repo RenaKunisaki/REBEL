@@ -32,25 +32,15 @@ namespace REBEL.Blocks {
         }
 
         public override void PlaceInWorld(int i, int j, Item item) {
-            Tile tile = Main.tile[i, j];
-            tile.frameY = (short)(_getFrame() * 18);
-            if(Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1, Player.tileTargetX,
-                    Player.tileTargetY, 1, TileChangeType.None);
-			}
+            setFrame(i, j, 0, _getFrame());
         }
 
         public override bool Slope(int i, int j) {
             /** Called when hit by a hammer.
              */
 			Tile tile = Main.tile[i, j];
-            tile.frameX ^= 18;
-            tile.frameY = (short)(_getFrame() * 18);
-			if (Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1,
-                    Player.tileTargetX, Player.tileTargetY,
-                    1, TileChangeType.None);
-			}
+            Point p = getFrameBlock(i, j);
+            setFrame(i, j, p.X ^ 1, _getFrame());
             return false;
 		}
 

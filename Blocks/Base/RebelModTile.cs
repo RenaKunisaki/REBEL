@@ -12,11 +12,20 @@ namespace REBEL.Blocks.Base {
         /** Base class for all our blocks.
          */
 
+        public int getFrameWidth()  => 18;
+        public int getFrameHeight() => 18;
+
+        public Point getFrameBlock(int i, int j) {
+            Tile tile = Main.tile[i, j];
+            return new Point(tile.frameX / getFrameWidth(),
+                tile.frameY / getFrameHeight());
+        }
+
         public void setFrame(int i, int j, int frameX, int frameY,
         bool local=false) {
             Tile tile = Main.tile[i, j];
-            tile.frameX = (short)(frameX * 18);
-            tile.frameY = (short)(frameY * 18);
+            tile.frameX = (short)(frameX * getFrameWidth());
+            tile.frameY = (short)(frameY * getFrameHeight());
             if((!local) && Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1, Player.tileTargetX,
                     Player.tileTargetY, 1, TileChangeType.None);

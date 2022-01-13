@@ -31,16 +31,15 @@ namespace REBEL.Blocks {
 
         public override bool RightClick(int x, int y) {
             REBEL mod = Mod as REBEL;
-            Tile tile = Main.tile[x, y];
-            int mode = tile.frameX / 18;
+            Point p = getFrameBlock(x, y);
             int anim = mod.wireAlreadyHit(x, y) ? 1 : 0;
-            setFrame(x, y, (mode+1) & 1, anim);
+            setFrame(x, y, p.X ^ 1, anim);
             return true;
         }
 
         public override void HitWire(int i, int j) {
             Tile tile = Main.tile[i, j];
-            int mode = tile.frameX / 18;
+            int mode = tile.frameX / getFrameWidth();
             setFrame(i, j, mode, 1, true); //use lit-up version
             if(mode != 0) return; //nothing to do
 
@@ -76,9 +75,8 @@ namespace REBEL.Blocks {
         ref int frameXOffset, ref int frameYOffset) {
             //clear highlight
             REBEL mod = Mod as REBEL;
-            Tile tile = Main.tile[i, j];
-            int mode = tile.frameX / 18;
-            setFrame(i, j, mode, 0, true);
+            Point p = getFrameBlock(i, j);
+            setFrame(i, j, p.X, 0, true);
             //frameXOffset = mode * 18;
             //frameYOffset = anim * 18;
         }

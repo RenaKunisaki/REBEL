@@ -39,15 +39,9 @@ namespace REBEL.Blocks {
 
         protected void toggle(int i, int j) {
             if((Mod as REBEL).wireAlreadyHit(i, j)) return;
+            Point p = getFrameBlock(i, j);
+            setFrame(i, j, p.X ^ 1, p.Y);
 
-            Tile tile = Main.tile[i, j];
-            tile.frameX ^= 18;
-            //Mod.Logger.Info($"[{Main.GameUpdateCount}] Timer toggled {tile.frameX}");
-            if (Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1,
-                    Player.tileTargetX, Player.tileTargetY,
-                    1, TileChangeType.None);
-			}
             //avoid turning ourselves off
             (Mod as REBEL).wireAlreadyHit(i, j);
         }

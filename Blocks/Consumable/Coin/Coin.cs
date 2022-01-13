@@ -45,7 +45,8 @@ namespace REBEL.Blocks {
             Tile tile = Main.tile[i, j];
             if(tile.HasActuator) {
                 //actuation doesn't work properly for non-solid blocks.
-                tile.frameX ^= 18;
+                Point p = getFrameBlock(i, j);
+                setFrame(i, j, p.X ^ 1, p.Y);
             }
         }
 
@@ -53,7 +54,7 @@ namespace REBEL.Blocks {
         static int[] animFrames = {0, 1, 2, 1};
         public override void AnimateIndividualTile(int type, int i, int j,
         ref int frameXOffset, ref int frameYOffset) {
-            frameYOffset = (animFrames[Main.tileFrame[Type] & 3]) * 18;
+            frameYOffset = (animFrames[Main.tileFrame[Type] & 3]) * getFrameHeight();
         }
 
         public override void AnimateTile(ref int frame, ref int frameCounter) {

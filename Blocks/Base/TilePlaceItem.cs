@@ -44,7 +44,7 @@ namespace REBEL.Items.Placeable {
 		}
 
         public override void AddRecipes() {
-			//recipe: create a stack of 69 from one dirt block.
+			//default recipe: create a stack of 69 from one dirt block.
 			var resultItem = ModContent.GetInstance<TDropItem>();
 			resultItem.CreateRecipe(69)
 				.AddIngredient(ItemID.DirtBlock, 1)

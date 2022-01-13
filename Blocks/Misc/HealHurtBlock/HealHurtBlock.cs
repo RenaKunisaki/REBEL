@@ -34,15 +34,8 @@ namespace REBEL.Blocks {
         public override bool Slope(int i, int j) {
             /** Called when hit by a hammer.
              */
-			Tile tile = Main.tile[i, j];
-            int mode = ((int)((tile.frameY / 18)+1)) & 3;
-            tile.frameX = 0;
-			tile.frameY = (short)(mode * 18);
-			if (Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(-1,
-                    Player.tileTargetX, Player.tileTargetY,
-                    1, TileChangeType.None);
-			}
+			Point p = getFrameBlock(i, j);
+            setFrame(i, j, 0, (p.Y+1) & 3);
             return false;
 		}
 
@@ -92,7 +85,7 @@ namespace REBEL.Blocks {
             var tile = Main.tile[location.X, location.Y];
             if(tile.IsActuated) return; //don't react when turned off.
 
-            int mode = (int)(tile.frameY / 18) & 3;
+            int mode = (int)(tile.frameY / getFrameHeight()) & 3;
             switch(mode) {
                 case 0: _onTouchedHeal(whom, location, direction, false); break;
                 case 1: _onTouchedHurt(whom, location, direction, false); break;
