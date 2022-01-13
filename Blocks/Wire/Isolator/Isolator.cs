@@ -30,15 +30,18 @@ namespace REBEL.Blocks {
         }
 
         public override bool RightClick(int x, int y) {
+            REBEL mod = Mod as REBEL;
             Tile tile = Main.tile[x, y];
             int mode = tile.frameX / 18;
-            setFrame(x, y, (mode+1) & 1, 0);
+            int anim = mod.wireAlreadyHit(x, y) ? 1 : 0;
+            setFrame(x, y, (mode+1) & 1, anim);
             return true;
         }
 
         public override void HitWire(int i, int j) {
             Tile tile = Main.tile[i, j];
             int mode = tile.frameX / 18;
+            setFrame(i, j, mode, 1, true); //use lit-up version
             if(mode != 0) return; //nothing to do
 
             REBEL mod = Mod as REBEL;
@@ -68,14 +71,25 @@ namespace REBEL.Blocks {
             (Mod as REBEL).deleteWire(i, j);
         }
 
-        public void setFrame(int i, int j, int frameX, int frameY) {
+        public void setFrame(int i, int j, int frameX, int frameY,
+        bool local=false) {
             Tile tile = Main.tile[i, j];
             tile.frameX = (short)(frameX * 18);
             tile.frameY = (short)(frameY * 18);
-            if(Main.netMode == NetmodeID.MultiplayerClient) {
+            if((!local) && Main.netMode == NetmodeID.MultiplayerClient) {
 				NetMessage.SendTileSquare(-1, Player.tileTargetX,
                     Player.tileTargetY, 1, TileChangeType.None);
 			}
+        }
+
+        public override void AnimateIndividualTile(int type, int i, int j,
+        ref int frameXOffset, ref int frameYOffset) {
+            REBEL mod = Mod as REBEL;
+            Tile tile = Main.tile[i, j];
+            int mode = tile.frameX / 18;
+            setFrame(i, j, mode, 0, true);
+            //frameXOffset = mode * 18;
+            //frameYOffset = anim * 18;
         }
     }
 }

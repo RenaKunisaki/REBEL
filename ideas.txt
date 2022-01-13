@@ -1,23 +1,49 @@
-- an item you use to configure some of these
-    - use it, click a block, and it pops up some UI
-- an item that prompts for text and plops letter blocks
-- an item that pops up an instruction manual for all this shit
+- related items
+    - an item you use to configure some of these
+        - use it, click a block, and it pops up some UI
+    - an item that prompts for text and plops letter blocks
+    - an item that pops up an instruction manual for all this shit
+
 - better mine cart stuff
     - brakes (slows you if above a certain speed)
     - boosters that work in whichever direction you're facing
         - can be turned off with wires
     - junctions that can be switched by wires
-- black hole block, draws you toward it
-    - magnet block, draws metal toward it
-- brick that shatters when hit from below
-- block that explodes on touch
-- donut block
-    - block that shatters when stood on for a while
-- block that "moves" by swapping itself with an adjacent tile
-    - dunno how that would work with tiles that are > 1x1
-- functioning clock (check game time in animation routines)
-    - would need some custom draw method to draw hands/digits
-    - large version using 4 number tiles
+
+- more physics stuff
+    - black hole block, draws you toward it
+        - magnet block, draws metal toward it
+    - block that explodes on touch
+        - block that shatters when stood on for a while
+    - speed limit block (slows you down like honey but less so)
+        - or subtracts coins if you move too fast :V
+        - minimum speed block; if velocity < x, velocity = x
+
+- more stuff ripped off from Mario
+    - brick that shatters when hit from below
+    - donut block
+    - other consumable blocks like the coin - HP/mana refills, item pickups...
+        - ones that don't disappear but just become inactive for a while/until reactivated by wire
+    - pipes
+        - ones that when you press against the opening, you get "sucked in" and warped
+        - ones that move you like the clear tubes/the ones in SMB3
+        - ones that just spawn the monsters that look like piranha plants
+
+- decorative stuff
+    - functioning clock (check game time in animation routines)
+        - would need some custom draw method to draw hands/digits
+        - large version using 4 number tiles
+    - letter blocks that can be actuated, turning them invisible, allowing for animated text reveals
+    - curtains that open/close when clicked
+
+- weird stuff
+    - block that "moves" by swapping itself with an adjacent tile
+        - dunno how that would work with tiles that are > 1x1
+    - fire
+        - every frame, random chance to spread to adjacent blocks of certain types
+            - damage them like pickaxe would; if destroyed, replace with fire
+        - when hit by water, turn back into what used to be there/dirt/air/ash block
+
 - more sensors; signal/change solidity when...
     - touched by NPCs
         - detect only friend/foe
@@ -48,24 +74,20 @@
         - certain pattern of signals received (time-based or wire order)
             - eg if received signals on red, then green, then blue
         - signal received X frames ago (delay)
-- other consumable blocks like the coin - health/mana refills, item pickups...
-    - ones that don't disappear but just become inactive for a while
-- fire
-    - every frame, random chance to spread to adjacent blocks of certain types
-        - damage them like pickaxe would; if destroyed, replace with fire
-    - when hit by water, turn back into what used to be there/dirt/air/ash block
-- heal/hurt blocks but non-solid (gas blocks)
+
 - turret; fires projectiles at nearby enemies
-- speed limit block (slows you down like honey but less so)
-    - or subtracts coins if you move too fast :V
 - when touched, prompt for a password (use the sign text entry?)
     - if correct, vanish/teleport player past/emit signal
 - blocks that control the keyboard RGB stuff
-- letter blocks that can be actuated, turning them invisible, allowing for animated text reveals
+
+
 - cheat stuff
+    - heal/hurt blocks but non-solid (gas blocks)
     - just drop a specific item every time it's activated
     - biome override - while you're near it you're in X biome no matter what
         - especially fun if actuated...
+    - anti-corruption blocks - whenever you're near/on the "random update" tick, they cleanse any corrupted blocks within some radius
+        - can they spread, themselves? or wouldn't that require placing more of themselves, instead of just converting blocks?
     - time/weather override
     - heal/nuke any NPC that gets near (Heal/Hurt Block but with large radius)
     - while player is near, all enemies take damage
@@ -75,3 +97,5 @@ Unrelated mod ideas:
 - show message in chat suggesting you take a break every hour
 - remove the screen-flip effect from gravity potions
 - apply trippy visuals like motion blur and color cycling to everything
+- count how many in-game days have passed in the world
+- an item/equip that highlights corrupted/crimson/hallowed blocks (like miner's glowstick but for these instead)
