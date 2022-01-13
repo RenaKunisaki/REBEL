@@ -1,6 +1,7 @@
 - an item you use to configure some of these
     - use it, click a block, and it pops up some UI
 - an item that prompts for text and plops letter blocks
+- an item that pops up an instruction manual for all this shit
 - better mine cart stuff
     - brakes (slows you if above a certain speed)
     - boosters that work in whichever direction you're facing
@@ -36,13 +37,13 @@
     - player has some buff/debuff, like Stinky
     - player nearby gets healed/hurt/has low HP/mana/dies/is a ghost
     - player is in water/upside down/touching ground/in a minecart/on a mount
+    - player has been nearby for a while
     - an invasion/party is happening
     - touched by something with certain velocity
     - the game is lagging/FPS is below X
     - pass signals to an adjacent block when...
         - certain time of day/IRL wall time
         - certain NPC nearby/is in town
-        - always (a diode)
         - certain number of signals received
         - certain pattern of signals received (time-based or wire order)
             - eg if received signals on red, then green, then blue

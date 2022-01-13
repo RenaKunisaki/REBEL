@@ -11,7 +11,13 @@ Sensors (use with wires)
 - Time Sensor: Emits a signal every in-game hour.
 - Random Sensor: Emits a signal at random.
 - Rapid Timer: Emits a signal every two frames.
-    - Not everything plays nicely with this. For example, torches' states won't change.
+    - Not everything plays nicely with this. For example, torches' states won't change. Especially if the game lags, signals can be dropped.
+
+Wire Helper Blocks
+- Isolator: Passes signals in one direction across short gaps.
+    - Has two modes: input and output. Right-click to switch mode.
+    - When a signal arrives at an input, it's broadcast to all outputs within a 5x5 square centred on the input.
+    - This allows signals to cross small gaps, jump from one wire color to another, and pass in only one direction (a diode).
 
 Cheaty/Fun Blocks
 - Heal/Hurt Blocks: Heals or hurts anyone who touches them.
@@ -22,7 +28,7 @@ Decorative Blocks
     - Right-click works like the Shift key, to change case/punctuation.
 
 Numeric Display
-Four blocks that work together to create a digital display that can be increased, decreased, or cleared by activating them (using wire or right-click).
+- Four blocks that work together to create a digital display that can be increased, decreased, or cleared by activating them (using wire or right-click).
 - Numeric Display Digit: When placed, displays a 0. When activated, increases the digit by 1.
 - Numeric Increment Block: When activated, looks for a nearby Numeric Display Digit and increases it by 1.
 - Numeric Decrement Block: When activated, looks for a nearby Numeric Display Digit and decreases it by 1.
