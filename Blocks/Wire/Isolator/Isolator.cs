@@ -60,6 +60,7 @@ namespace REBEL.Blocks {
                     if(t2.type == this.Type && t2.frameX != 0) {
                         //Mod.Logger.Info($"Isolator trip at {x},{y}");
                         mod.tripWire(x, y);
+                        setFrame(x, y, 1, 1, true); //use lit-up version
                     }
                 }
             }
