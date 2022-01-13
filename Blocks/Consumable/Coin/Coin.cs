@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
-    public class Coin: ModTile, IReactsToTouch {
+    public class Coin: RebelModTile, IReactsToTouch {
         /** A coin floating in the air.
          */
         public override String Texture {

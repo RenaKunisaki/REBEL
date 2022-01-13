@@ -7,11 +7,11 @@ using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Blocks.Base {
-    public abstract class ItemDropBlock<DropItemType> : ModTile
+    public abstract class ItemDropBlock<DropItemType> : RebelModTile
     where DropItemType: ModItem {
         /** Base class for blocks that drop an item when destroyed.
          */
-        
+
         public override void KillTile(int i, int j, ref bool fail,
         ref bool effectOnly, ref bool noItem) {
             /** Called when this tile is hit by a pickaxe.
