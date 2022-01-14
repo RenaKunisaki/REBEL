@@ -35,9 +35,12 @@ namespace REBEL.Blocks {
 
             if(whom is Player p) {
                 p.DoCoins(1);
-                WorldGen.KillTile(location.X, location.Y);
-                Item.NewItem(location.X * 16, location.Y * 16, 16, 16,
-                    ItemID.CopperCoin);
+                //WorldGen.KillTile(location.X, location.Y);
+                tile.IsActuated = true;
+                Point pt = getFrameBlock(location.X, location.Y);
+                setFrame(location.X, location.Y, 1, pt.Y);
+                Item.NewItem((int)whom.position.X, (int)whom.position.Y,
+                    16, 16, ItemID.CopperCoin);
             }
         }
 
