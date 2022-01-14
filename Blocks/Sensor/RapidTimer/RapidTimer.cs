@@ -71,8 +71,9 @@ namespace REBEL.Items.Placeable {
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.RapidTimer>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.LogicGateLamp_Faulty, 1)
+				.AddIngredient(ItemID.Timer1Second, 1)
 				.Register();
 		}
     }

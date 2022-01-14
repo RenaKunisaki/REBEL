@@ -117,10 +117,10 @@ namespace REBEL.Items.Placeable {
         public override String _getDescription() => "A block for debugging.";
 
         public override void AddRecipes() {
-			var resultItem = ModContent.GetInstance<Items.Placeable.TestBlock>();
-			resultItem.CreateRecipe(7511)
-				.AddIngredient(ItemID.DirtBlock, 1)
-				.Register();
+			//var resultItem = ModContent.GetInstance<Items.Placeable.TestBlock>();
+			//resultItem.CreateRecipe(7511)
+			//	.AddIngredient(ItemID.DirtBlock, 1)
+			//	.Register();
 		}
     }
 }

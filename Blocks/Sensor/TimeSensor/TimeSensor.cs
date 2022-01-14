@@ -75,8 +75,9 @@ namespace REBEL.Items.Placeable {
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.TimeSensor>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddIngredient(ItemID.CopperWatch, 1)
 				.Register();
 		}
     }

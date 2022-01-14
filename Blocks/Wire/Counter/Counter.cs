@@ -83,6 +83,16 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Signal Counter";
         public override String _getDescription() => "Receives signals from Isolator; emits one when enough have been received.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+
+        public override void AddRecipes() {
+			var resultItem = ModContent.GetInstance<Items.Placeable.Counter>();
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddIngredient(ItemID.TallyCounter, 1)
+				.Register();
+		}
     }
 }

@@ -104,8 +104,8 @@ namespace REBEL.Items.Placeable {
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.BoostBlock>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.SwiftnessPotion, 1)
 				.Register();
 		}
     }

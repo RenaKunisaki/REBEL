@@ -99,6 +99,16 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Delay Timer";
         public override String _getDescription() => "Receives signals from Isolator and passes them on a few frames later.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+
+        public override void AddRecipes() {
+			var resultItem = ModContent.GetInstance<Items.Placeable.Delay>();
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddIngredient(ItemID.HoneyBlock, 1)
+				.Register();
+		}
     }
 }

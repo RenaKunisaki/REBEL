@@ -122,7 +122,15 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Purity Shield";
         public override String _getDescription() => "Prevents corruption/crimson/hallow from spreading nearby.";
-        public override int _getResearchNeeded() => 100;
-        public override int _getValue() => 500;
+        public override int _getResearchNeeded() => 3;
+        public override int _getValue() => 2000;
+
+        public override void AddRecipes() {
+			var resultItem = ModContent.GetInstance<Items.Placeable.PurityBlock>();
+			resultItem.CreateRecipe(1)
+				.AddIngredient(ItemID.LifeCrystal, 1)
+				.AddIngredient(ItemID.Sunflower, 5)
+				.Register();
+		}
     }
 }

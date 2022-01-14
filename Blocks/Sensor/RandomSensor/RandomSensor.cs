@@ -50,9 +50,9 @@ namespace REBEL.Items.Placeable {
         public override bool _showsWires() => true;
 
         public override void AddRecipes() {
-			var resultItem = ModContent.GetInstance<Items.Placeable.OneWayBlock>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			var resultItem = ModContent.GetInstance<Items.Placeable.RandomSensor>();
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.LogicGateLamp_Faulty, 1)
 				.Register();
 		}
     }

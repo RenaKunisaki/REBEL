@@ -104,8 +104,9 @@ namespace REBEL.Items.Placeable {
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.GravityBlock>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.GravitationPotion, 1)
+                .AddRecipeGroup("IronBar", 1)
 				.Register();
 		}
     }

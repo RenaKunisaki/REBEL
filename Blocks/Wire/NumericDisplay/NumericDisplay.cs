@@ -280,7 +280,16 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Digit";
         public override String _getDescription() => "A digit that can be adjusted.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+        public override void AddRecipes() {
+			ModContent.GetInstance<Items.Placeable.NumericDisplayDigit>()
+                .CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddIngredient(ItemID.StoneBlock, 20)
+				.Register();
+		}
     }
 
     public class NumericDisplayInc : TilePlaceItem<
@@ -290,7 +299,16 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Increment";
         public override String _getDescription() => "Increments nearby digits when activated.";
+        public override int _getResearchNeeded() => 10;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+        public override void AddRecipes() {
+			ModContent.GetInstance<Items.Placeable.NumericDisplayInc>()
+                .CreateRecipe(5)
+				.AddIngredient(ItemID.LogicGateLamp_Off, 5)
+				.AddIngredient(ItemID.StoneBlock, 5)
+				.Register();
+		}
     }
 
     public class NumericDisplayDec : TilePlaceItem<
@@ -300,7 +318,16 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Decrement";
         public override String _getDescription() => "Decrements nearby digits when activated.";
+        public override int _getResearchNeeded() => 10;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+        public override void AddRecipes() {
+			ModContent.GetInstance<Items.Placeable.NumericDisplayInc>()
+                .CreateRecipe(5)
+				.AddIngredient(ItemID.LogicGateLamp_On, 5)
+				.AddIngredient(ItemID.StoneBlock, 5)
+				.Register();
+		}
     }
 
     public class NumericDisplayClear : TilePlaceItem<
@@ -310,6 +337,15 @@ namespace REBEL.Items.Placeable {
         }
         public override String _getName() => "Numeric Display Clear";
         public override String _getDescription() => "Resets nearby digits when activated.";
+        public override int _getResearchNeeded() => 10;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+        public override void AddRecipes() {
+			ModContent.GetInstance<Items.Placeable.NumericDisplayInc>()
+                .CreateRecipe(5)
+				.AddIngredient(ItemID.LogicGateLamp_Faulty, 5)
+				.AddIngredient(ItemID.StoneBlock, 5)
+				.Register();
+		}
     }
 }

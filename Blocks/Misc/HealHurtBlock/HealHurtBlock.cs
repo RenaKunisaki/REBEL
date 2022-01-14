@@ -109,9 +109,10 @@ namespace REBEL.Items.Placeable {
         public override int _getValue() => 500;
 
         public override void AddRecipes() {
-			var resultItem = ModContent.GetInstance<Items.Placeable.Coin>();
+			var resultItem = ModContent.GetInstance<Items.Placeable.HealHurtBlock>();
 			resultItem.CreateRecipe(1)
-				.AddIngredient(ItemID.CopperCoin, 1)
+				.AddIngredient(ItemID.HealingPotion, 1)
+				.AddIngredient(ItemID.Spike, 1)
 				.Register();
 		}
     }

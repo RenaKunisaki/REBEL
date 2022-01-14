@@ -70,5 +70,8 @@ namespace REBEL.Items.Placeable {
         public override String _getDescription() => "Lights up to show hitbox regions.";
         public override int _getResearchNeeded() => 100;
         public override int _getValue() => 500;
+        public override void AddRecipes() {
+			//do nothing
+		}
     }
 }

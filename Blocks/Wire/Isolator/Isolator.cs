@@ -124,7 +124,17 @@ namespace REBEL.Items.Placeable {
             get => "REBEL/Blocks/Wire/Isolator/Item";
         }
         public override String _getName() => "Isolator";
-        public override String _getDescription() => "Passes signals in one direction.";
+        public override String _getDescription() => "Passes signals across small gaps.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
         public override bool _showsWires() => true;
+
+        public override void AddRecipes() {
+			var resultItem = ModContent.GetInstance<Items.Placeable.Isolator>();
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 5)
+				.AddIngredient(ItemID.CrystalShard, 1)
+				.Register();
+		}
     }
 }
