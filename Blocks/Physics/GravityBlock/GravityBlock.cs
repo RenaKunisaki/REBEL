@@ -42,7 +42,10 @@ namespace REBEL.Blocks {
             //sadly, NPCs don't have gravity vars, so we can't flip them.
             if(!(whom is Player p)) return;
             //Main.NewText($"Grav touch {direction} at {location} by {p.name}");
-            //if(p.gravControl) return; //already have a gravity potion
+
+            //don't apply if player already has gravity control.
+            REBEL mod = Mod as REBEL;
+            if((p.gravControl || p.gravControl2) && !mod.forceUpsideDown) return;
 
             if(Cooldown.ContainsKey(whom.whoAmI)) {
                 uint diff = Main.GameUpdateCount - Cooldown[whom.whoAmI];
@@ -51,7 +54,6 @@ namespace REBEL.Blocks {
             }
             else Cooldown[whom.whoAmI] = Main.GameUpdateCount;
 
-            REBEL mod = Mod as REBEL;
             mod.forceUpsideDown = !mod.forceUpsideDown;
         }
 
