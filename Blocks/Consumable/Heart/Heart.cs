@@ -13,6 +13,7 @@ namespace REBEL.Blocks {
         /** A recovery heart floating in the air.
          */
         public override int _getItemID() => ItemID.Heart;
+        virtual public int _getValue() => 300; //same as Lesser Healing Potion
         public override String Texture {
             get => "REBEL/Blocks/Consumable/Heart/Block";
         }

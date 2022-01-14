@@ -13,6 +13,7 @@ namespace REBEL.Blocks {
         /** A mana refill star floating in the air.
          */
         public override int _getItemID() => ItemID.Star;
+        virtual public int _getValue() => 100; //same as Lesser Mana Potion
         public override String Texture {
             get => "REBEL/Blocks/Consumable/Mana/Block";
         }
