@@ -71,7 +71,6 @@
     - pass signals to an adjacent block when...
         - certain time of day/IRL wall time
         - certain NPC nearby/is in town
-        - certain number of signals received
         - certain pattern of signals received (time-based or wire order)
             - eg if received signals on red, then green, then blue
 
