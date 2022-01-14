@@ -37,11 +37,15 @@ namespace REBEL.Blocks {
             if(Receivers is null) {
                 Receivers = new Dictionary<ushort, Action<Point, Point>>();
             }
+            if(!Receivers.ContainsKey(type)) {
+                Receivers[type] = handler;
+            }
         }
 
         public void _activate(Point thisLoc, Point origin) {
             /** Called when activated by an Isolator.
              */
+            Tile tile = Main.tile[thisLoc.X, thisLoc.Y];
             int mode = tile.frameX / getFrameWidth();
             setFrame(thisLoc.X, thisLoc.Y, mode, 1, true); //use lit-up version
             if(mode != 0) return; //we're a transmitter; nothing to do
@@ -80,10 +84,10 @@ namespace REBEL.Blocks {
 
             //look for a corresponding outlet.
             Point ourLoc = new Point(i, j);
-            int x1 = Math.Max(i-4, (int)Main.leftWorld);
-            int x2 = Math.Min(i+4, (int)Main.rightWorld-1);
-            int y1 = Math.Max(j-4, (int)Main.topWorld);
-            int y2 = Math.Min(j+4, (int)Main.bottomWorld-1);
+            int x1 = Math.Max(i-2, (int)Main.leftWorld);
+            int x2 = Math.Min(i+2, (int)Main.rightWorld-1);
+            int y1 = Math.Max(j-2, (int)Main.topWorld);
+            int y2 = Math.Min(j+2, (int)Main.bottomWorld-1);
             for(int y=y1; y<=y2; y++) {
                 for(int x=x1; x<=x2; x++) {
                     activateTile(x, y, ourLoc);
