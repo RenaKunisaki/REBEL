@@ -1,54 +1,80 @@
 Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which desperately need better graphics.
 
-Physics Blocks
-- Bounce Blocks: Repels things away on touch.
-- Boost Blocks: Accelerates things in a specific direction on touch.
-    - Right-click to change direction.
-- Gravity Blocks: Flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
+[c/CC88CC:Physics Blocks]
+- [c/88CCCC:Boost Blocks]: Accelerates things in a specific direction on touch.
+- [c/88CCCC:Bounce Blocks]: Repels things away on touch.
+- [c/88CCCC:Gravity Blocks]: Flips gravity when touched, much like the potions.
+- [c/88CCCC:One-Way Blocks]: Can only be passed through from one direction.
 
-Sensors (use with wires)
-- Time Sensor: Emits a signal every in-game hour.
-- Random Sensor: Emits a signal at random.
-- Rapid Timer: Emits a signal every two frames.
-    - Not everything plays nicely with this. For example, torches' states won't change. Especially if the game lags, signals can be dropped.
-    - The activation state saves between sessions, unlike vanilla timers.
+[c/CC88CC:Sensors] (use with wires)
+- [c/88CCCC:Time Sensor]: Emits a signal every in-game hour.
+- [c/88CCCC:Random Sensor]: Emits a signal at random.
+- [c/88CCCC:Rapid Timer]: Emits a signal every two frames (1/30 second).
 
-Wire Helper Blocks
-- Isolator: Passes signals across short gaps.
-    - Has three modes, selected by right-click: Bidirectional, transmit only, receive only.
-    - When a signal arrives at a transmitter, it's broadcast to all receivers within a 5x5 square centred on the input.
-    - This allows signals to cross small gaps, jump from one wire color to another, and pass in only one direction (a diode).
-    - Each lights up when sending/receiving a signal.
-- Delay Timer: Receives a signal from an Isolator and sends it along a wire some number of frames later.
-    - Right-click to change delay, in frames: 1, 2, 4, 8, 16, 32, 64, random.
-    - Lights up when transmitting.
-- Signal Counter: Receives signals from Isolators. Emits a signal along a wire for every N singals received.
-    - Right-click to change N: 2, 4, 8, 16, 32, 64, 128, random.
-    - Lights up when transmitting.
+[c/CC88CC:Wire Helper Blocks]
+- [c/88CCCC:Isolator]: Passes signals across short gaps and to other Wire Helper Blocks. Can be used as a diode.
+- [c/88CCCC:Delay Timer]: Receives a signal from an Isolator and sends it along a wire some number of frames later.
+- [c/88CCCC:Signal Counter]: Receives signals from Isolators; emits a signal along a wire for every N singals received.
 
-Cheaty/Fun Blocks
-- Heal/Hurt Blocks: Heals or hurts anyone who touches them.
-    - Hammer to change their mode; alternates between hurt, heal, hurt lots, heal lots.
+[c/CC88CC:Numeric Display]
+- Four blocks that work together to create a digital display that can be increased, decreased, or cleared by activating them (using wire or right-click). See below for details.
+- [c/88CCCC:Numeric Display Digit]: When placed, displays a 0. When activated, increases the digit by 1.
+- [c/88CCCC:Numeric Increment Block]: When activated, looks for a nearby Numeric Display Digit and increases it by 1.
+- [c/88CCCC:Numeric Decrement Block]: When activated, looks for a nearby Numeric Display Digit and decreases it by 1.
+- [c/88CCCC:Numeric Clear Block]: When activated, looks for Numeric Display Digits to its left and resets them to 0.
 
-Decorative Blocks
-- Letter Blocks: Single-tile non-solid blocks for every ASCII character so you can make big signs.
-    - Right-click works like the Shift key, to change case/punctuation.
+[c/CC88CC:Decorative Blocks]
+- [c/88CCCC:Letter Blocks]: Single-tile non-solid blocks for every ASCII character so you can make big signs.
 
-Numeric Display
-- Four blocks that work together to create a digital display that can be increased, decreased, or cleared by activating them (using wire or right-click).
-- Numeric Display Digit: When placed, displays a 0. When activated, increases the digit by 1.
-- Numeric Increment Block: When activated, looks for a nearby Numeric Display Digit and increases it by 1.
-- Numeric Decrement Block: When activated, looks for a nearby Numeric Display Digit and decreases it by 1.
-- Numeric Clear Block: When activated, looks for Numeric Display Digits to its left and resets them to 0.
+[c/CC88CC:Consumable Blocks]
+- [c/88CCCC:Coin], [c/88CCCC:Heart], [c/88CCCC:Star]: Work the same as the drop versions, but are a floating block. Use them to make platforming challenges!
 
-Numeric Display Digits can be chained. When a Digit is increased past 9, it resets to 0; if the block to its left is another Digit, that block is increased too. Similarly, when decreased past 0, it resets to 9 and decreases the block to its left.
+[c/CC88CC:Misc Blocks]
+- [c/88CCCC:Heal/Hurt Blocks]: Heals or hurts anyone who touches them. (Can change which action.)
+- [c/88CCCC:Purity Shield]: Prevents anything in its radius from being converted to Corruption, Crimson, or Hallow.
 
-If the block to the left is not a Digit, it will check to the left of that block; if that also isn't a Digit, the process stops. This means you can place single blocks (of any kind, including empty space) between the digits to separate them.
+[c/CC88CC:How to Use]
 
-Additionally, when a Digit wraps from 9 to 0, it sends a signal over any wire immediately above it. When it wraps from 0 to 9, it sends a signal over any wire immediately below it. Note that whatever is on the other end of that wire must not be touching the Digit block to be activated.
+Most of the blocks can just be placed anywhere, even in midair. Solid ones can be changed to different variations by hammering them; non-solid ones by right-clicking. (This is because hammering non-solid blocks doesn't work right now; it will be changed eventually.)
 
-The Increment and Decrement blocks will search for a Digit block to their left, to their right, above them, and below them (in that order); if one is found within 16 blocks, they'll operate on it.
+[c/88CCCC:Letter Block]: These don't do anything. Use them to make big signs and stuff. Right-click to change between upper/lowercase or punctuation (works like the Shift key). Can be painted.
 
-The Clear block only clears digits to its immediate left, ignoring any Increment/Decrement blocks. The same one-block gap rule applies.
+[c/88CCCC:Boost Block]: When a player or NPC touches them, they're accelerated in the direction the block indicates. These are non-solid, so they can be used to simulate currents. Right-click to change the direction. Be careful not to get stuck between opposing blocks!
 
-The values of Digit blocks save between sessions.
+[c/88CCCC:Bounce Block]: When a player or NPC touches them, they get bounced away.
+
+[c/88CCCC:One-Way Block]: Non-solid, unless you approach them from the indicated direction. (Causes some visual jitter; should be fixed in the future.)
+
+[c/88CCCC:Gravity Block]: When a player (unfortunately, not an NPC) touches it, gravity reverses for them, just like a Gravitation Potion. Pressing Up will reset it back to normal (and won't let you keep controlling it afterward) just in case you fall into space. These won't activate if you already have a Gravitation Potion active, but using one while under the block's effect will only waste it.
+
+[c/88CCCC:Heal/Hurt Blocks]: When a player or NPC (including monsters!) touches it, they'll be healed or hurt, depending on the block's mode. There are four modes: heal, hurt, heal lots, hurt lots.
+
+[c/88CCCC:Purity Shield]: When placed, and whenever someone is nearby, converts all nearby Corrupt/Crimson/Hallowed blocks/NPCs into their pure versions. (Nearby means within a 9x9 square centred on the Shield.) Non-corrupt monsters such as Zombies won't be affected (and corrupt ones will still be monsters after purification), so this isn't a complete safety field.
+
+[c/88CCCC:Sensors]: Like the vanilla sensors, attach a wire to them and they'll send a signal on it.
+Note, some things don't handle the Rapid Timer nicely; for example, torches' states might not update. This is especially noticeable if the game is lagging.
+
+[c/88CCCC:Isolator]: These work as short-range wireless transmitters. They have three modes: Bidirectional, Transmit Only, Receive Only. Each should be connected to a wire.
+
+When a signal enters a transmitter, it's relayed to any receivers within a 5x5 square of the transmitter. Anything else is skipped over. This means they can send the signal across a short gap without interfering with any wiring in the gap.
+
+The receiver will send along all wires connected to it, regardless of the color that activated the transmitter. There can be multiple receivers in range.
+A transmitter and receiver used together form a simple diode (signals pass through in one direction only).
+
+Due to limitations of the wiring engine, you may need at least one empty space between a receiver and the thing on the other end of its wire.
+
+[c/88CCCC:Delay Timer]: Acts as a receiver for an Isolator. Waits N frames before relaying the signal along its wire. N can be changed by right-clicking.
+
+[c/88CCCC:Signal Counter]: Acts as a receiver for an Isolator. For every N signals received from the transmitter, it emits one signal along its wire.
+
+[c/88CCCC:Numeric Display]: Makes a simple counter that can be controlled by wires or right-click.
+Right-clicking a digit or sending a signal to it will increase it by 1. When it reaches 10, it resets to 0 and increases the digit to its left.
+The search for another digit checks one, then two blocks to the left, so there can be gaps (any non-digit block, air, etc) for separators.
+
+The Increment and Decrement Blocks let you control nearby digits (by right-click or wire). They look for a Digit to their left, right, above, and below (in that order). If one is found, it will be increased/decreased. Only one Digit will be affected, even if there are others nearby.
+
+The Clear Block looks for digits to its left, and resets them to zero. It will skip over single empty spaces (same as the digits themselves) and Increment/Decrement/Clear blocks.
+
+When a Digit Block reaches 10, it resets to 0, increases the block to its left, and sends a signal along a wire immediately above it. When it reaches -1, it resets to 9, decreases the block to its left, and sends a signal along a wire immediately below it.
+
+The values of digits are saved between sessions.
