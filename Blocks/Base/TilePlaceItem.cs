@@ -22,6 +22,7 @@ namespace REBEL.Items.Placeable {
         virtual public bool _showsWires() => false;
 
         public override void SetStaticDefaults() {
+			DisplayName.SetDefault(_getName());
             Tooltip.SetDefault(_getDescription());
 			Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.
                 Instance.SacrificeCountNeededByItemId[Type] =
