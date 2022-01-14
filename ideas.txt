@@ -22,7 +22,6 @@
 - more stuff ripped off from Mario
     - brick that shatters when hit from below
     - donut block
-    - other consumable blocks like the coin - HP/mana refills, item pickups...
     - pipes
         - ones that when you press against the opening, you get "sucked in" and warped
         - ones that move you like the clear tubes/the ones in SMB3
