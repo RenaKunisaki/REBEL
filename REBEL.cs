@@ -145,5 +145,91 @@ namespace REBEL {
 				}
 			}
 		}
+
+		public int replaceNPC(int idx, int newType) {
+			var npc = Main.npc[idx];
+			if(!npc.active) return -1;
+
+			int n = NPC.NewNPC(
+				(int)npc.position.X, (int)npc.position.Y, newType);
+			//unsure how many of these are needed...
+			var newNpc = Main.npc[n];
+			newNpc.velocity.X            = npc.velocity.X;
+			newNpc.velocity.Y            = npc.velocity.Y;
+			newNpc.direction             = npc.direction;
+			newNpc.honeyWet              = npc.honeyWet;
+			newNpc.lavaWet               = npc.lavaWet;
+			newNpc.oldDirection          = npc.oldDirection;
+			newNpc.oldPosition.X         = npc.oldPosition.X;
+			newNpc.oldPosition.Y         = npc.oldPosition.Y;
+			newNpc.oldVelocity.X         = npc.oldVelocity.X;
+			newNpc.oldVelocity.Y         = npc.oldVelocity.Y;
+			newNpc.wet                   = npc.wet;
+			newNpc.wetCount              = npc.wetCount;
+			newNpc.breath                = npc.breath;
+			newNpc.breathCounter         = npc.breathCounter;
+			newNpc.celled                = npc.celled;
+			newNpc.coldDamage            = npc.coldDamage;
+			newNpc.confused              = npc.confused;
+			//newNpc.damage                = npc.damage; //contact damage
+			newNpc.daybreak              = npc.daybreak;
+			newNpc.directionY            = npc.directionY;
+			newNpc.extraValue            = npc.extraValue;
+			newNpc.frame                 = npc.frame;
+			newNpc.frameCounter          = npc.frameCounter;
+			newNpc.hide                  = npc.hide;
+			newNpc.immortal              = npc.immortal;
+			newNpc.javelined             = npc.javelined;
+			newNpc.justHit               = npc.justHit;
+			newNpc.lastInteraction       = npc.lastInteraction;
+			newNpc.life                  = npc.life;
+			newNpc.lifeMax               = npc.lifeMax;
+			newNpc.lifeRegen             = npc.lifeRegen;
+			newNpc.lifeRegenCount        = npc.lifeRegenCount;
+			newNpc.loveStruck            = npc.loveStruck;
+			newNpc.midas                 = npc.midas;
+			newNpc.netAlways             = npc.netAlways;
+			//newNpc.netID                 = npc.netID;
+			//newNpc.netOffset             = npc.netOffset;
+			//newNpc.netSkip               = npc.netSkip;
+			//newNpc.netSpam               = npc.netSpam;
+			//newNpc.netUpdate             = npc.netUpdate;
+			//newNpc.netUpdate2            = npc.netUpdate2;
+			newNpc.oiled                 = npc.oiled;
+			//newNpc.oldPos.X              = npc.oldPos.X;
+			//newNpc.oldPos.Y              = npc.oldPos.Y;
+			newNpc.oldRot                = npc.oldRot;
+			newNpc.oldTarget             = npc.oldTarget;
+			newNpc.onFire                = npc.onFire;
+			newNpc.onFire2               = npc.onFire2;
+			newNpc.onFire3               = npc.onFire3; //what the fuck
+			newNpc.onFrostBurn           = npc.onFrostBurn;
+			newNpc.onFrostBurn2          = npc.onFrostBurn2;
+			newNpc.poisoned              = npc.poisoned;
+			//newNpc.rarity                = npc.rarity; //for LifeForm Analyzer
+			newNpc.realLife              = npc.realLife;
+			newNpc.rotation              = npc.rotation;
+			newNpc.scale                 = npc.scale;
+			newNpc.SpawnedFromStatue     = npc.SpawnedFromStatue;
+			newNpc.spriteDirection       = npc.spriteDirection;
+			newNpc.stairFall             = npc.stairFall;
+			newNpc.statsAreScaledForThisManyPlayers = npc.statsAreScaledForThisManyPlayers;
+			newNpc.stepSpeed             = npc.stepSpeed;
+			newNpc.stinky                = npc.stinky;
+			newNpc.strengthMultiplier    = npc.strengthMultiplier;
+			newNpc.takenDamageMultiplier = npc.takenDamageMultiplier;
+			newNpc.target                = npc.target;
+			//newNpc.targetRect.Left       = npc.targetRect.Left;
+			//newNpc.targetRect.Top        = npc.targetRect.Top;
+			//newNpc.targetRect.Right      = npc.targetRect.Right;
+			//newNpc.targetRect.Bottom     = npc.targetRect.Bottom;
+			newNpc.tentacleSpiked        = npc.tentacleSpiked;
+			newNpc.timeLeft              = npc.timeLeft;
+			//newNpc.value                 = npc.value; //coins dropped
+			newNpc.venom                 = npc.venom;
+
+			npc.active = false; //force despawn
+			return n;
+		}
 	}
 }

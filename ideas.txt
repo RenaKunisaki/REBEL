@@ -84,8 +84,6 @@
     - just drop a specific item every time it's activated
     - biome override - while you're near it you're in X biome no matter what
         - especially fun if actuated...
-    - anti-corruption blocks - whenever you're near/on the "random update" tick, they cleanse any corrupted blocks within some radius
-        - can they spread, themselves? or wouldn't that require placing more of themselves, instead of just converting blocks?
     - time/weather override
     - heal/nuke any NPC that gets near (Heal/Hurt Block but with large radius)
     - while player is near, all enemies take damage
