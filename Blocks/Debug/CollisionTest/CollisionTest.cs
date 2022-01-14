@@ -21,7 +21,7 @@ namespace REBEL.Blocks {
             Inside
         }
         public override String Texture {
-            get => "REBEL/Blocks/Misc/CollisionTest/Block";
+            get => "REBEL/Blocks/Debug/CollisionTest/Block";
         }
 
         public override void SetStaticDefaults() {
@@ -64,18 +64,11 @@ namespace REBEL.Blocks {
 namespace REBEL.Items.Placeable {
     public class CollisionTest: TilePlaceItem<Blocks.CollisionTest, CollisionTest> {
 		public override String Texture {
-            get => "REBEL/Blocks/Misc/CollisionTest/Item";
+            get => "REBEL/Blocks/Debug/CollisionTest/Item";
         }
         public override String _getName() => "Collision Test";
-        public override String _getDescription() => "Lights up to show collisons.";
+        public override String _getDescription() => "Lights up to show hitbox regions.";
         public override int _getResearchNeeded() => 100;
         public override int _getValue() => 500;
-
-        public override void AddRecipes() {
-			var resultItem = ModContent.GetInstance<Items.Placeable.CollisionTest>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
-				.Register();
-		}
     }
 }

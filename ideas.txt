@@ -43,8 +43,11 @@
         - every frame, random chance to spread to adjacent blocks of certain types
             - damage them like pickaxe would; if destroyed, replace with fire
         - when hit by water, turn back into what used to be there/dirt/air/ash block
+    - when touched, prompt for a password (use the sign text entry?)
+        - if correct, vanish/teleport player past/emit signal
+    - blocks that control the keyboard RGB stuff
 
-- more sensors; signal/change solidity when...
+- more sensors; signal/change solidity/pass signals when...
     - touched by NPCs
         - detect only friend/foe
     - on player join/leave server
@@ -75,10 +78,6 @@
             - eg if received signals on red, then green, then blue
 
 - turret; fires projectiles at nearby enemies
-- when touched, prompt for a password (use the sign text entry?)
-    - if correct, vanish/teleport player past/emit signal
-- blocks that control the keyboard RGB stuff
-
 
 - cheat stuff
     - heal/hurt blocks but non-solid (gas blocks)
@@ -94,7 +93,12 @@
 
 Unrelated mod ideas:
 - show message in chat suggesting you take a break every hour
-- remove the screen-flip effect from gravity potions
 - apply trippy visuals like motion blur and color cycling to everything
 - count how many in-game days have passed in the world
 - an item/equip that highlights corrupted/crimson/hallowed blocks (like miner's glowstick but for these instead)
+- hook into the keyboard RGB stuff and make it do something else, like control some custom hardware or just change lighting in-game
+- accessibility stuff
+    - hook into sound effect playing and display icons indicating the type of sound and its direction/location
+    - remove the screen-flip effect from gravity potions
+    - allow binding more things to mouse buttons to make it somewhat playable one-handed
+    - color filters for mod graphic designers to test colorblindness

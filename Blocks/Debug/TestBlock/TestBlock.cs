@@ -14,7 +14,7 @@ namespace REBEL.Blocks {
     ItemDropBlock<Items.Placeable.TestBlock>,
     IReactsToTouch {
         public override String Texture {
-            get => "REBEL/Blocks/Misc/TestBlock/Block";
+            get => "REBEL/Blocks/Debug/TestBlock/Block";
         }
 
         public override void PostSetDefaults() {
@@ -111,7 +111,7 @@ namespace REBEL.Blocks {
 namespace REBEL.Items.Placeable {
     public class TestBlock: TilePlaceItem<Blocks.TestBlock, TestBlock> {
 		public override String Texture {
-            get => "REBEL/Blocks/Misc/TestBlock/Item";
+            get => "REBEL/Blocks/Debug/TestBlock/Item";
         }
         public override String _getName() => "Test Block";
         public override String _getDescription() => "A block for debugging.";
