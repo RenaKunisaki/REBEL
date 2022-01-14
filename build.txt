@@ -1,3 +1,5 @@
 displayName = R.E.B.E.L
 author = Rena Kunisaki
-version = 0.1
+version = 1.0
+homepage = https://github.com/RenaKunisaki/REBEL
+includeSource = true

@@ -1,4 +1,4 @@
-Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which desperately need better graphics.
+Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which desperately need better graphics. How you use them is up to you!
 
 [c/CC88CC:Physics Blocks]
 - [c/88CCCC:Boost Blocks]: Accelerates things in a specific direction on touch.
