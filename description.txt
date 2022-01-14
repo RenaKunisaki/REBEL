@@ -4,8 +4,7 @@ Physics Blocks
 - Bounce Blocks: Repels things away on touch.
 - Boost Blocks: Accelerates things in a specific direction on touch.
     - Right-click to change direction.
-- Gravity Blocks (NOT WORKING): Flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
-    - These "work" but the effect is incomplete.
+- Gravity Blocks: Flips gravity, much like the potions. Pressing Up will reset it, but doesn't let you flip it again.
 
 Sensors (use with wires)
 - Time Sensor: Emits a signal every in-game hour.

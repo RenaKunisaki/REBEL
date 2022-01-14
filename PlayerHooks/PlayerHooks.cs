@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
 namespace REBEL.Hooks {
     public class PlayerHooks: ModPlayer {
-        protected void fuckingGravityShit1() {
+        protected void updateGravityControl() {
             REBEL mod = Mod as REBEL;
             var player = Main.LocalPlayer;
 
@@ -20,67 +21,40 @@ namespace REBEL.Hooks {
 
             if(mod.forceUpsideDown) {
                 if(!mod.wasForceUpsideDown) {
-                    Main.NewText("Going upside down", 0xFF, 0xFF, 0x00);
+                    //Main.NewText("Going upside down", 0xFF, 0xFF, 0x00);
                     //Mod.Logger.Info("Going upside down");
                 }
                 mod.wasForceUpsideDown = true;
-                player.gravDir = -1f; //flips screen
+                player.gravDir  = -1f; //flips screen
+                player.gravity *= -1f; //flips gravity
+                //manually setting these causes issues with jumping
+                //so just give the buff instead.
+                player.AddBuff(BuffID.Gravitation, 1);
             }
             else if(mod.wasForceUpsideDown) {
                 mod.wasForceUpsideDown = false;
-                Main.NewText("Going upside up", 0xFF, 0xFF, 0x00);
+                //Main.NewText("Going upside up", 0xFF, 0xFF, 0x00);
                 //Mod.Logger.Info("Going upside up");
-                player.gravDir = 1f;
-                if(player.gravity < 0) {
-                    player.gravity *= -1f;
-                }
-            }
-
-            //if(player.jump != 0) {
-            //    Main.NewText($"Jump = {player.justJumped} {player.jump} boost {player.jumpBoost} speed {player.jumpSpeedBoost} vel {player.velocity}");
-            //}
-        }
-
-        protected void fuckingGravityShit2() {
-            REBEL mod = Mod as REBEL;
-            var player = Main.LocalPlayer;
-            if(mod.forceUpsideDown) {
-                 if(player.gravity > 0) {
-                    player.gravity *= -1f; //flips gravity
-                }
-                //player.gravControl = true; //does fuck all
+                player.ClearBuff(BuffID.Gravitation);
             }
         }
 
-        //I can have gravity inverted or be able to jump.
-        //not both. even though the game does it just fine.
-        //if I fuck with it just right I can also make it
-        //so you can only jump once.
-        public override void PreUpdate() {
-            //fuckingGravityShit1();
-            //fuckingGravityShit2();
+        /* public override void PreUpdate() {
         }
 
         public override void PreUpdateMovement() {
-            //fuckingGravityShit1();
-            fuckingGravityShit2();
         }
 
         public override void PostUpdateBuffs() {
-            //fuckingGravityShit1();
-            //fuckingGravityShit2();
         }
 
         public override void PostUpdateRunSpeeds() {
-            //fuckingGravityShit1();
-            //fuckingGravityShit2();
-        }
+        } */
 
         public override void PostUpdate() {
             REBEL mod = Mod as REBEL;
             var player = Main.LocalPlayer;
-            fuckingGravityShit1();
-            //fuckingGravityShit2();
+            updateGravityControl();
             mod.checkTouchedBlocks(player);
         }
 
