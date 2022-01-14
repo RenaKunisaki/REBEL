@@ -86,7 +86,7 @@ namespace REBEL {
 			//note that a dead NPC is still there, invisible, at the
 			//position it died at. I assume it goes away eventually,
 			//like when its entry in the array is overwritten?
-            if(whom is Player p && p.statLife <= 0) return;
+			if(whom is Player p && p.statLife <= 0) return;
             if(whom is NPC n && n.life <= 0) return;
 
 			//shorthand to make code less ugly maybe
