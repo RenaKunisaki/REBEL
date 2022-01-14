@@ -86,7 +86,11 @@ namespace REBEL {
 			//note that a dead NPC is still there, invisible, at the
 			//position it died at. I assume it goes away eventually,
 			//like when its entry in the array is overwritten?
-			if(whom is Player p && p.statLife <= 0) return;
+			int grav = 1;
+            if(whom is Player p) {
+				if(p.statLife <= 0) return;
+				grav = (int)p.gravDir;
+			}
             if(whom is NPC n && n.life <= 0) return;
 
 			//shorthand to make code less ugly maybe
@@ -103,18 +107,18 @@ namespace REBEL {
 			//XXX do a line intersect test using oldPosition to prevent
 			//clipping at high speeds.
 
-			Point TopLeft = new Vector2(
-				whom.Hitbox.Left, whom.Hitbox.Top).ToTileCoordinates();
-			//get the blocks above us, so we know when we bonk our head.
-			if(whom.velocity.Y < 0) TopLeft.Y -= 1;
-			//also need to do this to check for left contact.
-			if(whom.velocity.X < 0) TopLeft.X -= 1;
-			Point BottomRight = new Vector2(
-				whom.Hitbox.Right, whom.Hitbox.Bottom).ToTileCoordinates();
+			//check an extra half-tile into the direction we're moving
+			//in case this is a solid block.
+			var hit    = whom.Hitbox;
+			var vel    = whom.velocity;
+            int left   = (int)((hit.Left   - (vel.X < 1 ? 8 : 0)) / 16);
+            int right  = (int)((hit.Right  + (vel.X > 1 ? 8 : 0)) / 16);
+            int top    = (int)((hit.Top    - (vel.Y < 1 ? 8 : 0)) / 16);
+            int bottom = (int)((hit.Bottom + (vel.Y > 1 ? 8 : 0)) / 16);
 
 			//check each tile the entity occupies.
-			for(int y=TopLeft.Y; y<=BottomRight.Y; y++) {
-				for(int x=TopLeft.X; x<=BottomRight.X; x++) {
+			for(int y=top; y<=bottom; y++) {
+				for(int x=left; x<=right; x++) {
 					var tile = Main.tile[x, y];
 					if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
 						//work out the direction we touched from.
@@ -122,19 +126,19 @@ namespace REBEL {
 						//from the tile, so if the contact is our bottom
 						//left point, it's the tile's top right.
 						TouchDirection dir = D_I;
-						if(x == TopLeft.X) {
+						if(x == left) {
 							dir = D_R;
-							if     (y == TopLeft.Y)     dir = D_BR;
-							else if(y == BottomRight.Y) dir = D_TR;
+							if     (y == top)    dir = D_BR;
+							else if(y == bottom) dir = D_TR;
 						}
-						else if(x == BottomRight.X) {
+						else if(x == right) {
 							dir = D_L;
-							if     (y == TopLeft.Y)     dir = D_BL;
-							else if(y == BottomRight.Y) dir = D_TL;
+							if     (y == top)    dir = D_BL;
+							else if(y == bottom) dir = D_TL;
 						}
 						else {
-							if     (y == TopLeft.Y)     dir = D_B;
-							else if(y == BottomRight.Y) dir = D_T;
+							if     (y == top)    dir = D_B;
+							else if(y == bottom) dir = D_T;
 						}
 						TouchHandlers[tile.type](whom, new Point(x, y), dir);
 					}
