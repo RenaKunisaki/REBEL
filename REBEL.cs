@@ -38,15 +38,16 @@ namespace REBEL {
 			for(int y=0; y<h; y++) {
 				for(int x=0; x<w; x++) {
 					//avoid tile triggering itself
-					wireAlreadyHit(i+x, j+y);
+					if(!wireAlreadyHit(i+x, j+y)) {
+						try {
+							Wiring.TripWire(i+x, j+y, 1, 1);
+						}
+						catch(System.ArgumentException) {
+							//ignore. this happens if the wire is already tripped.
+							//Logger.Info("Got ArgumentException in TripWire");
+						}
+					}
 				}
-			}
-			try {
-				Wiring.TripWire(i, j, w, h);
-			}
-			catch(System.ArgumentException) {
-				//ignore. this happens if the wire is already tripped.
-				Logger.Info("Got ArgumentException in TripWire");
 			}
 		}
 		public bool wireAlreadyHit(int i, int j) {

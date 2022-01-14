@@ -19,6 +19,7 @@ Wire Helper Blocks
     - Has two modes: input and output. Right-click to switch mode.
     - When a signal arrives at an input, it's broadcast to all outputs within a 5x5 square centred on the input.
     - This allows signals to cross small gaps, jump from one wire color to another, and pass in only one direction (a diode).
+- Delay Timer: Receives a signal from an Isolator and sends it along a wire some number of frames later.
 
 Cheaty/Fun Blocks
 - Heal/Hurt Blocks: Heals or hurts anyone who touches them.
