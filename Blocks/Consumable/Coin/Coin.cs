@@ -24,7 +24,7 @@ namespace REBEL.Items.Placeable {
 		public override String Texture {
             get => "REBEL/Blocks/Consumable/Coin/Item";
         }
-        public override String _getName() => "Coin";
+        public override String _getName() => "Floating Coin";
         public override String _getDescription() => "A coin floating in the air.";
         public override int _getResearchNeeded() => 100;
 
