@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,12 +24,13 @@ namespace REBEL.Hooks {
                 if(!mod.wasForceUpsideDown) {
                     //Main.NewText("Going upside down", 0xFF, 0xFF, 0x00);
                     //Mod.Logger.Info("Going upside down");
+                    SoundEngine.PlaySound(2, -1, -1, 8); //gravity flip
                 }
                 mod.wasForceUpsideDown = true;
                 player.gravDir  = -1f; //flips screen
                 player.gravity *= -1f; //flips gravity
                 //manually setting these causes issues with jumping
-                //so just give the buff instead.
+                //so just give the buff for one frame instead.
                 player.AddBuff(BuffID.Gravitation, 1);
             }
             else if(mod.wasForceUpsideDown) {
@@ -36,6 +38,11 @@ namespace REBEL.Hooks {
                 //Main.NewText("Going upside up", 0xFF, 0xFF, 0x00);
                 //Mod.Logger.Info("Going upside up");
                 player.ClearBuff(BuffID.Gravitation);
+                SoundEngine.PlaySound(2, -1, -1, 8); //gravity flip
+                //note, the sound is being played twice if the player
+                //manually cancels flip by pressing Up, but this doesn't
+                //appear to matter at all. it still only actually
+                //gets played once.
             }
         }
 
