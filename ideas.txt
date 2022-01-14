@@ -74,7 +74,6 @@
         - certain number of signals received
         - certain pattern of signals received (time-based or wire order)
             - eg if received signals on red, then green, then blue
-        - signal received X frames ago (delay)
 
 - turret; fires projectiles at nearby enemies
 - when touched, prompt for a password (use the sign text entry?)
