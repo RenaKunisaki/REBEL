@@ -15,6 +15,11 @@ namespace REBEL.Blocks {
          *  across short gaps.
          */
         Dictionary<ushort, Action<Point, Point>> Receivers;
+        enum Mode {
+            Bidirectional,
+            Transmit,
+            Receive
+        }
         public override String Texture {
             get => "REBEL/Blocks/Wire/Isolator/Block";
         }
@@ -47,8 +52,8 @@ namespace REBEL.Blocks {
              */
             Tile tile = Main.tile[thisLoc.X, thisLoc.Y];
             int mode = tile.frameX / getFrameWidth();
+            if(mode == (int)Mode.Transmit) return;
             setFrame(thisLoc.X, thisLoc.Y, mode, 1, true); //use lit-up version
-            if(mode != 0) return; //we're a transmitter; nothing to do
 
             REBEL mod = Mod as REBEL;
             mod.tripWire(thisLoc.X, thisLoc.Y);
@@ -58,7 +63,7 @@ namespace REBEL.Blocks {
             REBEL mod = Mod as REBEL;
             Point p = getFrameBlock(x, y);
             int anim = mod.wireAlreadyHit(x, y) ? 1 : 0;
-            setFrame(x, y, p.X ^ 1, anim);
+            setFrame(x, y, (p.X+1) % 3, anim);
             return true;
         }
 
@@ -75,7 +80,7 @@ namespace REBEL.Blocks {
             Tile tile = Main.tile[i, j];
             int mode = tile.frameX / getFrameWidth();
             setFrame(i, j, mode, 1, true); //use lit-up version
-            if(mode != 0) return; //nothing to do
+            if(mode == (int)Mode.Receive) return;
 
             REBEL mod = Mod as REBEL;
             if(mod.wireAlreadyHit(i, j)) return;

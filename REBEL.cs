@@ -107,6 +107,8 @@ namespace REBEL {
 				whom.Hitbox.Left, whom.Hitbox.Top).ToTileCoordinates();
 			//get the blocks above us, so we know when we bonk our head.
 			if(whom.velocity.Y < 0) TopLeft.Y -= 1;
+			//also need to do this to check for left contact.
+			if(whom.velocity.X < 0) TopLeft.X -= 1;
 			Point BottomRight = new Vector2(
 				whom.Hitbox.Right, whom.Hitbox.Bottom).ToTileCoordinates();
 

@@ -15,9 +15,9 @@ Sensors (use with wires)
     - The activation state saves between sessions, unlike vanilla timers.
 
 Wire Helper Blocks
-- Isolator: Passes signals in one direction across short gaps.
-    - Has two modes: input and output. Right-click to switch mode.
-    - When a signal arrives at an input, it's broadcast to all outputs within a 5x5 square centred on the input.
+- Isolator: Passes signals across short gaps.
+    - Has three modes, selected by right-click: Bidirectional, transmit only, receive only.
+    - When a signal arrives at a transmitter, it's broadcast to all receivers within a 5x5 square centred on the input.
     - This allows signals to cross small gaps, jump from one wire color to another, and pass in only one direction (a diode).
     - Each lights up when sending/receiving a signal.
 - Delay Timer: Receives a signal from an Isolator and sends it along a wire some number of frames later.
