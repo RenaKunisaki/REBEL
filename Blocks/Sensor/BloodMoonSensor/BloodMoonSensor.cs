@@ -14,7 +14,6 @@ namespace REBEL.Blocks {
         /** A block that emits a signal when a Blood Moon starts/ends.
          */
         enum Mode {Both, OnStart, OnEnd};
-        bool wasBloodMoon;
         public override String Texture {
             get => "REBEL/Blocks/Sensor/BloodMoonSensor/Block";
         }
@@ -28,14 +27,13 @@ namespace REBEL.Blocks {
 
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
             TileObjectData.addTile(Type);
-            wasBloodMoon = Main.bloodMoon;
         }
 
         public override bool RightClick(int x, int y) {
             //x: mode
             //y: animation (lit up or not)
             Point p = getFrameBlock(x, y);
-            setFrame(x, y, (p.X+1) % 3, 0);
+            setFrame(x, y, (p.X+1) % 3, p.Y);
             return true;
         }
 
@@ -47,22 +45,24 @@ namespace REBEL.Blocks {
 
         public override void NearbyEffects(int i, int j, bool closer) {
             if(Main.gamePaused) return;
-            int mode = getFrameBlock(i, j).X;
-            var tile = Main.tile[i, j];
-            bool trigger = false;
+            Point frame   = getFrameBlock(i, j);
+            int   mode    = frame.X;
+            bool  isOn    = frame.Y != 0;
+            var   tile    = Main.tile[i, j];
+            bool  trigger = false;
             switch((Mode)mode) {
                 case Mode.Both:
-                    trigger = (Main.bloodMoon != wasBloodMoon);
+                    trigger = (Main.bloodMoon != isOn);
                     break;
                 case Mode.OnStart:
-                    trigger = Main.bloodMoon && !wasBloodMoon;
+                    trigger = Main.bloodMoon && !isOn;
                     break;
                 case Mode.OnEnd:
-                    trigger = wasBloodMoon && !Main.bloodMoon;
+                    trigger = isOn && !Main.bloodMoon;
                     break;
             }
             if(trigger) (Mod as REBEL).tripWire(i, j);
-            wasBloodMoon = Main.bloodMoon;
+            setFrame(i, j, mode, Main.bloodMoon ? 1 : 0);
         }
     }
 }
