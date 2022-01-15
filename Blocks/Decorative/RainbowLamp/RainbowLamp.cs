@@ -13,8 +13,6 @@ namespace REBEL.Blocks {
     ItemDropBlock<Items.Placeable.RainbowLamp> {
         /** Emits light that cycles through colours.
          */
-        Dictionary<ushort, ushort> PureTiles;
-        Dictionary<int, int> PureNPCs;
         public override String Texture {
             get => "REBEL/Blocks/Decorative/RainbowLamp/Block";
         }
@@ -57,12 +55,12 @@ namespace REBEL.Blocks {
 namespace REBEL.Items.Placeable {
     public class RainbowLamp: TilePlaceItem<Blocks.RainbowLamp, RainbowLamp> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/RainbowLamp/Block"; //XXX
+            get => "REBEL/Blocks/Decorative/RainbowLamp/Block"; //reuse this
         }
         public override String _getName() => "Rainbow Lamp";
         public override String _getDescription() => "Cycles through colors.";
         public override int _getResearchNeeded() => 3;
-        public override int _getValue() => 2000;
+        public override int _getValue() => 100;
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.RainbowLamp>();
