@@ -10,6 +10,7 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 - [c/88CCCC:Time Sensor]: Emits a signal every in-game hour.
 - [c/88CCCC:Random Sensor]: Emits a signal at random.
 - [c/88CCCC:Rapid Timer]: Emits a signal every two frames (1/30 second).
+- [c/88CCCC:Blood Moon Sensor]: Emits a signal when the Blood Moon rises and/or falls.
 
 [c/CC88CC:Wire Helper Blocks]
 - [c/88CCCC:Isolator]: Passes signals across short gaps and to other Wire Helper Blocks. Can be used as a diode.

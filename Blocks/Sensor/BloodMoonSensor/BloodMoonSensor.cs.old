@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.ObjectData;
+using Microsoft.Xna.Framework;
+using REBEL.Blocks.Base;
+
+//this works but is awkward because any wire you place on it
+//will disappear, and during the Blood Moon it's a free wire
+//dispenser.
+namespace REBEL.Blocks {
+    public class BloodMoonSensor:
+    ItemDropBlock<Items.Placeable.BloodMoonSensor> {
+        /** A block that acts as a wire when there's a Blood Moon.
+         */
+        enum Color {Red, Green, Yellow, Blue};
+        public override String Texture {
+            get => "REBEL/Blocks/Sensor/BloodMoonSensor/Block";
+        }
+
+        public override void SetStaticDefaults() {
+            Main.tileSolid[Type] = false;
+            Main.tileMergeDirt[Type] = false;
+			Main.tileBlockLight[Type] = false;
+			Main.tileLighted[Type] = false;
+            Main.tileFrameImportant[Type] = true;
+
+            TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
+            TileObjectData.addTile(Type);
+        }
+
+        public override bool RightClick(int x, int y) {
+            //x: color (red, green, yellow, blue)
+            //y: animation (lit up or not)
+            Point p = getFrameBlock(x, y);
+            setFrame(x, y, (p.X+1) & 3, 0);
+            return true;
+        }
+
+        public override void KillTile(int i, int j, ref bool fail,
+        ref bool effectOnly, ref bool noItem) {
+            base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
+            (Mod as REBEL).deleteWire(i, j);
+        }
+
+        public override void NearbyEffects(int i, int j, bool closer) {
+            if(Main.gamePaused) return;
+            int color = getFrameBlock(i, j).X;
+            var tile  = Main.tile[i, j];
+            switch((Color)color) {
+                case Color.Red:    tile.RedWire    = Main.bloodMoon; break;
+                case Color.Green:  tile.GreenWire  = Main.bloodMoon; break;
+                case Color.Yellow: tile.YellowWire = Main.bloodMoon; break;
+                case Color.Blue:   tile.BlueWire   = Main.bloodMoon; break;
+            }
+        }
+    }
+}
+
+namespace REBEL.Items.Placeable {
+    public class BloodMoonSensor: TilePlaceItem<Blocks.BloodMoonSensor, BloodMoonSensor> {
+		public override String Texture {
+            get => "REBEL/Blocks/Sensor/BloodMoonSensor/Item";
+        }
+        public override String _getName() => "Blood Moon Sensor";
+        public override String _getDescription() => "Acts as wire during Blood Moon.";
+        public override int _getResearchNeeded() => 100;
+        public override int _getValue() => 500;
+        public override bool _showsWires() => true;
+
+        public override void AddRecipes() {
+			var resultItem = ModContent.GetInstance<Items.Placeable.BloodMoonSensor>();
+			resultItem.CreateRecipe(20)
+				.AddIngredient(ItemID.Wire, 20)
+				.AddIngredient(ItemID.Lens, 1)
+                .AddTile(TileID.WorkBenches)
+				.Register();
+		}
+    }
+}
