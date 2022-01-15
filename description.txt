@@ -27,6 +27,7 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 
 [c/CC88CC:Decorative Blocks]
 - [c/88CCCC:Letter Blocks]: Single-tile non-solid blocks for every ASCII character so you can make big signs.
+- [c/88CCCC:Rainbow Lamp]: A light that slowly cycles through the colors of the rainbow.
 
 [c/CC88CC:Consumable Blocks]
 - [c/88CCCC:Coin], [c/88CCCC:Heart], [c/88CCCC:Star]: Work the same as the drop versions, but are a floating block. Use them to make platforming challenges!
