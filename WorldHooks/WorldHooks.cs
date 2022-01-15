@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace REBEL.Hooks {
     public class WorldHooks: ModSystem {
+        public override void OnModLoad() {
+            Mod.Logger.Info("Mod loaded OK!");
+        }
+
         public override void PostUpdateNPCs() {
             //do this here so it applies even when player is dead.
             REBEL mod = Mod as REBEL;

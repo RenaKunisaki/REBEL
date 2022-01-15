@@ -11,6 +11,7 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 - [c/88CCCC:Random Sensor]: Emits a signal at random.
 - [c/88CCCC:Rapid Timer]: Emits a signal every two frames (1/30 second).
 - [c/88CCCC:Blood Moon Sensor]: Emits a signal when the Blood Moon rises and/or falls.
+- [c/88CCCC:Rain Sensor]: Emits a signal when rain starts and/or stops.
 
 [c/CC88CC:Wire Helper Blocks]
 - [c/88CCCC:Isolator]: Passes signals across short gaps and to other Wire Helper Blocks. Can be used as a diode.
@@ -53,7 +54,10 @@ Most of the blocks can just be placed anywhere, even in midair. Solid ones can b
 [c/88CCCC:Purity Shield]: When placed, and whenever someone is nearby, converts all nearby Corrupt/Crimson/Hallowed blocks/NPCs into their pure versions. (Nearby means within a 9x9 square centred on the Shield.) Non-corrupt monsters such as Zombies won't be affected (and corrupt ones will still be monsters after purification), so this isn't a complete safety field.
 
 [c/88CCCC:Sensors]: Like the vanilla sensors, attach a wire to them and they'll send a signal on it.
+
 Note, some things don't handle the Rapid Timer nicely; for example, torches' states might not update. This is especially noticeable if the game is lagging.
+
+The Blood Moon and Rain sensors have three modes: On Begin/End, On Begin Only, On End Only. They do not need to be directly exposed to rain/moonlight; they'll work even underground.
 
 [c/88CCCC:Isolator]: These work as short-range wireless transmitters. They have three modes: Bidirectional, Transmit Only, Receive Only. Each should be connected to a wire.
 
