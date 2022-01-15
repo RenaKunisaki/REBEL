@@ -78,6 +78,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.Wire, 20)
 				.AddIngredient(ItemID.CopperWatch, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

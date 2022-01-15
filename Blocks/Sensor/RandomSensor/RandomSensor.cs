@@ -53,6 +53,7 @@ namespace REBEL.Items.Placeable {
 			var resultItem = ModContent.GetInstance<Items.Placeable.RandomSensor>();
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.LogicGateLamp_Faulty, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

@@ -106,6 +106,7 @@ namespace REBEL.Items.Placeable {
 			var resultItem = ModContent.GetInstance<Items.Placeable.BoostBlock>();
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.SwiftnessPotion, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

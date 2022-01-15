@@ -288,6 +288,7 @@ namespace REBEL.Items.Placeable {
                 .CreateRecipe(20)
 				.AddIngredient(ItemID.Wire, 20)
 				.AddIngredient(ItemID.StoneBlock, 20)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
@@ -307,6 +308,7 @@ namespace REBEL.Items.Placeable {
                 .CreateRecipe(5)
 				.AddIngredient(ItemID.LogicGateLamp_Off, 5)
 				.AddIngredient(ItemID.StoneBlock, 5)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
@@ -326,6 +328,7 @@ namespace REBEL.Items.Placeable {
                 .CreateRecipe(5)
 				.AddIngredient(ItemID.LogicGateLamp_On, 5)
 				.AddIngredient(ItemID.StoneBlock, 5)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }
@@ -345,6 +348,7 @@ namespace REBEL.Items.Placeable {
                 .CreateRecipe(5)
 				.AddIngredient(ItemID.LogicGateLamp_Faulty, 5)
 				.AddIngredient(ItemID.StoneBlock, 5)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

@@ -74,6 +74,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.LogicGateLamp_Faulty, 1)
 				.AddIngredient(ItemID.Timer1Second, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

@@ -121,6 +121,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddRecipeGroup("PresurePlate", 1) //lolspelling
 				.AddRecipeGroup("IronBar", 1)
+                .AddTile(TileID.Anvils)
 				.Register();
 		}
     }

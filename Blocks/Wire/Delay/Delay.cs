@@ -108,6 +108,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.Wire, 20)
 				.AddIngredient(ItemID.HoneyBlock, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

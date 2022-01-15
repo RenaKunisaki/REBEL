@@ -237,6 +237,7 @@ namespace REBEL.Items.Placeable {
 			var resultItem = ModContent.GetInstance<DropItem>();
 			resultItem.CreateRecipe(1)
 				.AddIngredient(ItemID.StoneBlock, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

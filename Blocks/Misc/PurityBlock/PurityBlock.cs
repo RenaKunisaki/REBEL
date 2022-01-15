@@ -130,6 +130,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(1)
 				.AddIngredient(ItemID.LifeCrystal, 1)
 				.AddIngredient(ItemID.Sunflower, 5)
+                .AddTile(TileID.CookingPots)
 				.Register();
 		}
     }

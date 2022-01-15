@@ -134,6 +134,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.Wire, 5)
 				.AddIngredient(ItemID.CrystalShard, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

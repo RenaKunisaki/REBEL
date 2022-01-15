@@ -92,6 +92,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.Wire, 20)
 				.AddIngredient(ItemID.TallyCounter, 1)
+                .AddTile(TileID.WorkBenches)
 				.Register();
 		}
     }

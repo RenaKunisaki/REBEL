@@ -102,6 +102,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.GravitationPotion, 1)
                 .AddRecipeGroup("IronBar", 1)
+                .AddTile(TileID.Anvils)
 				.Register();
 		}
     }

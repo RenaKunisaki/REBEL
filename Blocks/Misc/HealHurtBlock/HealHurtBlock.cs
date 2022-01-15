@@ -113,6 +113,7 @@ namespace REBEL.Items.Placeable {
 			resultItem.CreateRecipe(1)
 				.AddIngredient(ItemID.HealingPotion, 1)
 				.AddIngredient(ItemID.Spike, 1)
+                .AddTile(TileID.Bottles)
 				.Register();
 		}
     }
