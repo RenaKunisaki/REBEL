@@ -231,5 +231,9 @@ namespace REBEL {
 			npc.active = false; //force despawn
 			return n;
 		}
+
+		//Hamstar's Mod Helpers integration
+		public static string GithubUserName { get => "RenaKunisaki"; }
+		public static string GithubProjectName { get => "REBEL"; }
 	}
 }
