@@ -49,7 +49,7 @@
     - touched by NPCs
         - detect only friend/foe
     - on player join/leave server
-    - weather
+    - weather (we have Rain now)
     - you catch a fish
     - you touch/near/right-click them with a certain item/# of coins in your inventory
         - optionally, remove the item and/or block
@@ -75,6 +75,7 @@
         - certain pattern of signals received (time-based or wire order)
             - eg if received signals on red, then green, then blue
 - can we control whether signals flow by just changing whether our tile has a wire?
+    - yes, but this is akward. when the condition isn't met, any wire placed will disappear, and when it is, the tile becomes a free wire dispenser. need to hook into the methods instead which requires dealing with MS bullshit.
 
 - turret; fires projectiles at nearby enemies
 - play sound effect on signal (but how to choose which?)
