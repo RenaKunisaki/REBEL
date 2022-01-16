@@ -51,7 +51,7 @@ Most of the blocks can just be placed anywhere, even in midair. Solid ones can b
 
 [c/88CCCC:Gravity Block]: When a player (unfortunately, not an NPC) touches it, gravity reverses for them, just like a Gravitation Potion. Pressing Up will reset it back to normal (and won't let you keep controlling it afterward) just in case you fall into space. These won't activate if you already have a Gravitation Potion active, but using one while under the block's effect will only waste it.
 
-[c/88CCCC:Heal/Hurt Blocks]: When a player or NPC (including monsters!) touches it, they'll be healed or hurt, depending on the block's mode. There are four modes: heal, hurt, heal lots, hurt lots.
+[c/88CCCC:Heal/Hurt Blocks]: When a player or NPC (including monsters!) touches it, they'll be healed or hurt, depending on the block. How much depends on the mode, which is set by hammering.
 
 [c/88CCCC:Purity Shield]: When placed, and whenever someone is nearby, converts all nearby Corrupt/Crimson/Hallowed blocks/NPCs into their pure versions. (Nearby means within a 9x9 square centred on the Shield.) Non-corrupt monsters such as Zombies won't be affected (and corrupt ones will still be monsters after purification), so this isn't a complete safety field.
 
