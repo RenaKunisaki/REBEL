@@ -110,7 +110,7 @@ namespace REBEL.Items.Placeable {
 
         public override void AddRecipes() {
 			var resultItem = ModContent.GetInstance<Items.Placeable.HealHurtBlock>();
-			resultItem.CreateRecipe(1)
+			resultItem.CreateRecipe(20)
 				.AddIngredient(ItemID.HealingPotion, 1)
 				.AddIngredient(ItemID.Spike, 1)
                 .AddTile(TileID.Bottles)
