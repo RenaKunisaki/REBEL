@@ -65,8 +65,9 @@ namespace REBEL.Hooks {
             try {
                 mod.checkTouchedBlocks(player);
             }
-            catch(System.IndexOutOfRangeException) {
+            catch(System.IndexOutOfRangeException ex) {
                 //ignore
+                Mod.Logger.Debug("IndexOutOfRangeException in Player.PostUpdate");
             }
         }
 

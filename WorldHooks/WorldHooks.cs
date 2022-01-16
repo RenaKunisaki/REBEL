@@ -19,10 +19,11 @@ namespace REBEL.Hooks {
                 try {
                     mod.checkTouchedBlocks(npc);
                 }
-                catch(System.IndexOutOfRangeException) {
+                catch(System.IndexOutOfRangeException ex) {
                     //this can sometimes happen when testing
                     //if an NPC is a player.
                     //I assume it's if the NPC list changes?
+                    Mod.Logger.Debug("IndexOutOfRangeException in PostUpdateNPCs");
                 }
             }
         }
