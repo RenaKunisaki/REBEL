@@ -62,7 +62,12 @@ namespace REBEL.Hooks {
             REBEL mod = Mod as REBEL;
             var player = Main.LocalPlayer;
             updateGravityControl();
-            mod.checkTouchedBlocks(player);
+            try {
+                mod.checkTouchedBlocks(player);
+            }
+            catch(System.IndexOutOfRangeException) {
+                //ignore
+            }
         }
 
         public override void OnRespawn(Player player) {

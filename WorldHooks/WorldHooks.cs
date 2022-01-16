@@ -15,7 +15,16 @@ namespace REBEL.Hooks {
         public override void PostUpdateNPCs() {
             //do this here so it applies even when player is dead.
             REBEL mod = Mod as REBEL;
-            foreach(var npc in Main.npc) mod.checkTouchedBlocks(npc);
+            foreach(var npc in Main.npc) {
+                try {
+                    mod.checkTouchedBlocks(npc);
+                }
+                catch(System.IndexOutOfRangeException) {
+                    //this can sometimes happen when testing
+                    //if an NPC is a player.
+                    //I assume it's if the NPC list changes?
+                }
+            }
         }
     }
 }
