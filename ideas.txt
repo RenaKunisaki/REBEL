@@ -22,6 +22,8 @@
 - more stuff ripped off from Mario
     - brick that shatters when hit from below
     - donut block
+    - blocks that spawn coins/mushrooms/etc when hit from below or by a weapon
+    - kickable turtle shell?
     - pipes
         - ones that when you press against the opening, you get "sucked in" and warped
         - ones that move you like the clear tubes/the ones in SMB3
@@ -83,15 +85,21 @@
 
 - cheat stuff
     - heal/hurt blocks but non-solid (gas blocks)
-    - just drop a specific item every time it's activated
+    - just drop a specific item every time it's activated (heart statues but different items and less cooldown)
     - biome override - while you're near it you're in X biome no matter what
         - especially fun if actuated...
     - time/weather override
     - heal/nuke any NPC that gets near (Heal/Hurt Block but with large radius)
     - while player is near, all enemies take damage
+    - force field: forcefully eject anyone in its radius who...
+        - isn't a player
+        - is a monster
+        - doesn't have a certain item
 
 
 Unrelated mod ideas:
+- patch the depth meter to also show biome (eg 30' Hallowed Caverns)
+    - be able to switch the displays between US/Metric/tiles-per-second/raw values
 - show message in chat suggesting you take a break every hour
 - apply trippy visuals like motion blur and color cycling to everything
 - count how many in-game days have passed in the world
