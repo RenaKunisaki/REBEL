@@ -68,9 +68,9 @@ namespace REBEL.Blocks {
 
             //var rebel = Mod as REBEL;
             //rebel.forceUpsideDown = !rebel.forceUpsideDown;
-            Wiring.TripWire(x, y, 1, 1); //send a signal
+            //Wiring.TripWire(x, y, 1, 1); //send a signal
 
-            (new TextureDumper(Mod as REBEL)).dumpAllLoadedTextures();
+            //(new TextureDumper(Mod as REBEL)).dumpAllLoadedTextures();
 
             return true; //we did something, don't do default right click
         }
