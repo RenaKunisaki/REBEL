@@ -34,7 +34,7 @@ namespace REBEL.Blocks {
             float hue = (float)Main.tileFrame[Type] / 2048f;
             Color color = Main.hslToRgb(hue, 1f, 0.5f);
             Lighting.AddLight(new Vector2(i, j).ToWorldCoordinates(),
-                color.ToVector3());
+                color.ToVector3() * 5f);
             //the vector can be scaled for more light.
             //at 255 it's basically a portable sun.
             //could make multiple variants with different brightness/speed.
