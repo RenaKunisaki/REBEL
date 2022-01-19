@@ -32,7 +32,7 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 [c/CC88CC:Consumable Blocks]
 - [c/88CCCC:Coin], [c/88CCCC:Heart], [c/88CCCC:Star]: Work the same as the drop versions, but are a floating block. Use them to make platforming challenges!
 
-[c/CC88CC:Misc Blocks]
+[c/CC88CC:Misc Fun/Cheaty Blocks]
 - [c/88CCCC:Heal Blocks]: Heals anyone who touches them. Hammer to switch intensity.
 - [c/88CCCC:Hurt Blocks]: Hurts anyone who touches them. Hammer to switch intensity.
 - [c/88CCCC:Purity Shield]: Prevents anything in its radius from being converted to Corruption, Crimson, or Hallow.
