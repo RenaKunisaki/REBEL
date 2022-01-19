@@ -55,7 +55,7 @@ namespace REBEL.Blocks {
 namespace REBEL.Items.Placeable {
     public class RainbowLamp: TilePlaceItem<Blocks.RainbowLamp, RainbowLamp> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/RainbowLamp/Block"; //reuse this
+            get => "REBEL/Blocks/Decorative/RainbowLamp/Item";
         }
         public override String _getName() => "Rainbow Lamp";
         public override String _getDescription() => "Cycles through colors.";
