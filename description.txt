@@ -36,12 +36,13 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 - [c/88CCCC:Heal Blocks]: Heals anyone who touches them. Hammer to switch intensity.
 - [c/88CCCC:Hurt Blocks]: Hurts anyone who touches them. Hammer to switch intensity.
 - [c/88CCCC:Purity Shield]: Prevents anything in its radius from being converted to Corruption, Crimson, or Hallow.
+- [c/88CCCC:Portable Sun]: Lights up EVERTHING. Or at least, a very large area.
 
 [c/CC88CC:How to Use]
 
 Most of the blocks can just be placed anywhere, even in midair. Solid ones can be changed to different variations by hammering them; non-solid ones by right-clicking. (This is because hammering non-solid blocks doesn't work right now; it will be changed eventually.)
 
-[c/88CCCC:Letter Block]: These don't do anything. Use them to make big signs and stuff. Right-click to change between upper/lowercase or punctuation (works like the Shift key). Can be painted.
+[c/88CCCC:Letter Block]: These don't do anything. Use them to make big signs and stuff. Right-click to change between upper/lowercase or punctuation (works like the Shift key). Can be painted using deep paints.
 
 [c/88CCCC:Boost Block]: When a player or NPC touches them, they're accelerated in the direction the block indicates. These are non-solid, so they can be used to simulate currents. Right-click to change the direction. Be careful not to get stuck between opposing blocks!
 
@@ -63,7 +64,7 @@ The Blood Moon and Rain sensors have three modes: On Begin/End, On Begin Only, O
 
 [c/88CCCC:Isolator]: These work as short-range wireless transmitters. They have three modes: Bidirectional, Transmit Only, Receive Only. Each should be connected to a wire.
 
-When a signal enters a transmitter, it's relayed to any receivers within a 5x5 square of the transmitter. Anything else is skipped over. This means they can send the signal across a short gap without interfering with any wiring in the gap.
+When a signal enters a transmitter, it's relayed to any receivers within a 5x5 square centred on the transmitter. Anything else is skipped over. This means they can send the signal across a short gap without interfering with any wiring in the gap.
 
 The receiver will send along all wires connected to it, regardless of the color that activated the transmitter. There can be multiple receivers in range.
 A transmitter and receiver used together form a simple diode (signals pass through in one direction only).
@@ -78,7 +79,7 @@ Due to limitations of the wiring engine, you may need at least one empty space b
 Right-clicking a digit or sending a signal to it will increase it by 1. When it reaches 10, it resets to 0 and increases the digit to its left.
 The search for another digit checks one, then two blocks to the left, so there can be gaps (any non-digit block, air, etc) for separators.
 
-The Increment and Decrement Blocks let you control nearby digits (by right-click or wire). They look for a Digit to their left, right, above, and below (in that order). If one is found, it will be increased/decreased. Only one Digit will be affected, even if there are others nearby.
+The Increment and Decrement Blocks let you control nearby digits (by right-click or wire). They look for a Digit to their left, right, above, and below (in that order). If one is found within 16 blocks, it will be increased/decreased. Only one Digit will be affected, even if there are others nearby. (These do not look in a square area, only four straight lines.)
 
 The Clear Block looks for digits to its left, and resets them to zero. It will skip over single empty spaces (same as the digits themselves) and Increment/Decrement/Clear blocks.
 
