@@ -15,6 +15,8 @@ using System.Reflection;
 //This should maybe dump hopefully all the textures, assuming your system
 //has the directory to dump them to...
 //It will take a minute or two. Maybe more if your system is slow.
+//Note if you have any resource packs or mods enabled, it'll dump those
+//too, which may or may not be desirable.
 
 namespace REBEL {
     public class TextureDumper {
@@ -29,8 +31,10 @@ namespace REBEL {
 			//	Logger.Info($"field: {field}");
 			//}
 
-			String basePath = "/home/games/DumpTex/";
-            Mod.Logger.Info("Dumping...");
+            String cwd = System.IO.Directory.GetCurrentDirectory();
+			String basePath = cwd + "/TerrariaTextureDump/";
+            Mod.Logger.Info($"Dumping to {basePath}...");
+            System.IO.Directory.CreateDirectory(basePath);
             var fields = typeof(TextureAssets).GetFields(BindingFlags.Public |
                 BindingFlags.Static |
                 BindingFlags.GetField |
