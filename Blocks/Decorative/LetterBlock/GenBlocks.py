@@ -23,7 +23,7 @@ names = {
 	'/':  "ZSlash",
 }
 
-for i, c in enumerate(string.ascii_uppercase + string.digits + "`-=[]\\;',./"):
+for i, c in enumerate(string.ascii_uppercase + string.digits + "-=[]\\;',./`"):
 	name = names.get(c, c)
 	print(template.format(name=name, frame=i).replace('\t', '    '), end='')
 

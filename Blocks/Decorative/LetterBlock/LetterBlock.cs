@@ -162,37 +162,37 @@ namespace REBEL.Blocks {
     public class LetterBlock9: LetterBlock<Items.Placeable.LetterBlock9> {
         public override int _getFrame() { return 35; }
     }
-    public class LetterBlockZGrave: LetterBlock<Items.Placeable.LetterBlockZGrave> {
+    public class LetterBlockZHyphen: LetterBlock<Items.Placeable.LetterBlockZHyphen> {
         public override int _getFrame() { return 36; }
     }
-    public class LetterBlockZHyphen: LetterBlock<Items.Placeable.LetterBlockZHyphen> {
+    public class LetterBlockZEqual: LetterBlock<Items.Placeable.LetterBlockZEqual> {
         public override int _getFrame() { return 37; }
     }
-    public class LetterBlockZEqual: LetterBlock<Items.Placeable.LetterBlockZEqual> {
+    public class LetterBlockZLeftBracket: LetterBlock<Items.Placeable.LetterBlockZLeftBracket> {
         public override int _getFrame() { return 38; }
     }
-    public class LetterBlockZLeftBracket: LetterBlock<Items.Placeable.LetterBlockZLeftBracket> {
+    public class LetterBlockZRightBracket: LetterBlock<Items.Placeable.LetterBlockZRightBracket> {
         public override int _getFrame() { return 39; }
     }
-    public class LetterBlockZRightBracket: LetterBlock<Items.Placeable.LetterBlockZRightBracket> {
+    public class LetterBlockZBackslash: LetterBlock<Items.Placeable.LetterBlockZBackslash> {
         public override int _getFrame() { return 40; }
     }
-    public class LetterBlockZBackslash: LetterBlock<Items.Placeable.LetterBlockZBackslash> {
+    public class LetterBlockZSemicolon: LetterBlock<Items.Placeable.LetterBlockZSemicolon> {
         public override int _getFrame() { return 41; }
     }
-    public class LetterBlockZSemicolon: LetterBlock<Items.Placeable.LetterBlockZSemicolon> {
+    public class LetterBlockZApostrophe: LetterBlock<Items.Placeable.LetterBlockZApostrophe> {
         public override int _getFrame() { return 42; }
     }
-    public class LetterBlockZApostrophe: LetterBlock<Items.Placeable.LetterBlockZApostrophe> {
+    public class LetterBlockZComma: LetterBlock<Items.Placeable.LetterBlockZComma> {
         public override int _getFrame() { return 43; }
     }
-    public class LetterBlockZComma: LetterBlock<Items.Placeable.LetterBlockZComma> {
+    public class LetterBlockZPeriod: LetterBlock<Items.Placeable.LetterBlockZPeriod> {
         public override int _getFrame() { return 44; }
     }
-    public class LetterBlockZPeriod: LetterBlock<Items.Placeable.LetterBlockZPeriod> {
+    public class LetterBlockZSlash: LetterBlock<Items.Placeable.LetterBlockZSlash> {
         public override int _getFrame() { return 45; }
     }
-    public class LetterBlockZSlash: LetterBlock<Items.Placeable.LetterBlockZSlash> {
+    public class LetterBlockZGrave: LetterBlock<Items.Placeable.LetterBlockZGrave> {
         public override int _getFrame() { return 46; }
     }
 }
@@ -497,13 +497,6 @@ namespace REBEL.Items.Placeable {
             get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/9";
         }
     }
-    public class LetterBlockZGrave: LetterBlock<Blocks.LetterBlockZGrave, Items.Placeable.LetterBlockZGrave> {
-        public override String _getLetter1() { return "`"; }
-        public override String _getLetter2() { return "~"; }
-        public override String Texture {
-            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/ZGrave";
-        }
-    }
     public class LetterBlockZHyphen: LetterBlock<Blocks.LetterBlockZHyphen, Items.Placeable.LetterBlockZHyphen> {
         public override String _getLetter1() { return "-"; }
         public override String _getLetter2() { return "_"; }
@@ -572,6 +565,13 @@ namespace REBEL.Items.Placeable {
         public override String _getLetter2() { return "?"; }
         public override String Texture {
             get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/ZSlash";
+        }
+    }
+    public class LetterBlockZGrave: LetterBlock<Blocks.LetterBlockZGrave, Items.Placeable.LetterBlockZGrave> {
+        public override String _getLetter1() { return "`"; }
+        public override String _getLetter2() { return "~"; }
+        public override String Texture {
+            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/ZGrave";
         }
     }
 }

@@ -68,7 +68,7 @@ lowers = {
 	'/': '?',
 }
 
-for c in string.ascii_uppercase + string.digits + "`-=[]\\;',./":
+for c in string.ascii_uppercase + string.digits + "-=[]\\;',./`":
 	name  = names.get(c, c)
 	c2    = lowers.get(c, c.lower())
 	name2 = names.get(c2, c2)

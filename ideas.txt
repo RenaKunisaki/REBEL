@@ -1,3 +1,6 @@
+the slash/backslash block shows up as colon/semicolon...
+also, add 8-way arrow block
+
 - related items
     - an item you use to configure some of these
         - use it, click a block, and it pops up some UI
@@ -71,7 +74,6 @@
     - an invasion/party is happening
     - touched by something with certain velocity
     - the game is lagging/FPS is below X
-    - clones of the vanilla timers that don't make a tick noise (is it them doing that?)
     - pass signals to an adjacent block when...
         - certain time of day/IRL wall time
         - certain NPC nearby/is in town
