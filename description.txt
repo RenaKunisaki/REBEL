@@ -27,14 +27,10 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 
 [c/CC88CC:Decorative Blocks]
 - [c/88CCCC:Letter Blocks]: Single-tile non-solid blocks for every ASCII character so you can make big signs.
-- [c/88CCCC:Rainbow Lamp]: A light that slowly cycles through the colors of the rainbow.
+- [c/88CCCC:Rainbow Lamp]: A light that slowly cycles through the colors of the rainbow. (Colors may not be visible depending which lighting mode you've set in the game's video settings.)
 
 [c/CC88CC:Consumable Blocks]
 - [c/88CCCC:Coin], [c/88CCCC:Heart], [c/88CCCC:Star]: Work the same as the drop versions, but are a floating block. Use them to make platforming challenges!
-
-If an actuator is placed on these, they become reusable. Collecting them turns them into an outline; actuating them turns them back into collectible blocks. You can use this to reset your platforming stage without worrying about ones that weren't collected.
-
-If no actuator is placed, they simply disappear forever when collected.
 
 [c/CC88CC:Misc Fun/Cheaty Blocks]
 - [c/88CCCC:Heal Blocks]: Heals anyone who touches them. Hammer to switch intensity.
@@ -59,6 +55,12 @@ Most of the blocks can just be placed anywhere, even in midair. Solid ones can b
 [c/88CCCC:Heal/Hurt Blocks]: When a player or NPC (including monsters!) touches it, they'll be healed or hurt, depending on the block. How much depends on the mode, which is set by hammering.
 
 [c/88CCCC:Purity Shield]: When placed, and whenever someone is nearby, converts all nearby Corrupt/Crimson/Hallowed blocks/NPCs into their pure versions. (Nearby means within a 9x9 square centred on the Shield.) Non-corrupt monsters such as Zombies won't be affected (and corrupt ones will still be monsters after purification), so this isn't a complete safety field.
+
+[c/88CCCC:Coin] and other consumables: When touched, they drop an item and disappear.
+
+If an actuator is placed on these, they become reusable. Collecting them turns them into an outline; actuating them turns them back into collectible blocks. You can use this to reset your platforming stage without worrying about ones that weren't collected.
+
+If no actuator is placed, they simply disappear forever when collected.
 
 [c/88CCCC:Sensors]: Like the vanilla sensors, attach a wire to them and they'll send a signal on it.
 
