@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
-using REBEL.Blocks.Base;
+using REBEL.UI;
 
-namespace REBEL.Items.Placeable {
-    public abstract class TilePlaceItem<TPlaceTile, TDropItem> : ModItem
-    where TPlaceTile: ModTile
-    where TDropItem: ModItem {
-        /** Base class for an item that simply places a tile.
+namespace REBEL.Items {
+    public abstract class RebelItem: ModItem {
+        /** Base class for our items. Wraps some things to make
+         *  the code neater.
          */
-		//public override String Texture;
         abstract public String _getName();
         abstract public String _getDescription();
         virtual public int _getResearchNeeded() => 1;
@@ -40,16 +39,7 @@ namespace REBEL.Items.Placeable {
 			Item.useStyle = 1; //ItemUseStyleID.SwingThrow;
 			Item.consumable = true;
 			Item.value = _getValue();
-			Item.createTile = ModContent.TileType<TPlaceTile>();
-            Item.mech = _showsWires();
-		}
-
-        public override void AddRecipes() {
-			//default recipe: create a stack of 69 from one dirt block.
-			var resultItem = ModContent.GetInstance<TDropItem>();
-			resultItem.CreateRecipe(69)
-				.AddIngredient(ItemID.DirtBlock, 1)
-				.Register();
+			Item.mech = _showsWires();
 		}
     }
 }
