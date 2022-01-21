@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using REBEL.Blocks.Base;
+using REBEL.Hooks;
 
 namespace REBEL {
 	public class REBEL: Mod {
@@ -32,6 +33,10 @@ namespace REBEL {
 			TouchHandlers = null;
 			if(!(lastWireHit is null)) lastWireHit.Clear();
 			lastWireHit = null;
+		}
+
+		public void showDebugUI(bool show) {
+			ModContent.GetInstance<WorldHooks>().showDebugUI(show);
 		}
 
 		public void tripWire(int i, int j, int w=1, int h=1) {

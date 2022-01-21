@@ -132,22 +132,8 @@ namespace REBEL.Items.Placeable {
 //XXX move this
 namespace REBEL.Items {
     public class DebugInfoItem: ModItem {
-        /** When used, displays some info in the chat window.
+        /** When used, displays some info in a popup window.
          */
-        Dictionary<int, String> BiomeNames = new Dictionary<int, String>() {
-            {BiomeID.Forest,            "Forest"},
-            {BiomeID.NormalUnderground, "Underground"},
-            {BiomeID.Snow,              "Snow"},
-            {BiomeID.Desert,            "Desert"},
-            {BiomeID.Jungle,            "Jungle"},
-            {BiomeID.Ocean,             "Ocean"},
-            {BiomeID.Hallow,            "Hallow"},
-            {BiomeID.Mushroom,          "Mushroom"},
-            {BiomeID.Dungeon,           "Dungeon"},
-            {BiomeID.Corruption,        "Corruption"},
-            {BiomeID.Crimson,           "Crimson"},
-        };
-
         public override String Texture {
             get => "REBEL/Blocks/Debug/TestBlock/DebugInfoItem";
         }
@@ -175,26 +161,7 @@ namespace REBEL.Items {
 
         // UseStyle is called each frame that the item is being actively used.
 		public override void UseStyle(Player player, Rectangle heldItemFrame) {
-            int biome = player.GetPrimaryBiome();
-            String biomeName = $"#{biome}";
-            if(BiomeNames.ContainsKey(biome)) biomeName = BiomeNames[biome];
-            Main.NewText("========");
-            Main.NewText($"Biome: [c/009DF3:{biomeName}]; Breath: [c/009DF3:{player.breath}]/[c/009DF3:{player.breathMax}]");
-            Main.NewText($"Def: [c/009DF3:{player.statDefense}] Armor penetration: [c/009DF3:{player.armorPenetration}]");
-            Main.NewText($"Dash: [c/009DF3:{player.dash}] Time: [c/009DF3:{player.dashTime}] Delay: [c/009DF3:{player.dashDelay}] Immune: [c/009DF3:{player.immuneTime}] EnvBuffImmune: [c/009DF3:{player.environmentBuffImmunityTimer}] Fish: [c/009DF3:{player.fishingSkill}]");
-            Main.NewText($"Jump: [c/009DF3:{player.jump}] Boost: [c/009DF3:{player.jumpSpeedBoost}] ItemTime: [c/009DF3:{player.itemTime}]/[c/009DF3:{player.itemTimeMax}] Luck: [c/009DF3:{player.luck}] Minions: [c/009DF3:{player.numMinions}]/[c/009DF3:{player.maxMinions}]");
-            Main.NewText($"Speeds: Move: [c/009DF3:{player.moveSpeed}] Melee: [c/009DF3:{player.meleeSpeed}] Fall: [c/009DF3:{player.maxFallSpeed}] Pick: [c/009DF3:{player.pickSpeed}] Tile: [c/009DF3:{player.tileSpeed}] Wall: [c/009DF3:{player.wallSpeed}]");
-            Vector2 mouse = Main.MouseWorld;
-            int tid = -1;
-            int mx  = (int)(mouse.X/16);
-            int my  = (int)(mouse.Y/16);
-            if(mx >= Main.leftWorld && mx < Main.rightWorld
-            && my >= Main.topWorld  && my < Main.bottomWorld) {
-                var tile = Main.tile[mx, my];
-                tid = (int)tile.type;
-            }
-            Main.NewText($"Mouse: [c/009DF3:{mx}], [c/009DF3:{my}]: Tile [c/009DF3:{tid}] Item: [c/009DF3:{player.cursorItemIconID}]");
-            DebugUI.visible = true;
+            (Mod as REBEL).showDebugUI(true);
         }
     }
 }
