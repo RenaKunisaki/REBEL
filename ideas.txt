@@ -1,5 +1,4 @@
-the slash/backslash block shows up as colon/semicolon...
-also, add 8-way arrow block
+should add 8-way arrow block to letters
 
 - related items
     - an item you use to configure some of these
@@ -113,3 +112,12 @@ Unrelated mod ideas:
     - remove the screen-flip effect from gravity potions
     - allow binding more things to mouse buttons to make it somewhat playable one-handed
     - color filters for mod graphic designers to test colorblindness
+    - reduce how much flashiness there is with some effects (volt bunny + UFO = free epilepsy test)
+- a more gradual difficulty curve instead of hard mode being a flip of a switch
+    - as you beat more bosses/get more villagers/find more items the number of hard mode effects increases
+        - biome spread speeds up and the number of blocks that can spread increases
+        - more hardmode bosses/NPCs/enemies/items/etc appear
+        - small patches of the hardmode ores might appear each time you beat a boss
+            - might be a problem if you don't yet have a pickaxe to get through them (but isn't this already a risk with demon altars?)
+        - another contributing factor could be how much of the map you've revealed, or the min/max distance you've travelled from centre on each axis
+            - even just how long the world has existed
