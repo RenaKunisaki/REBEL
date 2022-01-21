@@ -62,7 +62,7 @@ namespace REBEL.UI {
             panel.Top   .Set(rect.Top,    0f);
             panel.Width .Set(rect.Width,  0f);
             panel.Height.Set(rect.Height, 0f);
-            panel.BackgroundColor = new Color(73, 94, 171);
+            panel.BackgroundColor = new Color(0x00, 0x5D, 0xB3, 192);
             return panel;
         }
 
@@ -90,7 +90,6 @@ namespace REBEL.UI {
 
             //display the panel
             Append(panel);
-            //Recalculate();
         } //OnInitialize
 
         private void btnCloseClicked(UIMouseEvent evt,
@@ -110,7 +109,11 @@ namespace REBEL.UI {
             String c = "c/CCCCCC:";
             var player = Main.LocalPlayer;
 
-            return "[Player Info]\n"+
+            int tx = (int)(player.position.X / 16);
+            int ty = (int)(player.position.Y / 16);
+            return $"[Player Info: [{c}{player.name}]]\n"+
+                $"Pos: [{c}{player.position}] (T: [{c}{tx}], [{c}{ty}])\n"+
+                $"Vel: [{c}{player.velocity}]\n"+
                 $"Breath: [{c}{player.breath}]/[{c}{player.breathMax}]\n"+
 
                 $"Def: [{c}{player.statDefense}] "+
@@ -147,7 +150,7 @@ namespace REBEL.UI {
             String pumpkinMoon = Main.pumpkinMoon ? "[c/FF0000:Pumpkin], " : "";
             String snowMoon = Main.snowMoon ? "[c/FF0000:Snow], " : "";
             String eclipse = Main.eclipse ? "[c/FF0000:Yes]" : "[c/00FF00:No]";
-            String rain = Main.raining ? $"[{c}{Main.rainTime}]" : "[c/00FF00:-]";
+            String rain = Main.raining ? $"[{c}{(int)(Main.rainTime/60)}]" : "[c/00FF00:-]";
             String slimeRain = Main.slimeRain ? $"[c/FF0000:Slime {Main.slimeRainTime}], " : "";
 
             //what the fuck
@@ -179,6 +182,7 @@ namespace REBEL.UI {
         private String _makeText_WorldInfo() {
             String c = "c/CCCCCC:";
             List<String> styles = new List<String>();
+            if(Main.hardMode) styles.Add("[c/FF0000:HardMode]");
             if(Main.dontStarveWorld) styles.Add("[c/0088FF:DontStarve]");
             if(Main.drunkWorld) styles.Add("[c/FFFF88:Drunk]");
             if(Main.getGoodWorld) styles.Add("[c/FF88FF:GetGood]");
@@ -187,15 +191,15 @@ namespace REBEL.UI {
             if(!styles.Any()) styles.Add("[c/009DF3:Normal]");
             String style = String.Join(", ", styles);
 
-            String hard = Main.hardMode ? "[c/FF0000:Yes]" : "[c/00FF00:No]";
-
-            return "[World Info]\n"+
-                $"Name: [{c}{Main.worldName}]\n"+
-                $"Top: [{c}{Main.topWorld}] "+
-                $"Bottom: [{c}{Main.bottomWorld}]\n"+
-                $"Left: [{c}{Main.leftWorld}] "+
-                $"Right: [{c}{Main.rightWorld}]\n"+
-                $"Style: {style}; HardMode: {hard}";
+            Rectangle rWorld = new Rectangle((int)Main.leftWorld,
+                (int)Main.topWorld, (int)Main.rightWorld,
+                (int)Main.bottomWorld);
+            return $"[World Info: [{c}{Main.worldName}]]\n"+
+                $"Top: [{c}{rWorld.Top}] (T:[{c}{rWorld.Top / 16}]) "+
+                $"Bottom: [{c}{rWorld.Bottom}] (T:[{c}{rWorld.Bottom / 16}])\n"+
+                $"Left: [{c}{rWorld.Left}] (T:[{c}{rWorld.Left / 16}]) "+
+                $"Right: [{c}{rWorld.Right}] (T:[{c}{rWorld.Right / 16}])\n"+
+                $"Style: {style}";
         }
 
         private String _makeText_CursorInfo() {
