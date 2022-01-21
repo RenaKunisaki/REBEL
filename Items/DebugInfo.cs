@@ -20,11 +20,12 @@ namespace REBEL.Items {
         public override String _getDescription() => "Shows some info";
         public override int _getResearchNeeded() => 1;
         public override int _getValue() => 0;
+        public override int _getMaxStack() => 1;
         public override bool _showsWires() => true;
 
         // UseStyle is called each frame that the item is being actively used.
 		public override void UseStyle(Player player, Rectangle heldItemFrame) {
-            (Mod as REBEL).showDebugUI(true);
+            (Mod as REBEL).showUI(UIPanelId.Debug);
         }
     }
 }

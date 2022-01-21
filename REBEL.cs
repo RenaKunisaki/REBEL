@@ -4,13 +4,13 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.GameContent;
-using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using REBEL.Blocks.Base;
 using REBEL.Hooks;
+using REBEL.UI;
 
 namespace REBEL {
 	public class REBEL: Mod {
@@ -18,6 +18,7 @@ namespace REBEL {
 		Dictionary<Point, uint> lastWireHit;
 		public bool forceUpsideDown; //force reverse gravity + screen flip
 		public bool wasForceUpsideDown;
+		public RebelUI ui;
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");
@@ -35,9 +36,17 @@ namespace REBEL {
 			lastWireHit = null;
 		}
 
-		public void showDebugUI(bool show) {
-			ModContent.GetInstance<WorldHooks>().showDebugUI(show);
-		}
+		public void showUI(UIPanelId id) {
+			//use this to show the desired UI panel.
+			//don't mess with ui directly.
+            if(ui is null) return;
+			ui._showPanel(id);
+        }
+
+		//obsolete (XXX remove)
+		//public void showDebugUI(bool show) {
+		//	ModContent.GetInstance<WorldHooks>().showDebugUI(show);
+		//}
 
 		public void tripWire(int i, int j, int w=1, int h=1) {
 			for(int y=0; y<h; y++) {

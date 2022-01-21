@@ -60,6 +60,7 @@ namespace REBEL.UI {
             Append(panel);
         } //OnInitialize
 
+        //called to add the UI elements when created
         public abstract void Setup();
 
         private void btnCloseClicked(UIMouseEvent evt,
@@ -67,7 +68,10 @@ namespace REBEL.UI {
             onClose();
         }
 
-        public abstract void onClose();
+        public virtual void onClose() {
+			SoundEngine.PlaySound(SoundID.MenuClose);
+			ModContent.GetInstance<REBEL>().showUI(UIPanelId.None);
+		}
 
         public virtual void update() {
             //default: do nothing

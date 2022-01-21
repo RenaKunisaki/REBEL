@@ -10,40 +10,31 @@ using REBEL.UI;
 
 namespace REBEL.Hooks {
     public class WorldHooks: ModSystem {
-        internal DebugUI debugUI;
-		private UserInterface _debugUI;
-
         public override void OnModLoad() {
             Mod.Logger.Info("Mod loaded OK!");
         }
 
         public override void Load() {
-            //UI voodoo
-			if(!Main.dedServ) {
-				debugUI = new DebugUI();
-				debugUI.Activate();
-				_debugUI = new UserInterface();
-			}
-        }
-
-        public void showDebugUI(bool show) {
-            //use Mod.showDebugUI() instead of calling this.
-            _debugUI.SetState(show ? debugUI : null);
+            REBEL mod = Mod as REBEL;
+            if(!Main.dedServ) { //no UI for dedicated server
+                mod.ui = new RebelUI(mod);
+            }
         }
 
         public override void UpdateUI(GameTime gameTime) {
-            _debugUI?.Update(gameTime);
+            (Mod as REBEL).ui?.UpdateUI(gameTime);
         }
 
 		public override void ModifyInterfaceLayers(
 		List<GameInterfaceLayer> layers) {
+            //voodoo. nobody really knows how this function works.
             int mouseTextIndex = layers.FindIndex(layer =>
 				layer.Name.Equals("Vanilla: Mouse Text"));
             if(mouseTextIndex != -1) {
                 layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
-                    "REBEL: A Description",
+                    "REBEL: A Description", //XXX what goes here?
                     delegate {
-						_debugUI.Draw(Main.spriteBatch, new GameTime());
+                        (Mod as REBEL).ui?.Draw();
                         return true;
                     },
                     InterfaceScaleType.UI));
@@ -65,8 +56,8 @@ namespace REBEL.Hooks {
                 }
             } //foreach
 
-            //may as well do this here.
-            debugUI?.update();
+            //may as well do this here. (XXX probably a better place)
+            (Mod as REBEL).ui?.update();
 
         } //PostUpdateNPCs
     } //class

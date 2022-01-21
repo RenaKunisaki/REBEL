@@ -18,6 +18,7 @@ namespace REBEL.Items {
         abstract public String _getDescription();
         virtual public int _getResearchNeeded() => 1;
         virtual public int _getValue() => 1;
+        virtual public int _getMaxStack() => 9999;
         virtual public bool _showsWires() => false;
 
         public override void SetStaticDefaults() {
@@ -31,7 +32,7 @@ namespace REBEL.Items {
         public override void SetDefaults() {
 			Item.width = 16;
 			Item.height = 16;
-			Item.maxStack = 9999;
+			Item.maxStack = _getMaxStack();
 			Item.useTurn = true;
 			Item.autoReuse = true;
 			Item.useAnimation = 15;

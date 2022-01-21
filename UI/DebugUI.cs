@@ -53,11 +53,6 @@ namespace REBEL.UI {
             panel.Append(uiText);
         } //Setup
 
-        public override void onClose() {
-			SoundEngine.PlaySound(SoundID.MenuClose);
-			ModContent.GetInstance<REBEL>().showDebugUI(false);
-		}
-
         private void btnNextClicked(UIMouseEvent evt,
         UIElement listeningElement) {
 			SoundEngine.PlaySound(SoundID.MenuTick);
@@ -176,8 +171,8 @@ namespace REBEL.UI {
             String wires = "";
             int mx  = (int)(mouse.X/16);
             int my  = (int)(mouse.Y/16);
-            if(mx >= Main.leftWorld && mx < Main.rightWorld
-            && my >= Main.topWorld  && my < Main.bottomWorld) {
+            if(mouse.X >= Main.leftWorld && mouse.X < Main.rightWorld
+            && mouse.Y >= Main.topWorld  && mouse.Y < Main.bottomWorld) {
                 var tile = Main.tile[mx, my];
                 tid = (int)tile.type;
                 tFrame = (int)tile.FrameNumber;
