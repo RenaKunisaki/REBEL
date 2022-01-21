@@ -160,6 +160,7 @@ namespace REBEL.UI {
             int hour   = (int)( time / 3600.0);
             int minute = (int)((time / 60.0) % 60.0);
             int second = (int)( time % 60.0);
+            String day = (Main.dayTime ? "[c/00FFFF:Day]" : "[c/888888:Night]");
 
             return "[Environment Info]\n"+
                 $"Biome: [{c}{biomeName}]; "+
@@ -175,19 +176,22 @@ namespace REBEL.UI {
                 $"Invasion: [{c}{Main.invasionType}]\n"+
 
                 $"TimeRate: [{c}{Main.dayRate}]; "+
-                $"Time: [{c}{hour:00}:{minute:00}:{second:00}] "+
-                (Main.dayTime ? "[c/00FFFF:Day]" : "[c/888888:Night]");
+                $"Time: {day}, [{c}{hour:00}:{minute:00}:{second:00}] ";
         }
 
         private String _makeText_WorldInfo() {
             String c = "c/CCCCCC:";
             List<String> styles = new List<String>();
             if(Main.hardMode) styles.Add("[c/FF0000:HardMode]");
+            if(Main.expertMode) styles.Add("[c/FF0000:ExpertMode]");
+            if(Main.masterMode) styles.Add("[c/FF0000:MasterMode]");
             if(Main.dontStarveWorld) styles.Add("[c/0088FF:DontStarve]");
             if(Main.drunkWorld) styles.Add("[c/FFFF88:Drunk]");
             if(Main.getGoodWorld) styles.Add("[c/FF88FF:GetGood]");
             if(Main.notTheBeesWorld) styles.Add("[c/FFFF00:NotTheBees]");
             if(Main.tenthAnniversaryWorld) styles.Add("[c/88FF88:10thAnniversary]");
+            if(Main.halloween) styles.Add("[c/FF8000:Halloween]");
+            if(Main.xMas) styles.Add("[c/00FF00:Xmas]");
             if(!styles.Any()) styles.Add("[c/009DF3:Normal]");
             String style = String.Join(", ", styles);
 
