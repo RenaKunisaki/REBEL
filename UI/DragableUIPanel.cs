@@ -5,7 +5,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace REBEL.UI {
-	internal class DragableUIPanel: UIPanel {
+	public class DragableUIPanel: UIPanel {
 		//Stores the offset from the top left of the UIPanel while dragging.
 		private Vector2 offset;
 		public bool dragging;

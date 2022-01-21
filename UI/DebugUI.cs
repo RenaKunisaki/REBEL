@@ -13,11 +13,7 @@ using Terraria.GameContent.UI.Elements;
 using ReLogic.Content;
 
 namespace REBEL.UI {
-    public class DebugUI: UIState {
-        /** The UI canvas, which covers the entire screen, even if we don't
-         *  put anything there.
-         */
-        private DragableUIPanel panel;
+    public class DebugUI: RebelUIPanel {
         private UIText uiText;
 
         Dictionary<int, String> BiomeNames = new Dictionary<int, String>() {
@@ -43,40 +39,8 @@ namespace REBEL.UI {
         };
         private int mode;
 
-        private static UIHoverImageButton makeButton(String texture,
-            String text, Rectangle pos, MouseEvent onClick) {
-            Asset<Texture2D> tex = Main.Assets.Request<Texture2D>(texture);
-			UIHoverImageButton btn = new UIHoverImageButton(tex, text);
-			btn.Left  .Set(pos.Left,   0f);
-			btn.Top   .Set(pos.Top,    0f);
-			btn.Width .Set(pos.Width,  0f);
-			btn.Height.Set(pos.Height, 0f);
-			btn.OnClick += new MouseEvent(onClick);
-            return btn;
-        }
-
-        private static DragableUIPanel makePanel(Rectangle rect) {
-            var panel = new DragableUIPanel();
-            panel.SetPadding(4);
-            panel.Left  .Set(rect.Left,   0f); //default position relative to screen
-            panel.Top   .Set(rect.Top,    0f);
-            panel.Width .Set(rect.Width,  0f);
-            panel.Height.Set(rect.Height, 0f);
-            panel.BackgroundColor = new Color(0x00, 0x5D, 0xB3, 192);
-            return panel;
-        }
-
-        public override void OnInitialize() {
+        public override void Setup() {
             mode = (int)Mode.PlayerInfo;
-            //make the actual panel
-            //Mod.Logger.Info("UI init");
-            panel = makePanel(new Rectangle(400, 100, 600, 220));
-
-            //make close button
-            panel.Append(makeButton("Images/UI/ButtonDelete",
-                Language.GetTextValue("LegacyInterface.52"), //"Close"
-                new Rectangle((int)panel.Width.Pixels - 40, 10, 22, 22),
-                new MouseEvent(btnCloseClicked)));
 
             //make page buttons
             panel.Append(makeButton("Images/UI/ButtonPlay",
@@ -87,13 +51,9 @@ namespace REBEL.UI {
             //make text
             uiText = new UIText("HOWDY DOODY");
             panel.Append(uiText);
+        } //Setup
 
-            //display the panel
-            Append(panel);
-        } //OnInitialize
-
-        private void btnCloseClicked(UIMouseEvent evt,
-        UIElement listeningElement) {
+        public override void onClose() {
 			SoundEngine.PlaySound(SoundID.MenuClose);
 			ModContent.GetInstance<REBEL>().showDebugUI(false);
 		}
@@ -242,7 +202,7 @@ namespace REBEL.UI {
                 $"Item: #[{c}{player.cursorItemIconID}]\n";
         }
 
-        public void update() {
+        public override void update() {
             String text = "";
             switch((Mode)mode) {
                 case Mode.PlayerInfo: text = _makeText_PlayerInfo(); break;

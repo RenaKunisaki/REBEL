@@ -5,7 +5,7 @@ using Terraria.GameContent.UI.Elements;
 using ReLogic.Content;
 
 namespace REBEL.UI {
-	internal class UIHoverImageButton: UIImageButton {
+	public class UIHoverImageButton: UIImageButton {
 		internal string HoverText;
 
 		public UIHoverImageButton(Asset<Texture2D> texture, string hoverText):

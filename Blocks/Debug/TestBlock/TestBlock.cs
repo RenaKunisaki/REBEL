@@ -162,6 +162,7 @@ namespace REBEL.Items {
         // UseStyle is called each frame that the item is being actively used.
 		public override void UseStyle(Player player, Rectangle heldItemFrame) {
             (Mod as REBEL).showDebugUI(true);
+            Main.GetInputText("Beans", true);
         }
     }
 }
