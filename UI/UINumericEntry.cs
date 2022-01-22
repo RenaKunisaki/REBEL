@@ -52,7 +52,7 @@ namespace REBEL.UI {
             };
             this.OnTextChanged += (text) => {
                 if(Double.TryParse(text, out double val)) {
-                    this.value = val;
+                    this._value = val;
                 }
             };
             this.OnUpPressed   += () => { this.value += this.step; };
