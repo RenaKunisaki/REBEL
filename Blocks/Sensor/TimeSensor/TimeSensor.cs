@@ -17,7 +17,7 @@ namespace REBEL.Blocks {
             get => "REBEL/Blocks/Sensor/TimeSensor/Block";
         }
 
-        Dictionary<Point, int> prevTime;
+        Dictionary<Point, float> prevTime;
         public override void SetStaticDefaults() {
             Main.tileSolid[Type] = false;
             Main.tileMergeDirt[Type] = false;
@@ -26,9 +26,12 @@ namespace REBEL.Blocks {
             Main.tileFrameImportant[Type] = true;
 
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleSwitch);
+            TileObjectData.newTile.HookPostPlaceMyPlayer =
+                new PlacementHook(ModContent.GetInstance<TimeSensorEntity>()
+                    .Hook_AfterPlacement, -1, 0, true);
             TileObjectData.addTile(Type);
 
-            prevTime = new Dictionary<Point, int>();
+            prevTime = new Dictionary<Point, float>();
         }
 
         public override void NearbyEffects(int i, int j, bool closer) {
@@ -36,31 +39,60 @@ namespace REBEL.Blocks {
             if(Main.dayRate == 0) return; //time paused
 
             //what the fuck
-            double time = Main.time;
-			if (!Main.dayTime) time += 54000.0;
-            time = (time + (4.5 * 3600.0)) % 86400.0;
-            int hour = (int)(time / 3600.0);
-            int minute = (int)((time / 60.0) % 60.0);
-            int second = (int)(time % 60.0);
+            float time = (float)Main.time;
+			if (!Main.dayTime) time += 54000.0f;
+            time = (time + (4.5f * 3600.0f)) % 86400.0f;
+            //int hour = (int)(time / 3600.0);
+            //int minute = (int)((time / 60.0) % 60.0);
+            //int second = (int)(time % 60.0);
 
             //use this to ensure we don't miss a tick if the game lags,
             //and don't signal twice on the same minute.
             Point pt = new Point(i, j);
-            int prev = 0;
+            float prev = 0;
             if(prevTime.ContainsKey(pt)) prev = prevTime[pt];
-            //Main.NewText($"{hour:00}:{minute:00}:{second:00} prev {prev}");
+            //Main.NewText();
 
-            //check for < 5 to ensure that even if the player manually
-            //changes the clock backward we don't signal unless it's very
-            //near the top of the hour. don't just check for == 0 because
-            //then we can miss an hour if there's lag.
-            if(minute < prev && minute < 5) {
-                (Mod as REBEL).tripWire(i, j); //send a signal
+            float frequency = 60f;
+            int index = ModContent.GetInstance<TimeSensorEntity>().Find(i, j);
+            if(index >= 0) {
+                var entity = (TimeSensorEntity)TileEntity.ByID[index];
+                frequency = entity.frequency;
             }
-            prevTime[pt] = minute;
+
+            if(Math.Abs(time - prev) >= (frequency * 60f)) {
+                //Main.NewText($"{hour:00}:{minute:00}:{second:00}");
+                (Mod as REBEL).tripWire(i, j); //send a signal
+                prevTime[pt] = time;
+            }
         }
-    }
-}
+
+        public override bool RightClick(int x, int y) {
+            (Mod as REBEL).showUIForTile<TimeSensorEntity>(x, y);
+            return true;
+        }
+
+        public override void KillTile(int i, int j, ref bool fail,
+        ref bool effectOnly, ref bool noItem) {
+            base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
+            if(!(fail || effectOnly)) {
+                ModContent.GetInstance<TimeSensorEntity>().Kill(i, j);
+            }
+        }
+    } //class
+
+    public class TimeSensorEntity: RebelModTileEntity<TimeSensor> {
+        //Stores parameters for individual TimeSensor tiles.
+
+        //The name displayed in the config UI.
+        public override String displayName {get => "Time Sensor";}
+
+        [TileFloatAttribute("Frequency", "Trigger every this many minutes.",
+            defaultValue: 60f, minValue: 1f, maxValue: 3600f, step: 5f,
+            bigStep: 60f)]
+        public float frequency = 60f;
+    } //class
+} //namespace
 
 namespace REBEL.Items.Placeable {
     public class TimeSensor: TilePlaceItem<Blocks.TimeSensor, TimeSensor> {
@@ -68,7 +100,7 @@ namespace REBEL.Items.Placeable {
             get => "REBEL/Blocks/Sensor/TimeSensor/Item";
         }
         public override String _getName() => "Time Sensor";
-        public override String _getDescription() => "Emits a signal every hour.";
+        public override String _getDescription() => "Emits a signal every N in-game minutes.";
         public override int _getResearchNeeded() => 100;
         public override int _getValue() => 500;
         public override bool _showsWires() => true;
@@ -81,5 +113,5 @@ namespace REBEL.Items.Placeable {
                 .AddTile(TileID.WorkBenches)
 				.Register();
 		}
-    }
-}
+    } //class
+} //namespace

@@ -1,8 +1,6 @@
 should add 8-way arrow block to letters
 
 - related items
-    - an item you use to configure some of these
-        - use it, click a block, and it pops up some UI
     - an item that prompts for text and plops letter blocks
     - an item that pops up an instruction manual for all this shit
 

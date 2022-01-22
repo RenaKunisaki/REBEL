@@ -14,7 +14,7 @@ using Terraria.GameContent.UI.Elements;
 using ReLogic.Content;
 using REBEL.Blocks;
 
-//XXX Escape should close the box
+//XXX Escape should close the box; need scrollbars
 namespace REBEL.UI {
     public class TileConfigUI<TileEntityType>: RebelUIPanel
     where TileEntityType: RebelModTileEntityBase {
@@ -88,9 +88,10 @@ namespace REBEL.UI {
         }
 
         private UINumericEntry _makeNumericEntry(double val,
-        double minValue, double maxValue) {
+        double minValue, double maxValue, double step, double bigStep) {
             var entry = new UINumericEntry(value: val,
-                minValue: minValue, maxValue: maxValue);
+                minValue: minValue, maxValue: maxValue, step:step,
+                bigStep:bigStep);
             entry.Width.Set((panel.Width.Pixels / 2f) - 30f, 0f);
             entry.Left.Set(panel.Width.Pixels / 2f, 0f);
             //entry.HAlign = 0f;
@@ -102,8 +103,8 @@ namespace REBEL.UI {
             UIPanel subPanel = _makeNewRow(attr.name);
             UINumericEntry entry = _makeNumericEntry(
                 (double)tileEntity._getField<int>(field),
-                (double)attr.minValue,
-                (double)attr.maxValue);
+                (double)attr.minValue, (double)attr.maxValue,
+                (double)attr.step,     (double)attr.bigStep);
             entry.OnValueChanged += (val) => {
 				tileEntity._setField<int>(field, (int)val);
 			};
@@ -116,8 +117,8 @@ namespace REBEL.UI {
             UIPanel subPanel = _makeNewRow(attr.name);
             UINumericEntry entry = _makeNumericEntry(
                 (double)tileEntity._getField<float>(field),
-                (double)attr.minValue,
-                (double)attr.maxValue);
+                (double)attr.minValue, (double)attr.maxValue,
+                (double)attr.step,     (double)attr.bigStep);
             entry.OnValueChanged += (val) => {
 				tileEntity._setField<float>(field, (float)val);
 			};

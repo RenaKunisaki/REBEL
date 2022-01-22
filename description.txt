@@ -7,7 +7,7 @@ Rena's Extra Blocks & Extended Logic: adds a bunch of nifty new blocks which des
 - [c/88CCCC:One-Way Blocks]: Can only be passed through from one direction.
 
 [c/CC88CC:Sensors] (use with wires)
-- [c/88CCCC:Time Sensor]: Emits a signal every in-game hour.
+- [c/88CCCC:Time Sensor]: Emits a signal every N in-game minutes. Right-click to adjust.
 - [c/88CCCC:Random Sensor]: Emits a signal at random.
 - [c/88CCCC:Rapid Timer]: Emits a signal every two frames (1/30 second).
 - [c/88CCCC:Blood Moon Sensor]: Emits a signal when the Blood Moon rises and/or falls.

@@ -54,13 +54,16 @@ namespace REBEL.Blocks {
 
     public class TileIntAttribute: TileAttribute<int> {
         //An integer attribute, which has a minimum and maximum value.
-        public int minValue, maxValue, defaultValue;
+        public int minValue, maxValue, defaultValue, step, bigStep;
         public TileIntAttribute(String name, String description,
         int minValue=Int32.MinValue,
         int maxValue=Int32.MaxValue,
+        int step = 1, int bigStep = 10,
         int defaultValue=0): base(name, description, defaultValue) {
             this.minValue = minValue;
             this.maxValue = maxValue;
+            this.step     = step;
+            this.bigStep  = bigStep;
         }
         public override int receive(BinaryReader reader) => reader.ReadInt32();
         public override void send(BinaryWriter writer, int value) {
@@ -69,13 +72,16 @@ namespace REBEL.Blocks {
     }
     public class TileFloatAttribute: TileAttribute<float> {
         //A float attribute, which has a minimum and maximum value.
-        public float minValue, maxValue, defaultValue;
+        public float minValue, maxValue, defaultValue, step, bigStep;
         public TileFloatAttribute(String name, String description,
         float minValue=Single.NegativeInfinity,
         float maxValue=Single.PositiveInfinity,
+        float step = 1f, float bigStep = 10f,
         float defaultValue=0): base(name, description, defaultValue) {
             this.minValue = minValue;
             this.maxValue = maxValue;
+            this.step     = step;
+            this.bigStep  = bigStep;
         }
         //ReadFloat would be too obvious
         public override float receive(BinaryReader reader) => reader.ReadSingle();

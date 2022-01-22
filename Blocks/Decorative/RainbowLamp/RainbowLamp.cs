@@ -95,9 +95,9 @@ namespace REBEL.Blocks {
 
     public class RainbowLampEntity: RebelModTileEntity<RainbowLamp> {
         //Stores parameters for individual RainbowLamp tiles.
-        public override String displayName {
-            get => "Rainbow Lamp";
-        }
+
+        //The name displayed in the config UI.
+        public override String displayName {get => "Rainbow Lamp";}
 
         [TileFloatAttribute("Intensity", "How bright the light is.",
             defaultValue: 5f)]
@@ -108,7 +108,7 @@ namespace REBEL.Blocks {
         //repeat the default here
         [TileIntAttribute("Speed", "How long the cycle takes, in frames.",
             defaultValue: 2048, minValue: 1)]
-        public int animSpeed; //frame count
+        public int animSpeed;
     } //class
 } //namespace
 

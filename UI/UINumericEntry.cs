@@ -16,7 +16,7 @@ namespace REBEL.UI {
     public class UINumericEntry: UITextEntry {
         //you might think you could make this a template that can
         //accept both int and float, but, lolnope.
-        //XXX add +/- buttons; filter input.
+        //XXX add +/- buttons
         public event Action<double> OnValueChanged;
         public String format { get; private set; }
         public double step, bigStep;
@@ -52,7 +52,9 @@ namespace REBEL.UI {
             };
             this.OnTextChanged += (text) => {
                 if(Double.TryParse(text, out double val)) {
+                    bool changed = val != this._value;
                     this._value = val;
+                    if(changed) OnValueChanged?.Invoke(val);
                 }
             };
             this.OnUpPressed   += () => { this.value += this.step; };
