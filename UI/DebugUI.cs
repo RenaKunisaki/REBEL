@@ -9,6 +9,8 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.GameContent;
+using Terraria.GameContent.Personalities;
 using Terraria.GameContent.UI.Elements;
 using ReLogic.Content;
 
@@ -17,17 +19,17 @@ namespace REBEL.UI {
         private UIText uiText;
 
         Dictionary<int, String> BiomeNames = new Dictionary<int, String>() {
-            {BiomeID.Forest,            "Forest"},
-            {BiomeID.NormalUnderground, "Underground"},
-            {BiomeID.Snow,              "Snow"},
-            {BiomeID.Desert,            "Desert"},
-            {BiomeID.Jungle,            "Jungle"},
-            {BiomeID.Ocean,             "Ocean"},
-            {BiomeID.Hallow,            "Hallow"},
-            {BiomeID.Mushroom,          "Mushroom"},
-            {BiomeID.Dungeon,           "Dungeon"},
-            {BiomeID.Corruption,        "Corruption"},
-            {BiomeID.Crimson,           "Crimson"},
+            {PrimaryBiomeID.Forest,            "Forest"},
+            {PrimaryBiomeID.NormalUnderground, "Underground"},
+            {PrimaryBiomeID.Snow,              "Snow"},
+            {PrimaryBiomeID.Desert,            "Desert"},
+            {PrimaryBiomeID.Jungle,            "Jungle"},
+            {PrimaryBiomeID.Ocean,             "Ocean"},
+            {PrimaryBiomeID.Hallow,            "Hallow"},
+            {PrimaryBiomeID.Mushroom,          "Mushroom"},
+            {PrimaryBiomeID.Dungeon,           "Dungeon"},
+            {PrimaryBiomeID.Corruption,        "Corruption"},
+            {PrimaryBiomeID.Crimson,           "Crimson"},
         };
 
         enum Mode {
@@ -100,7 +102,8 @@ namespace REBEL.UI {
             var player = Main.LocalPlayer;
             int biome = player.GetPrimaryBiome();
             String biomeName = $"#{biome}";
-            if(BiomeNames.ContainsKey(biome)) biomeName = BiomeNames[biome];
+            //if(BiomeNames.ContainsKey(biome)) biomeName = BiomeNames[biome];
+            biomeName = ShopHelper.BiomeNameByKey(biome);
             String bloodMoon = Main.bloodMoon ? "[c/FF0000:Blood], " : "";
             String pumpkinMoon = Main.pumpkinMoon ? "[c/FF0000:Pumpkin], " : "";
             String snowMoon = Main.snowMoon ? "[c/FF0000:Snow], " : "";
