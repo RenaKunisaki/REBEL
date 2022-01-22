@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -67,7 +68,7 @@ namespace REBEL.Blocks {
 
         public override void HitWire(int i, int j) {
             Point p = getFrameBlock(i, j);
-            p.X ^= 1; //turn the lamp on/off
+            p.X ^= 1; //turn the lamp
             setFrame(i, j, p.X, p.Y);
         }
 
@@ -86,10 +87,18 @@ namespace REBEL.Blocks {
     } //class
 
 
-    public class RainbowLampEntity: ModTileEntity {
+    public class RainbowLampEntity: RebelModTileEntity {
         //Stores parameters for individual RainbowLamp tiles.
-        internal float lightIntensity = 5f;
-        internal int animSpeed = 2048; //frame count
+        public float _lightIntensity = 5f;
+
+        [TileFloatAttribute("Intensity", "How bright the light is")]
+        public float lightIntensity {
+            get => 5f;
+            set { _lightIntensity = value; }
+        }
+
+        [TileIntAttribute("Speed", "How long the cycle takes, in frames")]
+        public int animSpeed = 2048; //frame count
 
         public override void Update() {
             // Sending 86 aka, TileEntitySharing, triggers NetSend.
@@ -98,40 +107,11 @@ namespace REBEL.Blocks {
                 ID, Position.X, Position.Y);
 		}
 
-		public override void NetReceive(BinaryReader reader) {
-			lightIntensity = reader.ReadSingle(); //ReadFloat would be too obvious
-			animSpeed      = reader.ReadInt32();
-		}
-		public override void NetSend(BinaryWriter writer) {
-			writer.Write(lightIntensity);
-			writer.Write(animSpeed);
-		}
-
-		public override void SaveData(TagCompound tag) {
-			tag["lightIntensity"] = lightIntensity;
-			tag["animSpeed"] = animSpeed;
-		}
-		public override void LoadData(TagCompound tag) {
-            lightIntensity = tag.Get<float>("lightIntensity");
-            animSpeed = tag.Get<int>("animSpeed");
-		}
-
 		public override bool IsTileValidForEntity(int i, int j) {
 			Tile tile = Main.tile[i, j];
 			return tile.IsActive
                 && tile.type == ModContent.TileType<RainbowLamp>();
                 //&& tile.frameX == 0 && tile.frameY == 0;
-		}
-
-		public override int Hook_AfterPlacement(int i, int j, int type,
-        int style, int direction, int alternate) {
-			if(Main.netMode == NetmodeID.MultiplayerClient) {
-				NetMessage.SendTileSquare(Main.myPlayer, i, j, 3);
-				NetMessage.SendData(MessageID.TileEntityPlacement, -1, -1,
-                    null, i, j, Type, 0f, 0, 0, 0);
-				return -1;
-			}
-			return Place(i, j);
 		}
     } //class
 } //namespace
