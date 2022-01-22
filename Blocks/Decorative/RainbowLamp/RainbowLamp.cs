@@ -87,32 +87,26 @@ namespace REBEL.Blocks {
     } //class
 
 
-    public class RainbowLampEntity: RebelModTileEntity {
+    public class RainbowLampEntity: RebelModTileEntity<RainbowLamp> {
         //Stores parameters for individual RainbowLamp tiles.
         public float _lightIntensity = 5f;
 
-        [TileFloatAttribute("Intensity", "How bright the light is")]
+        //this doesn't need to exist (just expose the underlying value
+        //directly) but I'm leaving it for now for testing
+        //property attributes.
+        [TileFloatAttribute("Intensity", "How bright the light is",
+            defaultValue: 5f)]
         public float lightIntensity {
-            get => 5f;
+            get => _lightIntensity;
             set { _lightIntensity = value; }
         }
 
-        [TileIntAttribute("Speed", "How long the cycle takes, in frames")]
-        public int animSpeed = 2048; //frame count
-
-        public override void Update() {
-            // Sending 86 aka, TileEntitySharing, triggers NetSend.
-            //Think of it like manually calling sync.
-            NetMessage.SendData(MessageID.TileEntitySharing, -1, -1, null,
-                ID, Position.X, Position.Y);
-		}
-
-		public override bool IsTileValidForEntity(int i, int j) {
-			Tile tile = Main.tile[i, j];
-			return tile.IsActive
-                && tile.type == ModContent.TileType<RainbowLamp>();
-                //&& tile.frameX == 0 && tile.frameY == 0;
-		}
+        //XXX any way to get the default value from what animSpeed is
+        //initialized to? ie write "int animSpeed = 2048" and don't
+        //repeat the default here
+        [TileIntAttribute("Speed", "How long the cycle takes, in frames",
+            defaultValue: 2048)]
+        public int animSpeed; //frame count
     } //class
 } //namespace
 

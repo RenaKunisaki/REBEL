@@ -101,7 +101,15 @@ namespace REBEL.Blocks {
     }
 
 
-    public abstract class RebelModTileEntity: ModTileEntity {
+    public abstract class RebelModTileEntity<TileType>: ModTileEntity
+    where TileType: ModTile {
+        public override bool IsTileValidForEntity(int i, int j) {
+			Tile tile = Main.tile[i, j];
+			return tile.IsActive
+                && tile.type == ModContent.TileType<TileType>();
+                //&& tile.frameX == 0 && tile.frameY == 0;
+		}
+
         public override void Update() {
             // Sending 86 aka, TileEntitySharing, triggers NetSend.
             //Think of it like manually calling sync.
