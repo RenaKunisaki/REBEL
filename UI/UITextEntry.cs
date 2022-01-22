@@ -119,6 +119,7 @@ namespace REBEL.UI {
 		}
 
 		protected virtual void handleKeys() {
+			if(!focused) return;
 			if(JustPressed(Keys.Tab)) {
                 Unfocus();
                 OnTabPressed?.Invoke();

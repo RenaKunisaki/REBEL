@@ -54,6 +54,7 @@ namespace REBEL.UI {
         }
 
         protected override void handleKeys() {
+            if(!focused) return;
             base.handleKeys();
             if(JustPressed(Keys.PageUp))   this.value += this.bigStep;
             if(JustPressed(Keys.PageDown)) this.value -= this.bigStep;
