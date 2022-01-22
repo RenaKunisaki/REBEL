@@ -99,28 +99,15 @@ namespace REBEL.Blocks {
             get => "Rainbow Lamp";
         }
 
-        public float _lightIntensity = 5f;
-
-        //this doesn't need to exist (just expose the underlying value
-        //directly) but I'm leaving it for now for testing
-        //property attributes.
-        //now that I think about it, did we need attributes at all?
-        //could they not just be TileFloatAttribute(...) lightIntensity
-        //and lightIntensity.value?
-        //might not really simplify much, though... they still can be
-        //both fields and properties so we'd still duplicate stuff.
-        [TileFloatAttribute("Intensity", "How bright the light is",
+        [TileFloatAttribute("Intensity", "How bright the light is.",
             defaultValue: 5f)]
-        public float lightIntensity {
-            get => _lightIntensity;
-            set { _lightIntensity = value; }
-        }
+        public float lightIntensity = 5f;
 
         //XXX any way to get the default value from what animSpeed is
         //initialized to? ie write "int animSpeed = 2048" and don't
         //repeat the default here
-        [TileIntAttribute("Speed", "How long the cycle takes, in frames",
-            defaultValue: 2048)]
+        [TileIntAttribute("Speed", "How long the cycle takes, in frames.",
+            defaultValue: 2048, minValue: 1)]
         public int animSpeed; //frame count
     } //class
 } //namespace
