@@ -94,6 +94,11 @@ namespace REBEL.Blocks {
         //this doesn't need to exist (just expose the underlying value
         //directly) but I'm leaving it for now for testing
         //property attributes.
+        //now that I think about it, did we need attributes at all?
+        //could they not just be TileFloatAttribute(...) lightIntensity
+        //and lightIntensity.value?
+        //might not really simplify much, though... they still can be
+        //both fields and properties so we'd still duplicate stuff.
         [TileFloatAttribute("Intensity", "How bright the light is",
             defaultValue: 5f)]
         public float lightIntensity {
