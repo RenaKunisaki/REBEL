@@ -70,7 +70,7 @@ namespace REBEL.Blocks {
 
     public class TileIntAttribute: TileAttribute<int> {
         //An integer attribute, which has a minimum and maximum value.
-        protected int minValue, maxValue, defaultValue;
+        public int minValue, maxValue, defaultValue;
         public TileIntAttribute(String name, String description,
         int minValue=Int32.MinValue,
         int maxValue=Int32.MaxValue,
@@ -85,7 +85,7 @@ namespace REBEL.Blocks {
     }
     public class TileFloatAttribute: TileAttribute<float> {
         //A float attribute, which has a minimum and maximum value.
-        protected float minValue, maxValue, defaultValue;
+        public float minValue, maxValue, defaultValue;
         public TileFloatAttribute(String name, String description,
         float minValue=Single.MinValue,
         float maxValue=Single.MaxValue,
