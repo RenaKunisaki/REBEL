@@ -88,10 +88,11 @@ namespace REBEL.UI {
         }
 
         private UINumericEntry _makeNumericEntry(double val,
-        double minValue, double maxValue, double step, double bigStep) {
+        double minValue, double maxValue, double step, double bigStep,
+        string format) {
             var entry = new UINumericEntry(value: val,
                 minValue: minValue, maxValue: maxValue, step:step,
-                bigStep:bigStep);
+                bigStep:bigStep, format:format);
             entry.Width.Set((panel.Width.Pixels / 2f) - 30f, 0f);
             entry.Left.Set(panel.Width.Pixels / 2f, 0f);
             //entry.HAlign = 0f;
@@ -104,7 +105,8 @@ namespace REBEL.UI {
             UINumericEntry entry = _makeNumericEntry(
                 (double)tileEntity._getField<int>(field),
                 (double)attr.minValue, (double)attr.maxValue,
-                (double)attr.step,     (double)attr.bigStep);
+                (double)attr.step,     (double)attr.bigStep,
+                attr.format);
             entry.OnValueChanged += (val) => {
 				tileEntity._setField<int>(field, (int)val);
 			};
@@ -118,7 +120,8 @@ namespace REBEL.UI {
             UINumericEntry entry = _makeNumericEntry(
                 (double)tileEntity._getField<float>(field),
                 (double)attr.minValue, (double)attr.maxValue,
-                (double)attr.step,     (double)attr.bigStep);
+                (double)attr.step,     (double)attr.bigStep,
+                attr.format);
             entry.OnValueChanged += (val) => {
 				tileEntity._setField<float>(field, (float)val);
 			};

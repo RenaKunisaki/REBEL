@@ -42,18 +42,15 @@ namespace REBEL.Blocks {
         ref int frameXOffset, ref int frameYOffset) {
             if(getFrameBlock(i, j).X != 0) return; //turned off
 
-            float intensity = 0.5f;
+            float intensity = 1f;
             int speed = 2048;
             int index = ModContent.GetInstance<RainbowLampEntity>().Find(i, j);
-            if(index < 0) {
-                Mod.Logger.Info($"No RainbowLampEntity for {i}, {j}");
-            }
-            else {
+            if(index >= 0) {
                 var entity = (RainbowLampEntity)TileEntity.ByID[index];
                 intensity = entity.lightIntensity;
                 speed = entity.animSpeed;
             }
-            if(speed == 0) speed = 2048;
+            if(speed == 0) speed = 2048; //don't divide by zero
 
             float hue = (float)Main.tileFrame[Type] / (float)speed;
             Color color = Main.hslToRgb(hue, 1f, 0.5f);
@@ -100,8 +97,8 @@ namespace REBEL.Blocks {
         public override String displayName {get => "Rainbow Lamp";}
 
         [TileFloatAttribute("Intensity", "How bright the light is.",
-            defaultValue: 5f)]
-        public float lightIntensity = 5f;
+            defaultValue: 1f, format:"F2")]
+        public float lightIntensity = 1f;
 
         //XXX any way to get the default value from what animSpeed is
         //initialized to? ie write "int animSpeed = 2048" and don't
