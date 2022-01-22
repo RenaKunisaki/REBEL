@@ -71,8 +71,8 @@ namespace REBEL.Blocks {
         //A float attribute, which has a minimum and maximum value.
         public float minValue, maxValue, defaultValue;
         public TileFloatAttribute(String name, String description,
-        float minValue=Single.MinValue,
-        float maxValue=Single.MaxValue,
+        float minValue=Single.NegativeInfinity,
+        float maxValue=Single.PositiveInfinity,
         float defaultValue=0): base(name, description, defaultValue) {
             this.minValue = minValue;
             this.maxValue = maxValue;

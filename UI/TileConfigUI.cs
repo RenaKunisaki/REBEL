@@ -88,9 +88,9 @@ namespace REBEL.UI {
         }
 
         private UINumericEntry _makeNumericEntry(double val,
-        double minVal, double maxVal) {
+        double minValue, double maxValue) {
             var entry = new UINumericEntry(value: val,
-                minVal: minVal, maxVal: maxVal);
+                minValue: minValue, maxValue: maxValue);
             entry.Width.Set((panel.Width.Pixels / 2f) - 30f, 0f);
             entry.Left.Set(panel.Width.Pixels / 2f, 0f);
             //entry.HAlign = 0f;

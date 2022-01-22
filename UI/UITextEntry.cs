@@ -28,12 +28,18 @@ namespace REBEL.UI {
 		public event Action OnEnterPressed;
 		public event Action OnUpPressed;
 		public event Action OnDownPressed;
-		public Color bgColor;
+		public Func<string, bool> isValid; //why is result last!?
+		public Color bgColor, bgColorFocus;
+		public Color bgColorInvalid, bgColorInvalidFocus;
 
         public UITextEntry(string text="", float textScale=1, bool large=false):
         base(text, textScale, large) {
             SetPadding(4);
-			bgColor = new Color(0x00, 0x00, 0x00, 0x80);
+			bgColor             = new Color(0x00, 0x00, 0x00, 0x80);
+			bgColorFocus        = new Color(0x00, 0x00, 0x00, 0xC0);
+			bgColorInvalid      = new Color(0x40, 0x00, 0x00, 0x80);
+			bgColorInvalidFocus = new Color(0x40, 0x00, 0x00, 0xC0);
+			isValid = (str) => true;
         }
 
         public override void Click(UIMouseEvent evt) {
@@ -181,8 +187,10 @@ namespace REBEL.UI {
 				base.Text.Substring(0, this._cursor)).X,
 				base.IsLarge ? 32f : 16f) * base.TextScale;
 
-			pos.X += //(innerDimensions.Width - base.TextSize.X) * 0.5f +
-				vector.X - (base.IsLarge ? 8f : 4f) * base.TextScale + 6f;
+			//pos.X += //(innerDimensions.Width - base.TextSize.X) * 0.5f +
+			//	vector.X - (base.IsLarge ? 8f : 4f) * base.TextScale + 6f;
+			pos.Y += (IsLarge ? (10f * TextScale) : 6f) * TextScale;
+			pos.X += 4f + vector.X;
 			if(base.IsLarge) Utils.DrawBorderStringBig(spriteBatch, "|", pos,
 				base.TextColor, base.TextScale, 0f, 0f, -1);
 			else Utils.DrawBorderString(spriteBatch, "|", pos,
@@ -193,8 +201,14 @@ namespace REBEL.UI {
 			//draw background
 			Rectangle hitbox = GetDimensions().ToRectangle();
 			//hitbox.Inflate(4, 4);
-			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, hitbox,
-				bgColor);
+			Color bg;
+			if(focused) {
+				bg = isValid(Text) ? bgColorFocus : bgColorInvalidFocus;
+			}
+			else {
+				bg = isValid(Text) ? bgColor : bgColorInvalid;
+			}
+			Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, hitbox, bg);
 
 			if(focused) _drawFocused();
 			handleKeys();

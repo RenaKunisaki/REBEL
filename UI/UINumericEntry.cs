@@ -32,18 +32,24 @@ namespace REBEL.UI {
         }
 
         public UINumericEntry(double value,
-        double minVal=Double.NegativeInfinity,
-        double maxVal=Double.PositiveInfinity,
+        double minValue=Double.NegativeInfinity,
+        double maxValue=Double.PositiveInfinity,
         double step=1, double bigStep=10,
         string format="G", float textScale=1, bool large=false):
         base(value.ToString(format), textScale, large) {
-            this.format   = format; //format string for display
-            this.step     = step;   //how much to adjust with Up/Down keys
+            this.format   = format;   //format string for display
+            this.step     = step;     //how much to adjust with Up/Down keys
             this.bigStep  = bigStep;  //how much to adjust with Page keys
             this.minValue = minValue; //minimum acceptable value
             this.maxValue = maxValue; //maximum acceptable value
-            this.value    = value;    //current value
+            this._value   = value;    //current value
 
+            this.isValid = str => {
+                if(Double.TryParse(str, out double val)) {
+                    return val >= this.minValue && val <= this.maxValue;
+                }
+                else return false;
+            };
             this.OnTextChanged += (text) => {
                 if(Double.TryParse(text, out double val)) {
                     this.value = val;
