@@ -3,6 +3,7 @@
 - some things can be changed by hammering, others by right-click
     - this is a tModLoader limitation since hammering non-solid tiles doesn't work
 - several things check if a tile is within the world but mistakenly assume Main.topWorld, etc are in tile coords (they're not)
+    - should just use Terraria.Framing.getTileSafely
 
 # Visual bugs
 - one-way gates cause jitter

@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using REBEL.Blocks;
 using REBEL.Blocks.Base;
 
 namespace REBEL.Blocks {
@@ -84,11 +85,20 @@ namespace REBEL.Blocks {
                 ModContent.GetInstance<RainbowLampEntity>().Kill(i, j);
             }
         }
+
+        public override bool RightClick(int x, int y) {
+            (Mod as REBEL).showUIForTile<RainbowLampEntity>(x, y);
+            return true;
+        }
     } //class
 
 
     public class RainbowLampEntity: RebelModTileEntity<RainbowLamp> {
         //Stores parameters for individual RainbowLamp tiles.
+        public override String displayName {
+            get => "Rainbow Lamp";
+        }
+
         public float _lightIntensity = 5f;
 
         //this doesn't need to exist (just expose the underlying value

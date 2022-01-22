@@ -36,7 +36,7 @@ namespace REBEL.Blocks {
 
     public abstract class TileAttribute<T>: TileAttributeBase {
         public String name, description;
-        protected T defaultValue;
+        public T defaultValue;
         public TileAttribute(String name, String description, T defaultValue) {
             this.name = name;
             this.description = description;
@@ -45,8 +45,8 @@ namespace REBEL.Blocks {
 
         public virtual void save(TagCompound tag, T value) {
             //Store this attribute's value to the save file.
-            ModContent.GetInstance<REBEL>().Logger.Info(
-                $"Field {this.name} type {this.GetType()} save value {value}");
+            //ModContent.GetInstance<REBEL>().Logger.Info(
+            //    $"Field {this.name} type {this.GetType()} save value {value}");
             tag[this.name] = value;
         }
 
@@ -54,8 +54,8 @@ namespace REBEL.Blocks {
             //Retrieve this attribute's value from the save file.
             T result = tag.ContainsKey(this.name) ?
                 tag.Get<T>(this.name) : this.defaultValue;
-            ModContent.GetInstance<REBEL>().Logger.Info(
-                $"Field {this.name} type {this.GetType()} load value {result}");
+            //ModContent.GetInstance<REBEL>().Logger.Info(
+            //    $"Field {this.name} type {this.GetType()} load value {result}");
             return result;
         }
 
@@ -100,9 +100,18 @@ namespace REBEL.Blocks {
         }
     }
 
+    public abstract class RebelModTileEntityBase: ModTileEntity {
+        public abstract String displayName {get;}
+        public abstract List<MemberInfo> getAttrs();
+        public abstract T _getField<T>(MemberInfo member);
+        public abstract void _setField<T>(MemberInfo member, T value);
+    }
 
-    public abstract class RebelModTileEntity<TileType>: ModTileEntity
+
+    public abstract class RebelModTileEntity<TileType>: RebelModTileEntityBase
     where TileType: ModTile {
+        //public abstract String displayName {get;}
+
         public override bool IsTileValidForEntity(int i, int j) {
 			Tile tile = Main.tile[i, j];
 			return tile.IsActive
@@ -113,6 +122,7 @@ namespace REBEL.Blocks {
         public override void Update() {
             // Sending 86 aka, TileEntitySharing, triggers NetSend.
             //Think of it like manually calling sync.
+            //XXX only if some attribute has changed
             NetMessage.SendData(MessageID.TileEntitySharing, -1, -1, null,
                 ID, Position.X, Position.Y);
 		}
@@ -130,8 +140,7 @@ namespace REBEL.Blocks {
 
         public override void SaveData(TagCompound tag) {
 			Mod.Logger.Info("Start SaveData");
-            foreach(var field in this.GetType().GetMembers()
-            .Where(f => f is not null)) {
+            foreach(var field in getAttrs()) {
                 var attr = field.GetCustomAttribute<TileAttributeBase>(false);
                 switch(attr) {
                     //sadly doesn't seem to be any way to just automatically
@@ -155,8 +164,7 @@ namespace REBEL.Blocks {
 
 		public override void LoadData(TagCompound tag) {
             Mod.Logger.Info("Start LoadData");
-            foreach(var field in this.GetType().GetMembers()
-            .Where(f => f is not null)) {
+            foreach(var field in getAttrs()) {
                 var attr = field.GetCustomAttribute<TileAttributeBase>(false);
                 switch(attr) {
                     case null: continue;
@@ -185,12 +193,22 @@ namespace REBEL.Blocks {
 			return Place(i, j);
 		}
 
+        public override List<MemberInfo> getAttrs() {
+            //XXX can probably be simplified
+            var result = new List<MemberInfo>();
+            foreach(var field in this.GetType().GetMembers()
+            .Where(f => f is not null)) {
+                result.Add(field);
+            }
+            return result;
+        }
+
         //some extra stupid reflection nonsense for getting/setting
         //the value of an arbitrary member whether it's a field
         //or a property, because of course those would require
         //almost-but-not-quite-identical logic.
         //XXX move to some kind of helper class.
-        protected T _getField<T>(MemberInfo member) {
+        public override T _getField<T>(MemberInfo member) {
             //LOL C# repetition
             Type type = this.GetType();
             if(member.MemberType == MemberTypes.Field) {
@@ -205,7 +223,7 @@ namespace REBEL.Blocks {
             }
             else return default(T);
         }
-        protected void _setField<T>(MemberInfo member, T value) {
+        public override void _setField<T>(MemberInfo member, T value) {
             //LOL C# repetition
             Type type = this.GetType();
             if(member.MemberType == MemberTypes.Field) {
@@ -219,5 +237,5 @@ namespace REBEL.Blocks {
                 prop.SetValue(this, value);
             }
         }
-    }
+    } //class
 } //namespace

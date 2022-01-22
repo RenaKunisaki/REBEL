@@ -8,6 +8,7 @@ using Terraria.UI;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using REBEL.Blocks;
 using REBEL.Blocks.Base;
 using REBEL.Hooks;
 using REBEL.UI;
@@ -42,6 +43,12 @@ namespace REBEL {
             if(ui is null) return;
 			ui._showPanel(id);
         }
+
+		public void showUIForTile<TileEntityType>(int i, int j)
+		where TileEntityType: RebelModTileEntityBase {
+			if(ui is null) return;
+			ui._showUIForTile<TileEntityType>(i, j);
+		}
 
 		//obsolete (XXX remove)
 		//public void showDebugUI(bool show) {

@@ -8,11 +8,13 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 using Microsoft.Xna.Framework;
 using REBEL.UI;
+using REBEL.Blocks;
 
 namespace REBEL.UI {
     public enum UIPanelId {
         None,  //don't show any UI
         Debug, //debug info
+        Tile,  //tile config
         Count  //number of UI panels
     };
 
@@ -46,6 +48,7 @@ namespace REBEL.UI {
             uiPanels = new Dictionary<UIPanelId, RebelUIPanel>() {
                 {UIPanelId.None,  null},
                 {UIPanelId.Debug, debugUI},
+                //tile config is generated on the fly
             };
         } //constructor
 
@@ -66,6 +69,20 @@ namespace REBEL.UI {
             _curPanelId = id;
             _curPanel = uiPanels[id];
         }
+
+        public void _showUIForTile<TileEntityType>(int i, int j)
+        where TileEntityType: RebelModTileEntityBase {
+            int index = ModContent.GetInstance<TileEntityType>().Find(i, j);
+            if(index < 0) {
+                Main.NewText("This tile has no settings.");
+                return;
+            }
+            TileEntityType entity = (TileEntityType)TileEntity.ByID[index];
+            _curPanel = new TileConfigUI<TileEntityType>(i, j, entity);
+            _curPanel.Activate();
+            _curPanelId = UIPanelId.Tile;
+            ui?.SetState(_curPanel);
+		}
 
         public void UpdateUI(GameTime gameTime) {
             //periodic callback from ModSystem

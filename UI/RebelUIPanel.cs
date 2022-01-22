@@ -51,7 +51,7 @@ namespace REBEL.UI {
             //make close button
             panel.Append(makeButton("Images/UI/ButtonDelete",
                 Language.GetTextValue("LegacyInterface.52"), //"Close"
-                new Rectangle((int)panel.Width.Pixels - 40, 10, 22, 22),
+                new Rectangle((int)panel.Width.Pixels - 40, 5, 22, 22),
                 new MouseEvent(btnCloseClicked)));
 
             Setup();
