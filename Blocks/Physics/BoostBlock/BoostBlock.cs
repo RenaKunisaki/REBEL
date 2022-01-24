@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -52,7 +53,7 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
-            var tile = Main.tile[location.X, location.Y];
+            var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.IsActuated) return; //don't react when turned off.
 
             int mode = (int)(tile.frameX / getFrameWidth()) & 7;
@@ -68,7 +69,7 @@ namespace REBEL.Blocks {
 
         public override void HitWire(int i, int j) {
             //called when a signal passes through this tile via wire.
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             if(tile.HasActuator) {
                 //actuation doesn't work properly for non-solid blocks.
                 Point p = getFrameBlock(i, j);

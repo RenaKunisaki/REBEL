@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -16,14 +17,14 @@ namespace REBEL.Blocks.Base {
         public int getFrameHeight() => 18;
 
         public Point getFrameBlock(int i, int j) {
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             return new Point(tile.frameX / getFrameWidth(),
                 tile.frameY / getFrameHeight());
         }
 
         public void setFrame(int i, int j, int frameX, int frameY,
         bool local=false) {
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             tile.frameX = (short)(frameX * getFrameWidth());
             tile.frameY = (short)(frameY * getFrameHeight());
             if((!local) && Main.netMode == NetmodeID.MultiplayerClient) {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -89,9 +90,9 @@ namespace REBEL.Blocks {
             int y2 = Math.Min(j+8, (int)Main.bottomWorld-1);
             for(int y=y1; y<=y2; y++) {
                 for(int x=x1; x<=x2; x++) {
-                    Tile tile = Main.tile[x, y];
+                    Tile tile = Framing.GetTileSafely(x, y);
                     if(PureTiles.ContainsKey(tile.type)) {
-                        Main.tile[x, y].type = PureTiles[tile.type];
+                        Framing.GetTileSafely(x, y).type = PureTiles[tile.type];
                     }
                 }
             }

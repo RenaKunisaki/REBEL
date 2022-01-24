@@ -3,7 +3,7 @@
 - some things can be changed by hammering, others by right-click
     - this is a tModLoader limitation since hammering non-solid tiles doesn't work
 - several things check if a tile is within the world but mistakenly assume Main.topWorld, etc are in tile coords (they're not)
-    - should just use Terraria.Framing.getTileSafely
+    - should just use Terraria.Framing.Framing.GetTileSafely
 - Configurator isn't currently used.
     - ideally, use it instead of right-click so that you can control who's able to configure things.
     - I think it also doesn't have a recipe.

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -30,7 +31,7 @@ namespace REBEL.Blocks {
 
         public override void NearbyEffects(int i, int j, bool closer) {
             if(Main.gamePaused) return;
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             if(tile.frameX == 0) return; //inactive
             if((Main.GameUpdateCount & 1) == 0) {
                 (Mod as REBEL).tripWire(i, j); //send a signal

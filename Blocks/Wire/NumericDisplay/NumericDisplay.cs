@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -43,7 +44,7 @@ namespace REBEL.Blocks {
 
         public bool isANumericTile(int i, int j) {
             //Check if the tile at this location is any NumericDisplayBase tile.
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             if(tile.type == ModContent.GetInstance<NumericDisplayDigit>().Type
             || tile.type == ModContent.GetInstance<NumericDisplayClear>().Type
             || tile.type == ModContent.GetInstance<NumericDisplayInc>().Type
@@ -55,7 +56,7 @@ namespace REBEL.Blocks {
 
         public bool isADigitTile(int i, int j) {
             //Check if the tile at this location is a digit tile.
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             if(tile.type == ModContent.GetInstance<NumericDisplayDigit>().Type) {
                 return true;
             }
@@ -131,7 +132,7 @@ namespace REBEL.Blocks {
 
         public int getDigit(int i, int j) {
             //check which digit is displayed.
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             return (int)(tile.frameY / getFrameHeight()) - 26;
         }
 

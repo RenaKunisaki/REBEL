@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -176,7 +177,7 @@ namespace REBEL.UI {
             int my  = (int)(mouse.Y/16);
             if(mouse.X >= Main.leftWorld && mouse.X < Main.rightWorld
             && mouse.Y >= Main.topWorld  && mouse.Y < Main.bottomWorld) {
-                var tile = Main.tile[mx, my];
+                var tile = Framing.GetTileSafely(mx, my);
                 tid = (int)tile.type;
                 tFrame = (int)tile.FrameNumber;
                 if(tile.RedWire) wires += "[c/FF0000:R]";

@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.DataStructures;
+
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.GameContent;
@@ -140,7 +141,7 @@ namespace REBEL {
 			//check each tile the entity occupies.
 			for(int y=top; y<=bottom; y++) {
 				for(int x=left; x<=right; x++) {
-					var tile = Main.tile[x, y];
+					var tile = Framing.GetTileSafely(x, y);
 					if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
 						//work out the direction we touched from.
 						//this is the opposite of the direction we are

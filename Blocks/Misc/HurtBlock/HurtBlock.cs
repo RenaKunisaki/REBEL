@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -66,7 +67,7 @@ namespace REBEL.Blocks {
 
         public void OnTouched(Entity whom, Point location,
         TouchDirection direction) {
-            var tile = Main.tile[location.X, location.Y];
+            var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.IsActuated) return; //don't react when turned off.
 
             int mode = (int)(tile.frameY / getFrameHeight()) & 1;

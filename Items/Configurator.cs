@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -36,7 +37,7 @@ namespace REBEL.Items {
                 SoundEngine.PlaySound(2, -1, -1, 16); //fart
                 return;
             }
-            var tile = Main.tile[mx, my];
+            var tile = Framing.GetTileSafely(mx, my);
             if(tile.type == ModContent.GetInstance<RainbowLamp>().Type) {
                 Main.NewText("poo");
             }

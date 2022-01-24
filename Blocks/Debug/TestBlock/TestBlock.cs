@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -97,7 +98,7 @@ namespace REBEL.Blocks {
         public override void HitWire(int i, int j) {
             //called when a signal passes through this tile via wire.
             SoundEngine.PlaySound(2, -1, -1, 16); //fart
-            Tile tile = Main.tile[i, j];
+            Tile tile = Framing.GetTileSafely(i, j);
             //instead of doing this we could just put an actuator on it.
             tile.IsActuated = !tile.IsActuated;
             //Main.NewText($"HitWire({Wiring._currentWireColor})");

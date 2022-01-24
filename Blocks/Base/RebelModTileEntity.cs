@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -38,7 +39,7 @@ namespace REBEL.Blocks {
         //public abstract String displayName {get;}
 
         public override bool IsTileValidForEntity(int i, int j) {
-			Tile tile = Main.tile[i, j];
+			Tile tile = Framing.GetTileSafely(i, j);
 			return tile.IsActive
                 && tile.type == ModContent.TileType<TileType>();
                 //&& tile.frameX == 0 && tile.frameY == 0;

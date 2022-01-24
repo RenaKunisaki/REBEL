@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -38,7 +39,7 @@ namespace REBEL.Blocks {
         public override bool Slope(int i, int j) {
             /** Called when hit by a hammer.
              */
-			Tile tile = Main.tile[i, j];
+			Tile tile = Framing.GetTileSafely(i, j);
             Point p = getFrameBlock(i, j);
             setFrame(i, j, p.X ^ 1, _getFrame());
             return false;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -48,7 +49,7 @@ namespace REBEL.Blocks {
             Point frame   = getFrameBlock(i, j);
             int   mode    = frame.X;
             bool  isOn    = frame.Y != 0;
-            var   tile    = Main.tile[i, j];
+            var   tile    = Framing.GetTileSafely(i, j);
             bool  trigger = false;
             switch((Mode)mode) {
                 case Mode.Both:
