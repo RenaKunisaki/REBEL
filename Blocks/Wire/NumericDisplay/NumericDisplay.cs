@@ -71,11 +71,15 @@ namespace REBEL.Blocks {
             //find a nearby numeric display block
             int nSpc = 0;
             int bi = i-1;
+            int leftWorld   = (int)(Main.leftWorld   / 16);
+            int rightWorld  = (int)(Main.rightWorld  / 16);
+            int topWorld    = (int)(Main.topWorld    / 16);
+            int bottomWorld = (int)(Main.bottomWorld / 16);
 
             //look left
             //it's important that we look left first, since the inc/dec buttons
             //rely on this to handle rollover.
-            while(bi > Main.leftWorld && (i-bi) < 16) {
+            while(bi > leftWorld && (i-bi) < 16) {
                 if(isADigitTile(bi, j)) { outI = bi; outJ = j; return true; }
                 else if(isANumericTile(bi, j)) bi--; //skip
                 else if(nSpc == 0) { nSpc++; bi--; } //skip
@@ -85,7 +89,7 @@ namespace REBEL.Blocks {
             //look right
             nSpc = 0;
             bi = i+1;
-            while(bi < Main.rightWorld && (bi-i) < 16) {
+            while(bi < rightWorld && (bi-i) < 16) {
                 if(isADigitTile(bi, j)) { outI = bi; outJ = j; return true; }
                 else if(isANumericTile(bi, j)) bi++; //skip
                 else if(nSpc == 0) { nSpc++; bi++; } //skip
@@ -95,7 +99,7 @@ namespace REBEL.Blocks {
             //look up
             nSpc = 0;
             int bj = j-1;
-            while(bj > Main.topWorld && (j-bj) < 16) {
+            while(bj > topWorld && (j-bj) < 16) {
                 if(isADigitTile(i, bj)) { outI = i; outJ = bj; return true; }
                 else if(isANumericTile(i, bj)) bj--; //skip
                 else if(nSpc == 0) { nSpc++; bj--; } //skip
@@ -105,7 +109,7 @@ namespace REBEL.Blocks {
             //look down
             nSpc = 0;
             bj = j+1;
-            while(bj < Main.bottomWorld && (bj-j) < 16) {
+            while(bj < bottomWorld && (bj-j) < 16) {
                 if(isADigitTile(i, bj)) { outI = i; outJ = bj; return true; }
                 else if(isANumericTile(i, bj)) bj++; //skip
                 else if(nSpc == 0) { nSpc++; bj++; } //skip
@@ -142,7 +146,7 @@ namespace REBEL.Blocks {
             if(d == 9) {
                 //Mod.Logger.Info($"Overflow {i},{j}");
                 setDigit(i, j, 0);
-                if(j > Main.topWorld) (Mod as REBEL).tripWire(i, j-1);
+                if(j > Main.topWorld/16) (Mod as REBEL).tripWire(i, j-1);
                 return true; //overflow
             }
             //Mod.Logger.Info($"Increment {i},{j} to {d+1}");
@@ -156,7 +160,7 @@ namespace REBEL.Blocks {
             if(d == 0) {
                 //Mod.Logger.Info($"Underflow {i},{j}");
                 setDigit(i, j, 9);
-                if(j < Main.bottomWorld) (Mod as REBEL).tripWire(i, j+1);
+                if(j < Main.bottomWorld/16) (Mod as REBEL).tripWire(i, j+1);
                 return true; //underflow
             }
             //Mod.Logger.Info($"Decrement {i},{j} to {d-1}");

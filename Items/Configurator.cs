@@ -32,8 +32,8 @@ namespace REBEL.Items {
             int tFrame = -1;
             int mx  = (int)(mouse.X/16);
             int my  = (int)(mouse.Y/16);
-            if(mouse.X < Main.leftWorld || mouse.X >= Main.rightWorld
-            || mouse.Y < Main.topWorld  || mouse.Y >= Main.bottomWorld) {
+            if(mouse.X < (Main.leftWorld/16) || mouse.X >= (Main.rightWorld /16)
+            || mouse.Y < (Main.topWorld /16) || mouse.Y >= (Main.bottomWorld/16)) {
                 SoundEngine.PlaySound(2, -1, -1, 16); //fart
                 return;
             }

@@ -175,18 +175,15 @@ namespace REBEL.UI {
             String wires = "";
             int mx  = (int)(mouse.X/16);
             int my  = (int)(mouse.Y/16);
-            if(mouse.X >= Main.leftWorld && mouse.X < Main.rightWorld
-            && mouse.Y >= Main.topWorld  && mouse.Y < Main.bottomWorld) {
-                var tile = Framing.GetTileSafely(mx, my);
-                tid = (int)tile.type;
-                tFrame = (int)tile.FrameNumber;
-                if(tile.RedWire) wires += "[c/FF0000:R]";
-                if(tile.GreenWire) wires += "[c/00FF00:G]";
-                if(tile.YellowWire) wires += "[c/FFFF00:Y]";
-                if(tile.BlueWire) wires += "[c/00FFFF:B]";
-                if(tile.HasActuator) {
-                    wires += "[c/FFFFFF:" + (tile.IsActuated ? "a" : "A") + "]";
-                }
+            var tile = Framing.GetTileSafely(mx, my);
+            tid = (int)tile.type;
+            tFrame = (int)tile.FrameNumber;
+            if(tile.RedWire) wires += "[c/FF0000:R]";
+            if(tile.GreenWire) wires += "[c/00FF00:G]";
+            if(tile.YellowWire) wires += "[c/FFFF00:Y]";
+            if(tile.BlueWire) wires += "[c/00FFFF:B]";
+            if(tile.HasActuator) {
+                wires += "[c/FFFFFF:" + (tile.IsActuated ? "a" : "A") + "]";
             }
             if(wires == "") wires = $"[{c}None]";
 

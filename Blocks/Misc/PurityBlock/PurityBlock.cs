@@ -84,10 +84,10 @@ namespace REBEL.Blocks {
         }
 
         public override void NearbyEffects(int i, int j, bool closer) {
-            int x1 = Math.Max(i-8, (int)Main.leftWorld);
-            int x2 = Math.Min(i+8, (int)Main.rightWorld-1);
-            int y1 = Math.Max(j-8, (int)Main.topWorld);
-            int y2 = Math.Min(j+8, (int)Main.bottomWorld-1);
+            int x1 = Math.Max(i-8, (int)(Main.leftWorld / 16));
+            int x2 = Math.Min(i+8, (int)(Main.rightWorld / 16)-1);
+            int y1 = Math.Max(j-8, (int)(Main.topWorld / 16));
+            int y2 = Math.Min(j+8, (int)(Main.bottomWorld / 16)-1);
             for(int y=y1; y<=y2; y++) {
                 for(int x=x1; x<=x2; x++) {
                     Tile tile = Framing.GetTileSafely(x, y);
