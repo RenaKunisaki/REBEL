@@ -52,7 +52,7 @@ namespace REBEL.Hooks {
                     //this can sometimes happen when testing
                     //if an NPC is a player.
                     //I assume it's if the NPC list changes?
-                    Mod.Logger.Debug("IndexOutOfRangeException in PostUpdateNPCs");
+                    //Mod.Logger.Debug("IndexOutOfRangeException in PostUpdateNPCs");
                 }
             } //foreach
 
