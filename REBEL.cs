@@ -21,6 +21,7 @@ namespace REBEL {
 		public bool forceUpsideDown; //force reverse gravity + screen flip
 		public bool wasForceUpsideDown;
 		public RebelUI ui;
+		public int prevNumMinions;
 
         public override void Load() {
 			//Logger.InfoFormat("Hello world!");

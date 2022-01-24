@@ -4,7 +4,8 @@
     - this is a tModLoader limitation since hammering non-solid tiles doesn't work
 - Configurator isn't currently used.
     - ideally, use it instead of right-click so that you can control who's able to configure things.
-    - I think it also doesn't have a recipe.
+        - make it a config option whether right-click works or not.
+    - I think it also doesn't have a recipe. (or only the dumb default one)
 
 # Visual bugs
 - one-way gates cause jitter

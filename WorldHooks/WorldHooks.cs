@@ -25,6 +25,11 @@ namespace REBEL.Hooks {
             (Mod as REBEL).ui?.UpdateUI(gameTime);
         }
 
+        public override void PostUpdateProjectiles() {
+            //this is zero when UI updates so cache it here
+            (Mod as REBEL).prevNumMinions = Main.LocalPlayer.numMinions;
+        }
+
 		public override void ModifyInterfaceLayers(
 		List<GameInterfaceLayer> layers) {
             //voodoo. nobody really knows how this function works.

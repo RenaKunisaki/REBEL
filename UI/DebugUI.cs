@@ -66,6 +66,7 @@ namespace REBEL.UI {
         private String _makeText_PlayerInfo() {
             String c = "c/CCCCCC:";
             var player = Main.LocalPlayer;
+            REBEL mod = ModContent.GetInstance<REBEL>();
 
             int tx = (int)(player.position.X / 16);
             int ty = (int)(player.position.Y / 16);
@@ -88,7 +89,7 @@ namespace REBEL.UI {
                 $"Boost: [{c}{player.jumpSpeedBoost}] "+
                 $"ItemTime: [{c}{player.itemTime}]/[{c}{player.itemTimeMax}] "+
                 $"Luck: [{c}{player.luck}] "+
-                $"Minions: [{c}{player.numMinions}]/[{c}{player.maxMinions}]\n"+
+                $"Minions: [{c}{mod.prevNumMinions}]/[{c}{player.maxMinions}]\n"+
 
                 $"Speeds: Move: [{c}{player.moveSpeed}] "+
                 $"Melee: [{c}{player.meleeSpeed}] "+
