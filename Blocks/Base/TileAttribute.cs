@@ -95,4 +95,66 @@ namespace REBEL.Blocks {
             writer.Write(value);
         }
     }
+
+    public class TileEnumAttribute: TileAttribute<int> {
+        //An attribute which can be one of a given list of values.
+        public int defaultValue;
+        public Dictionary<int, String> values; //ID => display name
+        public List<int> sort; //order to display in UI
+
+        public TileEnumAttribute(String name, String description,
+        String values, int defaultValue = 0, String sort=""):
+        base(name, description, defaultValue) {
+            //horrible hack because of C# limitations
+            this.values = new Dictionary<int, String>();
+            int i = 0;
+            foreach(String line in values.Split('\n', StringSplitOptions.TrimEntries)) {
+                String val = line;
+                if(line.Contains('\t')) {
+                    var fields = line.Split('\t', 2);
+                    if(!Int32.TryParse(fields[0], out i)) {
+                        ModContent.GetInstance<REBEL>().Logger.Error(
+                            $"Init: Invalid key \"{fields[0]}\" for value "+
+                            $"\"{fields[1]}\" for attribute {this.name}");
+                    }
+                    val = fields[1];
+                }
+                this.values[i++] = val;
+            }
+
+            this.sort = new List<int>();
+            if(sort != "") {
+                foreach(String line in sort.Split('\n', StringSplitOptions.TrimEntries)) {
+                    foreach(String item in line.Split(',', StringSplitOptions.TrimEntries)) {
+                        int val;
+                        if(!Int32.TryParse(item, out val)) {
+                            ModContent.GetInstance<REBEL>().Logger.Error(
+                                $"Init: Invalid sort ID \"{item}\" "+
+                                $"for attribute {this.name}");
+                        }
+                        else this.sort.Append(val);
+                    }
+                    this.sort.Append(-1); //end of line
+                }
+            }
+        }
+        public override int receive(BinaryReader reader) {
+            int val = reader.ReadInt32();
+            if(!this.values.ContainsKey(val)) {
+                ModContent.GetInstance<REBEL>().Logger.Error(
+                    $"Receive: Invalid value {val} for attribute {this.name}");
+                //default to an arbitrary valid value
+                val = this.values.Keys.First();
+            }
+            return val;
+        }
+        public override void send(BinaryWriter writer, int value) {
+            if(!this.values.ContainsKey(value)) {
+                ModContent.GetInstance<REBEL>().Logger.Error(
+                    $"Send: Invalid value {value} for attribute {this.name}");
+                return;
+            }
+            writer.Write(value);
+        }
+    }
 } //namespace

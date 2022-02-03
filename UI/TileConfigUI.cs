@@ -10,6 +10,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using ReLogic.Content;
 using REBEL.Blocks;
@@ -21,6 +22,7 @@ namespace REBEL.UI {
         /** Displays configurable items for a tile.
          */
         private TileEntityType tileEntity;
+        private Point tileCoords;
         private int nRows;
         private REBEL Mod;
         private const float ROW_HEIGHT = 60f; //XXX calculate as needed.
@@ -30,6 +32,7 @@ namespace REBEL.UI {
         public TileConfigUI(int i, int j, TileEntityType entity): base() {
             Mod = ModContent.GetInstance<REBEL>();
             tileEntity = entity;
+            tileCoords = new Point(i, j);
             nRows = 0;
         }
 
@@ -43,11 +46,14 @@ namespace REBEL.UI {
                 var attr = field.GetCustomAttribute<TileAttributeBase>(false);
                 switch(attr) {
                     case null: continue;
-                    case TileIntAttribute I:
-                        _makeIntField(I, field);
+                    case TileEnumAttribute E:
+                        _makeEnumField(E, field);
                         break;
                     case TileFloatAttribute F:
                         _makeFloatField(F, field);
+                        break;
+                    case TileIntAttribute I:
+                        _makeIntField(I, field);
                         break;
                     default:
                         Mod.Logger.Error($"BUG: No entry in Setup for type {attr}");
@@ -127,6 +133,91 @@ namespace REBEL.UI {
 			};
             subPanel.Append(entry);
             _addDescriptionRow(attr.description, subPanel);
+            panel.Append(subPanel);
+        }
+
+        private UIPanel _newRowForEnum(float y) {
+            UIPanel pRow = new UIPanel();
+            pRow.SetPadding(4);
+            pRow.Left  .Set(0f, 0f);
+            pRow.Top   .Set(y,  0f);
+            pRow.Width .Set(panel.Width.Pixels, 0f);
+            pRow.Height.Set(ROW_HEIGHT, 0f);
+            pRow.BackgroundColor = new Color(0x00, 0xF0, 0x00, 192);
+            return pRow;
+        }
+
+        private void _makeEnumField(TileEnumAttribute attr, MemberInfo field) {
+            UIPanel subPanel = _makeNewRow(attr.name);
+            //get the sorted list of possible values
+            var sort = attr.sort;
+            if(!sort.Any()) {
+                //sort however
+                foreach(var entry in attr.values) {
+                    sort.Add(entry.Key);
+                }
+            }
+
+            //build the UI for each value
+            float x=0, y=TITLE_HEIGHT;
+            var font = FontAssets.MouseText.Value;
+            UIPanel pRow = null;
+            foreach(var key in sort) {
+                if(key == -1) x = 99999999f; //line break
+
+                if(x >= 570f) {
+                    //move to next cell (XXX remove hardcoded values)
+                    x = 0;
+                    y += 28f;
+                    if(pRow != null) {
+                        subPanel.Append(pRow);
+                        pRow = null; //start a new row
+                    }
+                }
+                if(key == -1) continue;
+
+                var value = attr.values[key];
+
+                //make click handler for button-panel and label
+                var click = new MouseEvent(
+                (UIMouseEvent evt, UIElement listeningElement) => {
+                    Mod.Logger.Info($"Clicked {value} ({key}) for tile {tileCoords}");
+                    tileEntity._setField<int>(field, key);
+                    tileEntity.refresh(tileCoords.X, tileCoords.Y);
+                });
+
+                //make label
+                var meas = font.MeasureString(value);
+                UIText label = new UIText(value);
+                label.HAlign = 0.5f;
+                label.VAlign = 0.5f;
+                label.OnClick += click;
+
+                //stuff into a panel which will act as a button
+                UIPanel pItem = new UIPanel();
+                pItem.SetPadding(4);
+                pItem.Left  .Set(x,           0f);
+                pItem.Top   .Set(0f,          0f);
+                pItem.Width .Set(meas.X + 24, 0f);
+                pItem.Height.Set(meas.Y +  8, 0f);
+                pItem.BackgroundColor = new Color(0xF0, 0x5D, 0xB3, 192);
+                pItem.Append(label);
+                pItem.OnClick += click;
+
+                if(pRow == null) pRow = _newRowForEnum(y);
+                pRow.Append(pItem);
+                x += meas.X + 24f;
+            }
+
+            if(pRow != null) subPanel.Append(pRow);
+            //_addDescriptionRow(attr.description, subPanel);
+
+            //XXX this is necessary because if our buttons aren't actually
+            //contained within the bounds of the parent panels, they'll appear
+            //but not be clickable. TODO compute these properly and allow them
+            //to scroll.
+            subPanel.Height.Set(y, 0f); //XXX
+            panel.Height.Set(panel.Height.Pixels + y, 0f); //XXX
             panel.Append(subPanel);
         }
 

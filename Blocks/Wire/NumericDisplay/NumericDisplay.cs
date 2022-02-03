@@ -281,7 +281,7 @@ namespace REBEL.Items.Placeable {
     public class NumericDisplayDigit : TilePlaceItem<
     Blocks.NumericDisplayDigit, NumericDisplayDigit> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/0";
+            get => "REBEL/Blocks/Wire/NumericDisplay/Zero";
         }
         public override String _getName() => "Numeric Display Digit";
         public override String _getDescription() => "A digit that can be adjusted.";
@@ -301,7 +301,7 @@ namespace REBEL.Items.Placeable {
     public class NumericDisplayInc : TilePlaceItem<
     Blocks.NumericDisplayInc, NumericDisplayInc> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/Inc";
+            get => "REBEL/Blocks/Wire/NumericDisplay/BtnPlus";
         }
         public override String _getName() => "Numeric Display Increment";
         public override String _getDescription() => "Increments nearby digits when activated.";
@@ -321,7 +321,7 @@ namespace REBEL.Items.Placeable {
     public class NumericDisplayDec : TilePlaceItem<
     Blocks.NumericDisplayDec, NumericDisplayDec> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/Dec";
+            get => "REBEL/Blocks/Wire/NumericDisplay/BtnMinus";
         }
         public override String _getName() => "Numeric Display Decrement";
         public override String _getDescription() => "Decrements nearby digits when activated.";
@@ -341,7 +341,7 @@ namespace REBEL.Items.Placeable {
     public class NumericDisplayClear : TilePlaceItem<
     Blocks.NumericDisplayClear, NumericDisplayClear> {
 		public override String Texture {
-            get => "REBEL/Blocks/Decorative/LetterBlock/ItemTextures/Clear";
+            get => "REBEL/Blocks/Wire/NumericDisplay/BtnClear";
         }
         public override String _getName() => "Numeric Display Clear";
         public override String _getDescription() => "Resets nearby digits when activated.";

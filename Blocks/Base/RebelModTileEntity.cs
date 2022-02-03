@@ -30,6 +30,7 @@ namespace REBEL.Blocks {
     public abstract class RebelModTileEntityBase: ModTileEntity {
         public abstract String displayName {get;}
         public abstract List<MemberInfo> getAttrs();
+        public virtual void refresh(int i, int j) {}
         public abstract T _getField<T>(MemberInfo member);
         public abstract void _setField<T>(MemberInfo member, T value);
     }
@@ -65,7 +66,7 @@ namespace REBEL.Blocks {
 		}
 
         public override void SaveData(TagCompound tag) {
-			Mod.Logger.Info("Start SaveData");
+			//Mod.Logger.Info("Start SaveData");
             foreach(var field in getAttrs()) {
                 var attr = field.GetCustomAttribute<TileAttributeBase>(false);
                 switch(attr) {
@@ -74,38 +75,44 @@ namespace REBEL.Blocks {
                     //to repeat the list of types...
                     //XXX find a way to avoid duplicating all this.
                     case null: continue;
-                    case TileIntAttribute I:
-                        I.save(tag, _getField<int>(field));
+                    case TileEnumAttribute E:
+                        E.save(tag, _getField<int>(field));
                         break;
                     case TileFloatAttribute F:
                         F.save(tag, _getField<float>(field));
+                        break;
+                    case TileIntAttribute I:
+                        I.save(tag, _getField<int>(field));
                         break;
                     default:
                         Mod.Logger.Error($"BUG: No entry in SaveData for type {attr}");
                         break;
                 }
             }
-            Mod.Logger.Info("Done SaveData");
+            //Mod.Logger.Info("Done SaveData");
 		}
 
 		public override void LoadData(TagCompound tag) {
-            Mod.Logger.Info("Start LoadData");
+            //Mod.Logger.Info("Start LoadData");
             foreach(var field in getAttrs()) {
                 var attr = field.GetCustomAttribute<TileAttributeBase>(false);
                 switch(attr) {
                     case null: continue;
-                    case TileIntAttribute I:
-                        _setField<int>(field, I.load(tag));
+                    case TileEnumAttribute E:
+                        _setField<int>(field, E.load(tag));
                         break;
                     case TileFloatAttribute F:
                         _setField<float>(field, F.load(tag));
+                        break;
+                    case TileIntAttribute I:
+                        _setField<int>(field, I.load(tag));
                         break;
                     default:
                         Mod.Logger.Error($"BUG: No entry in LoadData for type {attr}");
                         break;
                 }
             }
-            Mod.Logger.Info("Done LoadData");
+            //Mod.Logger.Info("Done LoadData");
 		}
 
         public override int Hook_AfterPlacement(int i, int j, int type,
