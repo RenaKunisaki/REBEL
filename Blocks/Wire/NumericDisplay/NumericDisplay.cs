@@ -125,19 +125,18 @@ namespace REBEL.Blocks {
     NumericDisplayBase<Items.Placeable.NumericDisplayDigit> {
         /** A digit in a numeric display.
          */
-        public override int _getFrameX() { return  0; }
-        public override int _getFrameY() { return 26; }
+        public override int _getFrameX() { return 0; }
+        public override int _getFrameY() { return 3; }
 
         public void setDigit(int i, int j, int digit) {
             //set which digit is displayed.
-            //the digit 0 is the 26th tile in the texture
-            setFrame(i, j, 0, digit+26);
+            setFrame(i, j, digit, _getFrameY());
         }
 
         public int getDigit(int i, int j) {
             //check which digit is displayed.
             Tile tile = Framing.GetTileSafely(i, j);
-            return (int)(tile.frameY / getFrameHeight()) - 26;
+            return (int)(tile.frameX / getFrameHeight());
         }
 
         public bool increment(int i, int j) {
@@ -182,8 +181,8 @@ namespace REBEL.Blocks {
     NumericDisplayBase<Items.Placeable.NumericDisplayClear> {
         /** A clear button for a numeric display.
          */
-        public override int _getFrameX() { return  0; }
-        public override int _getFrameY() { return 48; }
+        public override int _getFrameX() { return 15; }
+        public override int _getFrameY() { return  7; }
 
         public override void HitWire(int i, int j) {
             if((Mod as REBEL).wireAlreadyHit(i, j)) return;
@@ -193,7 +192,7 @@ namespace REBEL.Blocks {
             while(i > Main.leftWorld) {
                 if(isADigitTile(i-1, j)) {
                     //Mod.Logger.Info($"Reset {i-1},{j}");
-                    setFrame(i-1, j, 0, 26); //reset to 0
+                    setFrame(i-1, j, 0, 3); //reset to 0
                     i--;
                     nSpc = 0;
                     nDigit++;
@@ -222,8 +221,8 @@ namespace REBEL.Blocks {
     NumericDisplayBase<Items.Placeable.NumericDisplayInc> {
         /** An increment button for a numeric display.
          */
-        public override int _getFrameX() { return  0; }
-        public override int _getFrameY() { return 47; }
+        public override int _getFrameX() { return 1; }
+        public override int _getFrameY() { return 0; }
 
         public override void HitWire(int i, int j) {
             if((Mod as REBEL).wireAlreadyHit(i, j)) return;
@@ -251,8 +250,8 @@ namespace REBEL.Blocks {
     NumericDisplayBase<Items.Placeable.NumericDisplayDec> {
         /** A decrement button for a numeric display.
          */
-        public override int _getFrameX() { return  1; }
-        public override int _getFrameY() { return 47; }
+        public override int _getFrameX() { return 2; }
+        public override int _getFrameY() { return 0; }
 
         public override void HitWire(int i, int j) {
             if((Mod as REBEL).wireAlreadyHit(i, j)) return;

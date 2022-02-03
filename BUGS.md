@@ -12,6 +12,6 @@
     - actually acceptable for horizontal because it's like they're pushing you back (well, they are) but would be better if they worked like walls
     - for vertical it's awful
 - the graphics are bad, someone please make better ones
-    - especially some things are missing slope graphics
-- the letter tiles and Numeric Display Digit all appear as A while being placed, but show up correctly once placed.
+    - especially some things are missing slope graphics and the UI is ugly
+- the letter tiles and Numeric Display Digit all appear as a blank brick while being placed, but show up correctly once placed.
     - I'm sure this is trivial to fix but nobody can tell me how

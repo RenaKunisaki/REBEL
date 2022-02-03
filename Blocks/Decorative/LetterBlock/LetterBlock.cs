@@ -35,7 +35,7 @@ namespace REBEL.Blocks {
         public override void PlaceInWorld(int i, int j, Item item) {
             //XXX be able to select a default?
             //this item should be "letter placer" or something
-            setFrame(i, j, 0, 0);
+            setFrame(i, j, 1, 2); //A
         }
 
         public override void KillTile(int i, int j, ref bool fail,
@@ -45,15 +45,6 @@ namespace REBEL.Blocks {
                 ModContent.GetInstance<LetterBlockEntity>().Kill(i, j);
             }
         }
-
-        public override bool Slope(int i, int j) {
-            /** Called when hit by a hammer.
-             */
-			Tile tile = Framing.GetTileSafely(i, j);
-            Point p = getFrameBlock(i, j);
-            setFrame(i, j, p.X ^ 1, p.Y); //swap case
-            return false;
-		}
 
         public override bool RightClick(int x, int y) {
             /** Called when right-clicked.
@@ -72,50 +63,34 @@ namespace REBEL.Blocks {
         public override String displayName {get => "Letter Block";}
 
         [TileEnumAttribute("Letter", "Which letter to display",
-            defaultValue: 0, values:
+            values:
                 //horrible hack because we can't pass a dict here.
                 //XXX any way to generate this at runtime?
-                //this is not in ASCII order because it would be
-                //gross in the UI. but this is dreadful. should just
-                //redo the texture to be in ASCII order, then we don't
-                //need to worry about sorting either.
-                //0-25
-                "A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\n"+
-                "Q\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n"+
-                //26-51
-                "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\n"+
-                "q\nr\ns\nt\nu\nv\nw\nx\ny\nz\n"+
-                //52-61
-                "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n"+
-                //62-71
-                "!\n@\n#\n$\n%\n^\n&\n*\n(\n)\n"+
-                //72-81
-                "-\n=\n`\n[\n]\n\\\n;\n'\n,\n.\n/\n"+
-                //82-91
-                "_\n+\n~\n{\n}\n|\n:\n\"\n<\n>\n?"
-            /* sort: //XXX needs to be converted to IDs
-                "`1234567890-=\n"+
-                "QWERTYUIOP{}|\n"+
-                "ASDFGHJKL:\"\n"+
-                "ZXCVBNM<>?\n"+
-                "~!@#$%^&*()_+\n"+
-                "qwertyuiop[]\\\n"+
-                "asdfghjkl;'\n"+
-                "zxcvbnm,./", */
-            )]
-        public int letter = 0;
+                "33\t!\n\"\n#\n$\n%\n&\n'\n(\n)\n*\n+\n,\n-\n.\n/\n"+
+                "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n:\n;\n<\n=\n>\n?\n"+
+                "@\nA\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\n"+
+                "P\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\n[\n\\\n]\n^\n_\n"+
+                "`\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\n"+
+                "p\nq\nr\ns\nt\nu\nv\nw\nx\ny\nz\n{\n|\n}\n~\n"+
+                "3\tUp\nUpRight\nRight\nDownRight\nDown\nDownLeft\nLeft\nUpLeft",
+            sort: //ASCII values in QWERTY order
+                "96,49,50,51,52,53,54,55,56,57,48,45,61\n"+ //`1234567890-=
+                "81,87,69,82,84,89,85,73,79,80,123,125,124\n"+ //QWERTYUIOP{}|
+                "65,83,68,70,71,72,74,75,76,58,34\n"+ //ASDFGHJKL:"
+                "90,88,67,86,66,78,77,60,62,63\n"+ //ZXCVBNM<>?
+                "126,33,64,35,36,37,94,38,42,40,41,95,43\n"+ //~!@#$%^&*()_+
+                "113,119,101,114,116,121,117,105,111,112,91,93,92\n"+ //qwertyuiop[]\ .
+                "97,115,100,102,103,104,106,107,108,59,39\n"+ //asdfghjkl;'
+                "122,120,99,118,98,110,109,44,46,47\n"+ //zxcvbnm,./
+                "3,4,5,6\n7,8,9,10", //arrows
+            defaultValue: 0x41 //A
+        )]
+        public int letter = 0x41;
 
         public override void refresh(int i, int j) {
             Tile tile = Framing.GetTileSafely(i, j);
-            int x=0, y=0;
-            if(letter < 26) y = letter;
-            else if(letter >= 26 && letter <= 51) { x = 1; y = letter - 26; }
-            else if(letter >= 52 && letter <= 61) { x = 0; y = letter - 36; }
-            else if(letter >= 62 && letter <= 71) { x = 1; y = letter - 36; }
-            else if(letter >= 72 && letter <= 81) { x = 0; y = letter - 46; }
-            else if(letter >= 82 && letter <= 91) { x = 1; y = letter - 46; }
-            Mod.Logger.Info($"Letter({i}, {j}) is {letter}: ({x}, {y})");
-            ModContent.GetInstance<LetterBlock>().setFrame(i, j, x, y);
+            ModContent.GetInstance<LetterBlock>().setFrame(i, j,
+                letter & 0xF, letter >> 4);
         }
     } //class
 }

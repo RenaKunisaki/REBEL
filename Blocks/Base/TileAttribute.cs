@@ -122,8 +122,8 @@ namespace REBEL.Blocks {
                 this.values[i++] = val;
             }
 
-            this.sort = new List<int>();
             if(sort != "") {
+                this.sort = new List<int>();
                 foreach(String line in sort.Split('\n', StringSplitOptions.TrimEntries)) {
                     foreach(String item in line.Split(',', StringSplitOptions.TrimEntries)) {
                         int val;
@@ -132,11 +132,12 @@ namespace REBEL.Blocks {
                                 $"Init: Invalid sort ID \"{item}\" "+
                                 $"for attribute {this.name}");
                         }
-                        else this.sort.Append(val);
+                        else this.sort.Add(val);
                     }
-                    this.sort.Append(-1); //end of line
+                    this.sort.Add(-1); //end of line
                 }
             }
+            else this.sort = null;
         }
         public override int receive(BinaryReader reader) {
             int val = reader.ReadInt32();

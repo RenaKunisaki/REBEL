@@ -142,17 +142,37 @@ namespace REBEL.UI {
             pRow.Left  .Set(0f, 0f);
             pRow.Top   .Set(y,  0f);
             pRow.Width .Set(panel.Width.Pixels, 0f);
-            pRow.Height.Set(ROW_HEIGHT, 0f);
-            pRow.BackgroundColor = new Color(0x00, 0xF0, 0x00, 192);
+            pRow.Height.Set(36f, 0f);
+            pRow.BackgroundColor = new Color(0x00, 0x00, 0x00, 0x00);
             return pRow;
+        }
+
+        private UIPanel _makeButtonForEnum(String text, Vector2 size,
+        MouseEvent click, float x) {
+            UIText label = new UIText(text);
+            label.HAlign = 0.5f;
+            label.VAlign = 0.0f;
+            label.OnClick += click;
+
+            UIPanel pItem = new UIPanel();
+            pItem.SetPadding(4);
+            pItem.Left  .Set(x,           0f);
+            pItem.Top   .Set(0f,          0f);
+            pItem.Width .Set(size.X + 24, 0f);
+            pItem.Height.Set(size.Y + 16, 0f);
+            pItem.BackgroundColor = new Color(0x00, 0x5D, 0xB3, 192);
+            pItem.Append(label);
+            pItem.OnClick += click;
+            return pItem;
         }
 
         private void _makeEnumField(TileEnumAttribute attr, MemberInfo field) {
             UIPanel subPanel = _makeNewRow(attr.name);
+
             //get the sorted list of possible values
             var sort = attr.sort;
-            if(!sort.Any()) {
-                //sort however
+            if(sort == null) sort = new List<int>();
+            if(!sort.Any()) { //sort however
                 foreach(var entry in attr.values) {
                     sort.Add(entry.Key);
                 }
@@ -162,23 +182,27 @@ namespace REBEL.UI {
             float x=0, y=TITLE_HEIGHT;
             var font = FontAssets.MouseText.Value;
             UIPanel pRow = null;
+            Vector2 meas = new Vector2();
             foreach(var key in sort) {
                 if(key == -1) x = 99999999f; //line break
 
                 if(x >= 570f) {
                     //move to next cell (XXX remove hardcoded values)
-                    x = 0;
-                    y += 28f;
+                    x  = 0;
+                    y += 36f;
                     if(pRow != null) {
                         subPanel.Append(pRow);
                         pRow = null; //start a new row
                     }
                 }
                 if(key == -1) continue;
-
+                if(!attr.values.ContainsKey(key)) { //sanity check
+                    Mod.Logger.Error($"Sort ID {key} not in attribute {attr.name} values");
+                    continue;
+                }
                 var value = attr.values[key];
 
-                //make click handler for button-panel and label
+                //make click handler
                 var click = new MouseEvent(
                 (UIMouseEvent evt, UIElement listeningElement) => {
                     Mod.Logger.Info($"Clicked {value} ({key}) for tile {tileCoords}");
@@ -186,28 +210,16 @@ namespace REBEL.UI {
                     tileEntity.refresh(tileCoords.X, tileCoords.Y);
                 });
 
-                //make label
-                var meas = font.MeasureString(value);
-                UIText label = new UIText(value);
-                label.HAlign = 0.5f;
-                label.VAlign = 0.5f;
-                label.OnClick += click;
+                //make button
+                meas = font.MeasureString(value);
+                UIPanel pItem = _makeButtonForEnum(value, meas, click, x);
 
-                //stuff into a panel which will act as a button
-                UIPanel pItem = new UIPanel();
-                pItem.SetPadding(4);
-                pItem.Left  .Set(x,           0f);
-                pItem.Top   .Set(0f,          0f);
-                pItem.Width .Set(meas.X + 24, 0f);
-                pItem.Height.Set(meas.Y +  8, 0f);
-                pItem.BackgroundColor = new Color(0xF0, 0x5D, 0xB3, 192);
-                pItem.Append(label);
-                pItem.OnClick += click;
-
+                //append button to row panel
                 if(pRow == null) pRow = _newRowForEnum(y);
                 pRow.Append(pItem);
                 x += meas.X + 24f;
             }
+            y += meas.Y + 16f; //for computing parent panel height
 
             if(pRow != null) subPanel.Append(pRow);
             //_addDescriptionRow(attr.description, subPanel);
@@ -216,9 +228,11 @@ namespace REBEL.UI {
             //contained within the bounds of the parent panels, they'll appear
             //but not be clickable. TODO compute these properly and allow them
             //to scroll.
-            subPanel.Height.Set(y, 0f); //XXX
-            panel.Height.Set(panel.Height.Pixels + y, 0f); //XXX
+            var h = panel.Height.Pixels - subPanel.Height.Pixels;
+            subPanel.Height.Set(y, 0f);
+            panel   .Height.Set(y, 0f);
             panel.Append(subPanel);
+            sort = null;
         }
 
         public override void update() {
