@@ -56,7 +56,7 @@ namespace REBEL.Blocks {
             var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.IsActuated) return; //don't react when turned off.
 
-            int mode = (int)(tile.frameX / getFrameWidth()) & 7;
+            int mode = (int)(tile.TileFrameX / getFrameWidth()) & 7;
             switch(mode) {
                 case 0: whom.velocity.Y = -10; break;
                 case 1: whom.velocity.X =  10; break;

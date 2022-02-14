@@ -91,8 +91,8 @@ namespace REBEL.Blocks {
             for(int y=y1; y<=y2; y++) {
                 for(int x=x1; x<=x2; x++) {
                     Tile tile = Framing.GetTileSafely(x, y);
-                    if(PureTiles.ContainsKey(tile.type)) {
-                        Framing.GetTileSafely(x, y).type = PureTiles[tile.type];
+                    if(PureTiles.ContainsKey(tile.TileType)) {
+                        tile.TileType = PureTiles[tile.TileType];
                     }
                 }
             }

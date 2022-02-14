@@ -55,7 +55,7 @@ namespace REBEL.Blocks {
             var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.IsActuated) return; //don't react when turned off.
 
-            int mode = (int)(tile.frameX / 18) & 3;
+            int mode = (int)(tile.TileFrameX / 18) & 3;
             //0:up 1:right 2:down 3:left
             //these numbers are the order of the graphics in the image
             switch(mode) {

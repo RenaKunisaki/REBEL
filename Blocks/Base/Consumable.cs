@@ -31,7 +31,7 @@ namespace REBEL.Blocks {
         TouchDirection direction) {
             var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.HasActuator && tile.IsActuated) return; //don't react when turned off.
-            if(tile.frameX != 0) return; //actuator hack
+            if(tile.TileFrameX != 0) return; //actuator hack
 
             if(whom is Player p) {
                 if(tile.HasActuator) {

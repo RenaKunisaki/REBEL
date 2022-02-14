@@ -177,8 +177,8 @@ namespace REBEL.UI {
             int mx  = (int)(mouse.X/16);
             int my  = (int)(mouse.Y/16);
             var tile = Framing.GetTileSafely(mx, my);
-            tid = (int)tile.type;
-            tFrame = (int)tile.FrameNumber;
+            tid = (int)tile.TileType;
+            //tFrame = (int)tile.FrameNumber;
             if(tile.RedWire) wires += "[c/FF0000:R]";
             if(tile.GreenWire) wires += "[c/00FF00:G]";
             if(tile.YellowWire) wires += "[c/FFFF00:Y]";
@@ -194,7 +194,7 @@ namespace REBEL.UI {
                 $"World: [{c}{mouse.X}], [{c}{mouse.Y}]\n"+
 
                 $"Tile: [{c}{mx}], [{c}{my}]: #[{c}{tid}], "+
-                $"Frame [{c}{tFrame}], wires: {wires}\n"+
+                $"Wires: {wires}\n"+
 
                 $"Item: #[{c}{player.cursorItemIconID}]\n";
         }

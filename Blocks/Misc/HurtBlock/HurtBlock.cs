@@ -70,7 +70,7 @@ namespace REBEL.Blocks {
             var tile = Framing.GetTileSafely(location.X, location.Y);
             if(tile.IsActuated) return; //don't react when turned off.
 
-            int mode = (int)(tile.frameY / getFrameHeight()) & 1;
+            int mode = (int)(tile.TileFrameY / getFrameHeight()) & 1;
             switch(mode) {
                 case 0: _onTouchedHurt(whom, location, direction, false); break;
                 case 1: _onTouchedHurt(whom, location, direction, true); break;

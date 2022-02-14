@@ -52,7 +52,7 @@ namespace REBEL.Blocks {
             /** Called when activated by an Isolator.
              */
             Tile tile = Framing.GetTileSafely(thisLoc.X, thisLoc.Y);
-            int mode = tile.frameX / getFrameWidth();
+            int mode = tile.TileFrameX / getFrameWidth();
             if(mode == (int)Mode.Transmit) return;
             setFrame(thisLoc.X, thisLoc.Y, mode, 1, true); //use lit-up version
 
@@ -70,8 +70,8 @@ namespace REBEL.Blocks {
 
         public bool activateTile(int i, int j, Point thisLoc) {
             Tile tile = Framing.GetTileSafely(i, j);
-            if(Receivers.ContainsKey(tile.type)) {
-                Receivers[tile.type](new Point(i,j), thisLoc);
+            if(Receivers.ContainsKey(tile.TileType)) {
+                Receivers[tile.TileType](new Point(i,j), thisLoc);
                 return true;
             }
             return false;
@@ -79,7 +79,7 @@ namespace REBEL.Blocks {
 
         public override void HitWire(int i, int j) {
             Tile tile = Framing.GetTileSafely(i, j);
-            int mode = tile.frameX / getFrameWidth();
+            int mode = tile.TileFrameX / getFrameWidth();
             setFrame(i, j, mode, 1, true); //use lit-up version
             if(mode == (int)Mode.Receive) return;
 

@@ -32,7 +32,7 @@ namespace REBEL.Blocks {
         public override void NearbyEffects(int i, int j, bool closer) {
             if(Main.gamePaused) return;
             Tile tile = Framing.GetTileSafely(i, j);
-            if(tile.frameX == 0) return; //inactive
+            if(tile.TileFrameX == 0) return; //inactive
             if((Main.GameUpdateCount & 1) == 0) {
                 (Mod as REBEL).tripWire(i, j); //send a signal
             }

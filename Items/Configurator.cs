@@ -38,7 +38,7 @@ namespace REBEL.Items {
                 return;
             }
             var tile = Framing.GetTileSafely(mx, my);
-            if(tile.type == ModContent.GetInstance<RainbowLamp>().Type) {
+            if(tile.TileType == ModContent.GetInstance<RainbowLamp>().Type) {
                 Main.NewText("poo");
             }
         }

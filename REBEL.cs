@@ -143,7 +143,7 @@ namespace REBEL {
 			for(int y=top; y<=bottom; y++) {
 				for(int x=left; x<=right; x++) {
 					var tile = Framing.GetTileSafely(x, y);
-					if(tile.IsActive && TouchHandlers.ContainsKey(tile.type)) {
+					if(tile.HasTile && TouchHandlers.ContainsKey(tile.TileType)) {
 						//work out the direction we touched from.
 						//this is the opposite of the direction we are
 						//from the tile, so if the contact is our bottom
@@ -163,7 +163,7 @@ namespace REBEL {
 							if     (y == top)    dir = D_B;
 							else if(y == bottom) dir = D_T;
 						}
-						TouchHandlers[tile.type](whom, new Point(x, y), dir);
+						TouchHandlers[tile.TileType](whom, new Point(x, y), dir);
 					}
 				}
 			}

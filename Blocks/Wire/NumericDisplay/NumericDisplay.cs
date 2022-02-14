@@ -45,10 +45,10 @@ namespace REBEL.Blocks {
         public bool isANumericTile(int i, int j) {
             //Check if the tile at this location is any NumericDisplayBase tile.
             Tile tile = Framing.GetTileSafely(i, j);
-            if(tile.type == ModContent.GetInstance<NumericDisplayDigit>().Type
-            || tile.type == ModContent.GetInstance<NumericDisplayClear>().Type
-            || tile.type == ModContent.GetInstance<NumericDisplayInc>().Type
-            || tile.type == ModContent.GetInstance<NumericDisplayDec>().Type) {
+            if(tile.TileType == ModContent.GetInstance<NumericDisplayDigit>().Type
+            || tile.TileType == ModContent.GetInstance<NumericDisplayClear>().Type
+            || tile.TileType == ModContent.GetInstance<NumericDisplayInc>().Type
+            || tile.TileType == ModContent.GetInstance<NumericDisplayDec>().Type) {
                 return true;
             }
             return false;
@@ -57,7 +57,7 @@ namespace REBEL.Blocks {
         public bool isADigitTile(int i, int j) {
             //Check if the tile at this location is a digit tile.
             Tile tile = Framing.GetTileSafely(i, j);
-            if(tile.type == ModContent.GetInstance<NumericDisplayDigit>().Type) {
+            if(tile.TileType == ModContent.GetInstance<NumericDisplayDigit>().Type) {
                 return true;
             }
             return false;
@@ -136,7 +136,7 @@ namespace REBEL.Blocks {
         public int getDigit(int i, int j) {
             //check which digit is displayed.
             Tile tile = Framing.GetTileSafely(i, j);
-            return (int)(tile.frameX / getFrameHeight());
+            return (int)(tile.TileFrameX / getFrameHeight());
         }
 
         public bool increment(int i, int j) {

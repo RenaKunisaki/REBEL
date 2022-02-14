@@ -41,9 +41,9 @@ namespace REBEL.Blocks {
 
         public override bool IsTileValidForEntity(int i, int j) {
 			Tile tile = Framing.GetTileSafely(i, j);
-			return tile.IsActive
-                && tile.type == ModContent.TileType<TileType>();
-                //&& tile.frameX == 0 && tile.frameY == 0;
+			return tile.HasTile
+                && tile.TileType == ModContent.TileType<TileType>();
+                //&& tile.TileFrameX == 0 && tile.TileFrameY == 0;
 		}
 
         public override void Update() {
