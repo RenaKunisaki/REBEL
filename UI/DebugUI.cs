@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
-
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -19,7 +18,7 @@ namespace REBEL.UI {
     public class DebugUI: RebelUIPanel {
         private UIText uiText;
 
-        Dictionary<int, String> BiomeNames = new Dictionary<int, String>() {
+        /*Dictionary<int, String> BiomeNames = new Dictionary<int, String>() {
             {PrimaryBiomeID.Forest,            "Forest"},
             {PrimaryBiomeID.NormalUnderground, "Underground"},
             {PrimaryBiomeID.Snow,              "Snow"},
@@ -31,7 +30,7 @@ namespace REBEL.UI {
             {PrimaryBiomeID.Dungeon,           "Dungeon"},
             {PrimaryBiomeID.Corruption,        "Corruption"},
             {PrimaryBiomeID.Crimson,           "Crimson"},
-        };
+        };*/
 
         enum Mode {
             PlayerInfo,
@@ -102,10 +101,11 @@ namespace REBEL.UI {
         private String _makeText_EnvInfo() {
             String c = "c/CCCCCC:";
             var player = Main.LocalPlayer;
-            int biome = player.GetPrimaryBiome();
-            String biomeName = $"#{biome}";
+            //int biome = player.GetPrimaryBiome();
+            //String biomeName = $"#{biome}";
             //if(BiomeNames.ContainsKey(biome)) biomeName = BiomeNames[biome];
-            biomeName = ShopHelper.BiomeNameByKey(biome);
+            //biomeName = ShopHelper.BiomeNameByKey(biome);
+            String biomeName = "LOL";
             String bloodMoon = Main.bloodMoon ? "[c/FF0000:Blood], " : "";
             String pumpkinMoon = Main.pumpkinMoon ? "[c/FF0000:Pumpkin], " : "";
             String snowMoon = Main.snowMoon ? "[c/FF0000:Snow], " : "";

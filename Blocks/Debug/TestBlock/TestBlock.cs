@@ -61,9 +61,9 @@ namespace REBEL.Blocks {
 
         public override bool RightClick(int x, int y) {
             Player p = Main.LocalPlayer;
-            int biome = p.GetPrimaryBiome();
-            Main.NewText($"You are in biome {biome}, clicked {x} {y}, grav {p.gravity}",
-                0x00, 0x9D, 0xF3);
+            //int biome = p.GetPrimaryBiome();
+            //Main.NewText($"You are in biome {biome}, clicked {x} {y}, grav {p.gravity}",
+            //    0x00, 0x9D, 0xF3);
             //Mod.Logger.InfoFormat("You are in biome {0}.", biome);
 
             Mod.Logger.Info($"TopLeft={p.TopLeft/18} BottomRight={p.BottomRight/18} pos={p.position/18}");

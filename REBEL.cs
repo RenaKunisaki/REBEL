@@ -174,7 +174,10 @@ namespace REBEL {
 			if(!npc.active) return -1;
 
 			int n = NPC.NewNPC(
-				(int)npc.position.X, (int)npc.position.Y, newType);
+				//NPC.GetSource_FromAI(),
+				npc.GetSpawnSourceForNPCFromNPCAI(),
+				(int)npc.position.X, (int)npc.position.Y, newType,
+				npc.whoAmI);
 			//unsure how many of these are needed...
 			var newNpc = Main.npc[n];
 			newNpc.velocity.X            = npc.velocity.X;

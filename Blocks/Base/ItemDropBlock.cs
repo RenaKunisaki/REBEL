@@ -21,7 +21,8 @@ namespace REBEL.Blocks.Base {
              *  noItem: don't drop anything.
              */
             if(fail || effectOnly || noItem) return;
-            Item.NewItem(i * 16, j * 16, 16, 16,
+            Item.NewItem(new EntitySource_TileBreak(i, j),
+                new Rectangle(i * 16, j * 16, 16, 16),
                 ModContent.ItemType<DropItemType>());
         }
     }

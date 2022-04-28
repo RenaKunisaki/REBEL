@@ -39,8 +39,10 @@ namespace REBEL.Blocks {
                     Point pt = getFrameBlock(location.X, location.Y);
                     setFrame(location.X, location.Y, 1, pt.Y);
                     //spawn the item right on the player
-                    Item.NewItem((int)whom.position.X, (int)whom.position.Y,
-                        16, 16, _getItemID());
+                    Item.NewItem(new EntitySource_TileBreak(
+                        (int)whom.position.X, (int)whom.position.Y),
+                        new Rectangle((int)whom.position.X,
+                            (int)whom.position.Y, 16, 16), _getItemID());
                 }
                 //don't drop an item if we're about to destroy the block,
                 //because doing so will drop the item anyway.
@@ -69,7 +71,8 @@ namespace REBEL.Blocks {
              *  noItem: don't drop anything.
              */
             if(fail || effectOnly || noItem) return;
-            Item.NewItem(i * 16, j * 16, 16, 16, _getItemID());
+            Item.NewItem(new EntitySource_TileBreak(i, j),
+                new Rectangle(i * 16, j * 16, 16, 16), _getItemID());
         }
 
         //repeat the middle frame to avoid duplicating it in memory.
